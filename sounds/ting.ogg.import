@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ting.ogg-282172d80fdaf172a212807d6800bd93.oggstr"
+
+[deps]
+
+source_file="res://sounds/ting.ogg"
+dest_files=[ "res://.import/ting.ogg-282172d80fdaf172a212807d6800bd93.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0
