@@ -7,9 +7,11 @@ var cell_size = 64
 
 var tiles = []
 
-export(String, MULTILINE) var level = ""
+var level = ""
 
-func _ready():
+func setup(level):
+	
+	self.level = level
 	
 	var lines = level.split("\n")
 	
@@ -27,7 +29,7 @@ func _ready():
 				tiles[x].append(1)
 			
 		
-	terrain.update_tiles(self)	
+	$Terrain.update_tiles(self)	
 	
 	position = Vector2(320, 320) - size * cell_size / 2
 func _draw():
@@ -56,15 +58,6 @@ func toggle_tile(pos):
 	tiles[pos.x][pos.y] = 1 - tiles[pos.x][pos.y]
 	
 	terrain.update_tiles(self)
-
-func _input(event):
-	if (event.is_pressed() and event.button_index == BUTTON_LEFT):
-		var mpos = get_viewport().get_mouse_position();
-		print(mpos)
-		var pos = position_to_pos(mpos)
-		
-		if is_pos_in_bounds(pos):
-			toggle_tile(pos)
 		
 func get_tile(pos):
 	if is_pos_in_bounds(pos):
