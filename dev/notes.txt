@@ -1,0 +1,12 @@
+Game states
+# Menu
+# Level
+# LevelFinished (?)
+# LevelTransition
+
+Level Loop
+# Start
+# Begin turn
+# Commit turn
+# Update environment
+# Start over or finish level
