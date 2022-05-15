@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://scenes/Grid.gd" type="Script" id=1]
+[ext_resource path="res://tilesets/basic_tileset_art.tres" type="TileSet" id=2]
+[ext_resource path="res://scenes/DualGrid.gd" type="Script" id=3]
+[ext_resource path="res://tilesets/back.png" type="Texture" id=4]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Level" type="Node2D" parent="."]
+position = Vector2( 188, 107 )
+script = ExtResource( 1 )
+level = "4
+3
+----
+-##-
+----"
+
+[node name="DualGrid" type="Node2D" parent="Level"]
+position = Vector2( -32, -32 )
+script = ExtResource( 3 )
+
+[node name="Tilemap" type="TileMap" parent="Level/DualGrid"]
+tile_set = ExtResource( 2 )
+format = 1
+
+[node name="Sprite" type="Sprite" parent="Level"]
+position = Vector2( 315.5, 191.5 )
+scale = Vector2( 16.4219, 9.60938 )
+z_index = -100
+texture = ExtResource( 4 )
