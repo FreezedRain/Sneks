@@ -25,7 +25,7 @@ func _ready():
 				tiles[x].append(1)
 			
 		
-	$DualGrid.update_tiles(self)
+	$DualGrid.update_tiles(self)	
 
 func _draw():
 	

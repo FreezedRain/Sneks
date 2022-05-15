@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://scenes/Grid.gd" type="Script" id=1]
+[ext_resource path="res://scenes/grid/grid.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/basic_tileset_art.tres" type="TileSet" id=2]
-[ext_resource path="res://scenes/DualGrid.gd" type="Script" id=3]
+[ext_resource path="res://scenes/grid/dual_grid.gd" type="Script" id=3]
 [ext_resource path="res://tilesets/back.png" type="Texture" id=4]
 
 [node name="Node2D" type="Node2D"]

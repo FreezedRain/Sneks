@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://scripts/actions/actions.gd"
 }, {
 "base": "Node2D",
+"class": "Grid",
+"language": "GDScript",
+"path": "res://scenes/level/grid.gd"
+}, {
+"base": "Node2D",
 "class": "Level",
 "language": "GDScript",
 "path": "res://scenes/level/level.gd"
@@ -29,11 +34,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/state_machine/state_machine.gd"
 }, {
-"base": "Node2D",
-"class": "Tiles",
-"language": "GDScript",
-"path": "res://scenes/level/tiles.gd"
-}, {
 "base": "Reference",
 "class": "Utils",
 "language": "GDScript",
@@ -41,10 +41,10 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Actions": "",
+"Grid": "",
 "Level": "",
 "State": "",
 "StateMachine": "",
-"Tiles": "",
 "Utils": ""
 }
 

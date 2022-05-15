@@ -7,8 +7,9 @@ var snakes
 
 func load_level(data):
     # Load level from string
-    # ...
+    # ...   
     # Setup objects
     snakes = $Snakes.get_children()
     for snake in snakes:
         snake.setup(tiles)
+

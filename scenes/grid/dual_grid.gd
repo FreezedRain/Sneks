@@ -1,12 +1,12 @@
 extends Node2D
 
+const halftileh = Vector2(0.5, 0)
+const halftilev = Vector2(0, 0.5)
+
 func update_tiles(grid):
 	for i in range(0, grid.size.x + 1):
 		for j in range(0, grid.size.y + 1):
-			
 			var pos = Vector2(i - 0.5, j - 0.5)
-			var halftileh = Vector2(0.5, 0)
-			var halftilev = Vector2(0, 0.5)
 			
 			var n = false
 			var s = false
