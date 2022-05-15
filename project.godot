@@ -9,6 +9,11 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "Object",
+"class": "Actions",
+"language": "GDScript",
+"path": "res://scripts/actions/actions.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -25,6 +30,7 @@ _global_script_classes=[ {
 "path": "res://singletons/globals.gd"
 } ]
 _global_script_class_icons={
+"Actions": "",
 "State": "",
 "StateMachine": "",
 "Utils": ""
@@ -33,7 +39,15 @@ _global_script_class_icons={
 [application]
 
 config/name="GWJ45"
+run/main_scene="res://scenes/main.tscn"
 config/icon="res://sprites/icon.png"
+
+[display]
+
+window/size/width=640
+window/size/height=640
+window/size/resizable=false
+window/dpi/allow_hidpi=true
 
 [physics]
 
