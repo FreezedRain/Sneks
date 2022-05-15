@@ -1,7 +1,4 @@
-## Finite state machine, uses nodes with a State script as states
-##
-## Pass the reference to the states' parent and initial state using
-## onready var fsm = StateMachine.new(self, $states, $states/idle)
+## Finite state machine
 class_name StateMachine extends Node
 
 var object : Node
@@ -22,15 +19,15 @@ func setup_states(state_holder):
 		states[state.name] = state
 		state.setup(self, object)
 
-func process(delta) -> void:
+func process(delta):
 	if next_state != current_state:
 		if current_state != null:
 			current_state.exit(next_state)
 			if debug:
-				print('Exited ', current_state.name)
+				print('Exited %s' % current_state.name)
 			previous_state = current_state
 		current_state = next_state
 		current_state.enter(previous_state)
 		if debug:
-			print('Entered ', current_state.name)
+			print('Entered %s' % current_state.name)
 	current_state.process(delta)

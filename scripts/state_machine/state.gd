@@ -2,7 +2,7 @@
 class_name State extends Node
 
 var fsm
-var object : Node
+var object: Node
 
 func setup(fsm, object):
 	self.fsm = fsm
@@ -12,11 +12,11 @@ func setup(fsm, object):
 func post_setup():
 	pass
 
-func enter(from_state : State) -> void:
+func enter(from_state: State):
 	pass
 
-func exit(to_state : State) -> void:
+func exit(to_state: State):
 	pass
 
-func process(delta) -> void:
+func process(delta):
 	pass
