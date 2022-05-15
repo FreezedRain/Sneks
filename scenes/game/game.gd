@@ -14,7 +14,7 @@ func _ready():
 func load_level(idx: int):
 	if current_level:
 		current_level.queue_free()
-	var level_data = null #levels[idx]
+	var level_data = levels[idx]
 	current_level = LEVEL_SCENE.instance()
 	current_level.load_level(level_data)
 	add_child(current_level)
