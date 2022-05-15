@@ -2,8 +2,13 @@
 class_name Level extends Node2D
 
 onready var tiles = $Tiles
-onready var snakes = $Snakes.get_children()
 
-# Handle player turns and environment actions
+var snakes
+
 func load_level(data):
-    pass
+    # Load level from string
+    # ...
+    # Setup objects
+    snakes = $Snakes.get_children()
+    for snake in snakes:
+        snake.setup(tiles)

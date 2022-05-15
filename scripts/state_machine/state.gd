@@ -1,4 +1,4 @@
-## State class for the state_machine.gd
+## State class for the state_machine.gd 
 class_name State extends Node
 
 var fsm
