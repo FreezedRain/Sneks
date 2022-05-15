@@ -3,13 +3,13 @@ class_name Level extends Node2D
 
 onready var tiles = $Tiles
 
-var snakes
+var snakes: Array
 
-func load_level(data):
-	# Load level from string
-	# ...   
-	# Setup objects
-	snakes = $Snakes.get_children()
-	for snake in snakes:
-		snake.setup(tiles)
+func load_level(data: LevelData):
+    # Load level from string
+    # ...   
+    # Setup objects
+    snakes = $Snakes.get_children()
+    for snake in snakes:
+        snake.setup(tiles)
 
