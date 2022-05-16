@@ -15,15 +15,11 @@ func load_data(level_data: LevelData):
 	terrain.load_data(level_data)
 
 func update_size(level_size: Vector2):
-	print(level_size)
 	size = level_size
 	bounds.size = Vector2(cell_size.x * size.x, cell_size.y * size.y)
-	print(bounds)
 	var screen_size = get_viewport_rect().size
-	print(screen_size)
 	bounds.position = (screen_size - bounds.size) * 0.5
 	position = bounds.position
-	print(position)
 
 func is_free(pos: Vector2) -> bool:
 	return not terrain.get_tile(pos)

@@ -10,4 +10,3 @@ level_data = ExtResource( 3 )
 
 [node name="Grid" parent="." instance=ExtResource( 2 )]
 position = Vector2( 0, 0 )
-cell_size = Vector2( 64, 64 )

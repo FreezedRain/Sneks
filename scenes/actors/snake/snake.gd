@@ -19,7 +19,6 @@ func move(direction: Vector2) -> bool:
 		return false
 	# Update segments
 	for i in range(len(segments) - 1, 0, -1):
-		print(i)
 		segments[i].grid_pos = segments[i - 1].grid_pos
 		segments[i].align_to_grid(grid)
 	
