@@ -1,7 +1,8 @@
 extends State
 
 var actions: Array
-var snake_idx: int
+var drags: Array
+var current_snake: Snake
 var making_turn: bool
 
 func enter(from_state: State):
@@ -11,26 +12,30 @@ func exit(to_state: State):
 	pass
 
 func process(delta):
-	if Input.is_action_just_pressed("click"):
+	if Input.is_action_just_pressed("click") and object.hovered_snake != null:
+		current_snake = object.hovered_snake
 		making_turn = true
+		drags.append(len(actions))
 	
 	if making_turn:
-		var direction = convert_direction(object.mouse_grid_pos - object.snakes[snake_idx].grid_pos)
+		var direction = convert_direction(object.mouse_grid_pos - current_snake.grid_pos)
 
-		if Input.is_action_just_released("click"):
-			# print(direction)
-			# Commit turn
-			var action = Actions.SnakeMoveAction.new(object.snakes[snake_idx], direction)
-
+		if direction != Vector2.ZERO:
+			var action = Actions.SnakeMoveAction.new(current_snake, direction)
 			if execute_action(action):
-				snake_idx = (snake_idx + 1) % len(object.snakes)
+				pass
 			
+		if Input.is_action_just_released("click"):
+			current_snake = null
 			making_turn = false
+			if drags[len(drags) - 1] - len(actions) == 0:
+				drags.pop_back()
 	else:
 		if Input.is_action_just_pressed("undo"):
-			if len(actions) > 0:
-				actions.pop_back().undo()
-				snake_idx = (snake_idx - 1) % len(object.snakes)
+			if len(drags) > 0:
+				var last_drag = drags.pop_back()
+				while len(actions) > last_drag:
+					actions.pop_back().undo()
 
 func convert_direction(direction: Vector2) -> Vector2:
 	if direction == Vector2.ZERO:

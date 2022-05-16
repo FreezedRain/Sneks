@@ -10,6 +10,7 @@ onready var snake_holder = $Snakes
 # Data
 var level_data: LevelData
 var snakes: Array
+var hovered_snake: Snake
 
 # Input
 var mouse_pos: Vector2
@@ -36,5 +37,12 @@ func load_level(level_data: LevelData):
 		var snake = SNAKE_SCENE.instance()
 		snake.setup(grid)
 		snake.setup_segments(snake_segments)
-		snake_holder.add_child(snake)
+		snake.connect("hovered", self, "_on_snake_hovered")
+		snake.connect("unhovered", self, "_on_snake_unhovered")
 		snakes.append(snake)
+
+func _on_snake_hovered(snake):
+	hovered_snake = snake
+
+func _on_snake_unhovered(snake):
+	hovered_snake = null

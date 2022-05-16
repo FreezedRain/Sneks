@@ -1,12 +1,16 @@
-extends Sprite
+extends GridObject
 
-var grid_pos: Vector2
 var target_position: Vector2
 
-func _process(delta):
-	position = lerp(position, target_position, delta * 12)
+func _ready():
+	pass
 
-func align_to_grid(grid: Grid, instant: bool = false):
-	target_position = grid.grid_to_world(grid_pos)
-	if instant:
-		position = target_position
+func _process(delta):
+	position = lerp(position, target_position, delta * 16)
+
+func align():
+	.align()
+	target_position = position
+
+func align_visuals():
+	target_position = get_world_pos()

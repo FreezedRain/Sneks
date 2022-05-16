@@ -3,8 +3,10 @@ class_name Grid extends Node2D
 export (Vector2) var cell_size
 
 var size: Vector2
+var tiles: Array
 var bounds: Rect2
 
+onready var object_holder = $Objects
 onready var terrain = $Terrain
 
 func _ready():
@@ -12,7 +14,9 @@ func _ready():
 
 func load_data(level_data: LevelData):
 	update_size(level_data.size)
-	terrain.load_data(level_data)
+	load_tiles(level_data.level)
+	terrain.update_tiles()
+	print(grid_to_world(Vector2(0, 0)))
 
 func update_size(level_size: Vector2):
 	size = level_size
@@ -20,9 +24,34 @@ func update_size(level_size: Vector2):
 	var screen_size = get_viewport_rect().size
 	bounds.position = (screen_size - bounds.size) * 0.5
 	position = bounds.position
+	object_holder.position = -position
+
+func load_tiles(raw_tiles: Array):
+	for x in range(size.x):
+		var col = []
+		for y in range(size.y):
+			var is_solid = raw_tiles[x][y] == '#'
+			var tile = Tile.new(self, Vector2(x, y), is_solid)
+			col.append(tile)
+		tiles.append(col)
+
+func add_object(object: GridObject):
+	tiles[object.grid_pos.x][object.grid_pos.y].add_object(object)
+	object_holder.add_child(object)
+
+func get_tile(pos: Vector2) -> Tile:
+	return tiles[pos.x][pos.y]
 
 func is_free(pos: Vector2) -> bool:
-	return not terrain.get_tile(pos)
+	if is_solid(pos):
+		return false
+	var tile = get_tile(pos)
+	return len(tile.objects) == 0
+
+func is_solid(pos: Vector2) -> bool:
+	if not in_bounds(pos):
+		return true
+	return tiles[pos.x][pos.y].solid
 
 func in_bounds(pos: Vector2) -> bool:
 	return pos.x >= 0 and pos.y >= 0 and pos.x < size.x and pos.y < size.y
