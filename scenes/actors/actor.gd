@@ -6,3 +6,6 @@ var grid_pos: Vector2
 
 func setup(grid: Grid):
 	self.grid = grid
+
+func move(direction: Vector2) -> bool:
+	return false

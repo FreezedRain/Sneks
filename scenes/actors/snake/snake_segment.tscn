@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/utility/square_64.png" type="Texture" id=1]
+[ext_resource path="res://scenes/actors/snake/snake_segment.gd" type="Script" id=2]
+
+[node name="SnakeSegment" type="Sprite"]
+visible = false
+modulate = Color( 0.529412, 0.635294, 0.45098, 1 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

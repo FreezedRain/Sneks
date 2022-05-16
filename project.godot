@@ -22,7 +22,7 @@ _global_script_classes=[ {
 "base": "Node2D",
 "class": "Grid",
 "language": "GDScript",
-"path": "res://scenes/level/grid.gd"
+"path": "res://scenes/grid/grid.gd"
 }, {
 "base": "Node2D",
 "class": "Level",
@@ -79,10 +79,19 @@ window/size/height=640
 window/size/resizable=false
 window/dpi/allow_hidpi=true
 
+[input]
+
+click={
+"deadzone": 0.5,
+"events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
+ ]
+}
+
 [physics]
 
 common/enable_pause_aware_picking=true
 
 [rendering]
 
+environment/default_clear_color=Color( 0.121569, 0.121569, 0.121569, 1 )
 environment/default_environment="res://resources/default_env.tres"

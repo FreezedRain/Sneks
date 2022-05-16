@@ -16,5 +16,5 @@ func load_level(idx: int):
 		current_level.queue_free()
 	var level_data = levels[idx]
 	current_level = LEVEL_SCENE.instance()
-	current_level.load_level(level_data)
+	current_level.call_deferred("load_level", level_data)
 	add_child(current_level)
