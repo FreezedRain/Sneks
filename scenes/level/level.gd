@@ -3,19 +3,13 @@ class_name Level extends Node2D
 
 const SNAKE_SCENE = preload("res://scenes/actors/snake/snake.tscn")
 
-# onready var fsm = StateMachine.new(self, $States, $States/idle, false)
+onready var fsm = StateMachine.new(self, $States, $States/idle, false)
 onready var grid = $Grid
 onready var snake_holder = $Snakes
 
 # Data
 var level_data: LevelData
 var snakes: Array
-var actions: Array
-
-# Turn
-var snake_idx: int
-var waiting_for_turn: bool
-var making_turn: bool
 
 # Input
 var mouse_pos: Vector2
@@ -23,6 +17,14 @@ var mouse_grid_pos: Vector2
 
 func _ready():
 	pass
+
+func _process(delta):
+	process_input()
+	fsm.process(delta)
+
+func process_input():
+	mouse_pos = get_viewport().get_mouse_position()
+	mouse_grid_pos = grid.world_to_grid(mouse_pos)
 
 func load_level(level_data: LevelData):
 	level_data.parse()
@@ -36,21 +38,6 @@ func load_level(level_data: LevelData):
 		snake.setup_segments(snake_segments)
 		snake_holder.add_child(snake)
 		snakes.append(snake)
-
-func _process(delta):
-	if Input.is_action_just_pressed("ui_up"):
-		snakes[0].move(Vector2.UP)
-	if Input.is_action_just_pressed("ui_down"):
-		snakes[0].move(Vector2.DOWN)
-	if Input.is_action_just_pressed("ui_right"):
-		snakes[0].move(Vector2.RIGHT)
-	if Input.is_action_just_pressed("ui_left"):
-		snakes[0].move(Vector2.LEFT)
-	# fsm.process(delta)
-
-# func process_input():
-# 	mouse_pos = get_viewport().get_mouse_position()
-# 	mouse_grid_pos = grid.world_to_grid(mouse_pos)
 
 # func process_turns():
 # 	if Input.is_action_just_pressed("click"):
