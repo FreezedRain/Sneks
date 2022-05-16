@@ -89,12 +89,20 @@ func update_tiles():
 			elif (n and s and w and e and !se and ne and !nw and sw): tilemap.set_cell(i, j, 6)
 			
 			else: tilemap.set_cell(i, j, 8)
-
-# func update_tiles(grid):
-# 	dual_grid.update_tiles(grid)
+			
+	$Back.position = grid.size * grid.cell_size / 2
+	$Back.scale = Vector2(grid.size.x + 1, grid.size.y + 1);
 	
+	$Top.position = grid.size * grid.cell_size / 2
+	$Top.scale = Vector2(20, 20);
+			
+	
+
+## func update_tiles(grid):
+# 	dual_grid.update_tiles(grid)
+#
 # 	$Back.position = grid.size * grid.cell_size / 2
 # 	$Back.scale = Vector2(grid.size.x + 1, grid.size.y + 1);
-	
+#
 # 	$Top.position = grid.size * grid.cell_size / 2
 	
