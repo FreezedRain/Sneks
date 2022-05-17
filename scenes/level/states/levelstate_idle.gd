@@ -1,7 +1,7 @@
 extends State
 
 func enter(from_state: State):
-	fsm.next_state = fsm.states.turn
+	pass
 
 func exit(to_state: State):
 	pass

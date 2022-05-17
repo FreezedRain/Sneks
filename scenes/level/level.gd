@@ -29,6 +29,9 @@ func process_input():
 	mouse_pos = get_viewport().get_mouse_position()
 	mouse_grid_pos = grid.world_to_grid(mouse_pos)
 
+func start():
+	fsm.next_state = fsm.states.turn
+
 func load_level(level_data: LevelData):
 	level_data.parse()
 	self.level_data = level_data

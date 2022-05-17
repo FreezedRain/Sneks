@@ -21,6 +21,7 @@ func exit(to_state: State):
 func process(delta):
 	if Input.is_action_just_pressed("click") and object.hovered_snake != null:
 		current_snake = object.hovered_snake
+		current_snake.set_highlight(true)
 		making_turn = true
 		move_timer = 0
 		drags.append(len(actions))
@@ -32,6 +33,7 @@ func process(delta):
 			process_movement()
 
 		if Input.is_action_just_released("click"):
+			current_snake.set_highlight(false)
 			current_snake = null
 			making_turn = false
 			if drags[len(drags) - 1] - len(actions) == 0:

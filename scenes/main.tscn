@@ -10,3 +10,4 @@
 
 [node name="Game" parent="." instance=ExtResource( 1 )]
 levels = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ]
+level_idx = 3

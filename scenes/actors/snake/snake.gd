@@ -7,6 +7,7 @@ const SEGMENT_SCENE = preload("res://scenes/actors/snake/snake_segment.tscn")
 
 onready var visuals = $Visuals
 onready var sprite = $Visuals/Sprite
+onready var head = $Visuals/Sprite/Head
 
 var color
 var segments: Array
@@ -81,10 +82,17 @@ func align_visuals():
 func get_tail_pos() -> Vector2:
 	return segments[len(segments) - 1].grid_pos
 
+func set_highlight(enabled: bool):
+	if enabled:
+		head.show()
+	else:
+		head.hide()
+
 func _on_HoverArea_mouse_entered():
-	sprite.modulate = Color(0.85, 0.85, 0.85, 1)
+	# head.show()
+	# visuals.modulate = Color(0.85, 0.85, 0.85, 1)
 	emit_signal("hovered", self)
 
 func _on_HoverArea_mouse_exited():
-	sprite.modulate = Color(1, 1, 1, 1)
+	# head.hide()# = Color(1, 1, 1, 1)
 	emit_signal("unhovered", self)
