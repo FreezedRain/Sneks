@@ -1,5 +1,7 @@
 class_name Grid extends Node2D
 
+const SNAKE_GOAL_SCENE = preload("res://scenes/goals/snake_goal.tscn")
+
 export (Vector2) var cell_size
 
 var size: Vector2
@@ -15,8 +17,8 @@ func _ready():
 func load_data(level_data: LevelData):
 	update_size(level_data.size)
 	load_tiles(level_data.level)
+	load_objects(level_data.level)
 	terrain.update_tiles()
-	print(grid_to_world(Vector2(0, 0)))
 
 func update_size(level_size: Vector2):
 	size = level_size
@@ -35,6 +37,15 @@ func load_tiles(raw_tiles: Array):
 			col.append(tile)
 		tiles.append(col)
 
+func load_objects(raw_tiles: Array):
+	for x in range(size.x):
+		for y in range(size.y):
+			var raw_object = raw_tiles[x][y]
+			if Globals.COLORS_LETTERS.keys().has(raw_object):
+				var goal = SNAKE_GOAL_SCENE.instance()
+				goal.setup(self, Vector2(x, y))
+				goal.set_color(Globals.COLORS_LETTERS[raw_object])
+
 func add_object(object: GridObject):
 	tiles[object.grid_pos.x][object.grid_pos.y].add_object(object)
 	object_holder.add_child(object)
@@ -46,7 +57,10 @@ func is_free(pos: Vector2) -> bool:
 	if is_solid(pos):
 		return false
 	var tile = get_tile(pos)
-	return len(tile.objects) == 0
+	for obj in tile.objects:
+		if obj is SnakeSegment:
+			return false
+	return true
 
 func is_solid(pos: Vector2) -> bool:
 	if not in_bounds(pos):

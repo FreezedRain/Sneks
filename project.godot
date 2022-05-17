@@ -44,6 +44,16 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/snake/snake.gd"
 }, {
+"base": "GridObject",
+"class": "SnakeGoal",
+"language": "GDScript",
+"path": "res://scenes/goals/snake_goal.gd"
+}, {
+"base": "GridObject",
+"class": "SnakeSegment",
+"language": "GDScript",
+"path": "res://scenes/actors/snake/snake_segment.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -72,6 +82,8 @@ _global_script_class_icons={
 "Level": "",
 "LevelData": "",
 "Snake": "",
+"SnakeGoal": "",
+"SnakeSegment": "",
 "State": "",
 "StateMachine": "",
 "Tile": "",

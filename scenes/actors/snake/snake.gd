@@ -22,6 +22,9 @@ func _process(delta):
 	for i in range(len(segments)):
 		line.set_point_position(i + 1, segments[i].position - position - visuals.position)
 
+func set_pos(new_pos: Vector2):
+	.set_pos(new_pos)
+
 func can_move(direction: Vector2) -> bool:
 	if not grid.is_free(grid_pos + direction):
 		return false
@@ -62,6 +65,7 @@ func setup_segments(segment_positions: Array):
 	for pos in segment_positions:
 		var segment = SEGMENT_SCENE.instance()
 		segment.setup(grid, pos)
+		segment.setup_snake(self)
 		segments.append(segment)
 		line.add_point(segment.position - position)
 

@@ -38,6 +38,7 @@ func process(delta):
 				var last_drag = drags.pop_back()
 				while len(actions) > last_drag:
 					actions.pop_back().undo()
+				Events.emit_signal("turn_updated")
 
 func process_movement():
 	var direction = convert_direction(object.mouse_grid_pos - current_snake.grid_pos)
@@ -59,4 +60,5 @@ func execute_action(action: Actions.Action) -> bool:
 		return false
 	actions.append(action)
 	action.execute()
+	Events.emit_signal("turn_updated")
 	return true

@@ -1,9 +1,13 @@
-extends GridObject
+class_name SnakeSegment extends GridObject
 
+var snake
 var target_position: Vector2
 
 func _ready():
 	pass
+
+func setup_snake(snake):
+	self.snake = snake
 
 func _process(delta):
 	position = lerp(position, target_position, delta * 16)
