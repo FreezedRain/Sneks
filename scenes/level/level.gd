@@ -33,7 +33,6 @@ func start():
 	fsm.next_state = fsm.states.turn
 
 func load_level(level_data: LevelData):
-	level_data.parse()
 	self.level_data = level_data
 
 	grid.load_data(level_data)

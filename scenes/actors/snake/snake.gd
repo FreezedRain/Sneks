@@ -19,9 +19,10 @@ func _ready():
 
 func _process(delta):
 	visuals.position = lerp(visuals.position, Vector2.ZERO, delta * 16)
-	sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 16)
-	for i in range(len(segments)):
-		line.set_point_position(i + 1, segments[i].position - position - visuals.position)
+	if len(segments) > 0:
+		sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 16)
+		for i in range(len(segments)):
+			line.set_point_position(i + 1, segments[i].position - position - visuals.position)
 
 func set_pos(new_pos: Vector2):
 	.set_pos(new_pos)
@@ -62,8 +63,11 @@ func setup_segments(segment_positions: Array):
 	align()
 	line = $Visuals/Line2D
 	line.add_point(Vector2.ZERO)
-	segment_positions.pop_front()
+	var count = 0
 	for pos in segment_positions:
+		count += 1
+		if count == 1:
+			continue
 		var segment = SEGMENT_SCENE.instance()
 		segment.setup(grid, pos)
 		segment.setup_snake(self)
