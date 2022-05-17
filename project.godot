@@ -62,7 +62,7 @@ _global_script_classes=[ {
 "base": "Reference",
 "class": "Utils",
 "language": "GDScript",
-"path": "res://singletons/globals.gd"
+"path": "res://singletons/utils.gd"
 } ]
 _global_script_class_icons={
 "Actions": "",
@@ -83,6 +83,11 @@ _global_script_class_icons={
 config/name="GWJ45"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://sprites/icon.png"
+
+[autoload]
+
+Events="*res://singletons/events.gd"
+Globals="*res://singletons/globals.gd"
 
 [display]
 

@@ -33,10 +33,11 @@ func load_level(level_data: LevelData):
 
 	grid.load_data(level_data)
 
-	for snake_segments in level_data.snakes:
+	for snake_data in level_data.snakes:
 		var snake = SNAKE_SCENE.instance()
 		snake.setup(grid)
-		snake.setup_segments(snake_segments)
+		snake.setup_segments(snake_data.segments)
+		snake.set_color(snake_data.color)
 		snake.connect("hovered", self, "_on_snake_hovered")
 		snake.connect("unhovered", self, "_on_snake_unhovered")
 		snakes.append(snake)

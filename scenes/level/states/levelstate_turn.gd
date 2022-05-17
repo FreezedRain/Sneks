@@ -1,9 +1,12 @@
 extends State
 
+const MOVE_DELAY = 0.1
+
 var actions: Array
 var drags: Array
 var current_snake: Snake
 var making_turn: bool
+var move_timer: float = 0
 
 func enter(from_state: State):
 	pass
@@ -15,16 +18,15 @@ func process(delta):
 	if Input.is_action_just_pressed("click") and object.hovered_snake != null:
 		current_snake = object.hovered_snake
 		making_turn = true
+		move_timer = 0
 		drags.append(len(actions))
 	
 	if making_turn:
-		var direction = convert_direction(object.mouse_grid_pos - current_snake.grid_pos)
+		if move_timer > 0:
+			move_timer -= delta
+		else:
+			process_movement()
 
-		if direction != Vector2.ZERO:
-			var action = Actions.SnakeMoveAction.new(current_snake, direction)
-			if execute_action(action):
-				pass
-			
 		if Input.is_action_just_released("click"):
 			current_snake = null
 			making_turn = false
@@ -36,6 +38,14 @@ func process(delta):
 				var last_drag = drags.pop_back()
 				while len(actions) > last_drag:
 					actions.pop_back().undo()
+
+func process_movement():
+	var direction = convert_direction(object.mouse_grid_pos - current_snake.grid_pos)
+
+	if direction != Vector2.ZERO:
+		var action = Actions.SnakeMoveAction.new(current_snake, direction)
+		if execute_action(action):
+			move_timer = MOVE_DELAY
 
 func convert_direction(direction: Vector2) -> Vector2:
 	if direction == Vector2.ZERO:

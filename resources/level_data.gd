@@ -32,10 +32,19 @@ func parse_level():
 func parse_snakes():
 	var lines = snakes_string.split("\n")
 	for line in lines:
-		var segment_data = line.split("-")
+		var segment_data = line.substr(1).split("-")
 		var segments = []
+		var color = Globals.COLORS_LETTERS[line[0]]
 		for pos_line in segment_data:
 			var pos_data = pos_line.split("/")
 			var pos = Vector2(int(pos_data[0]), int(pos_data[1]))
 			segments.append(pos)
-		snakes.append(segments)
+		snakes.append(SnakeData.new(segments, color))
+
+class SnakeData:
+	var segments: Array
+	var color
+
+	func _init(segments: Array, color):
+		self.segments = segments
+		self.color = color
