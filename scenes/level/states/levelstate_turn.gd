@@ -80,5 +80,11 @@ func _on_post_turn_updated():
 		if obj is SnakeGoal and not obj.active:
 			all_goals_met = false
 			break
+		if obj is SegmentGoal and not obj.active:
+			all_goals_met = false
+			break
+		if obj is ClearGoal and not obj.active:
+			all_goals_met = false
+			break
 	if all_goals_met:
 		fsm.next_state = fsm.states.complete

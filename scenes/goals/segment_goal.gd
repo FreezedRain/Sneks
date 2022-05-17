@@ -1,4 +1,4 @@
-class_name SnakeGoal extends GridObject
+class_name SegmentGoal extends GridObject
 
 var color
 var active: bool = false
@@ -23,7 +23,7 @@ func _on_turn_updated():
 	var tile_objects = grid.get_tile(grid_pos).objects
 	var now_active = false
 	for obj in tile_objects:
-		if obj is Snake:
+		if obj is SnakeSegment:
 			now_active = obj.color == color
 		# elif obj is SnakeSegment:
 		# 	now_active = obj.snake.color == color

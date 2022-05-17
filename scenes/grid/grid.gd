@@ -1,6 +1,8 @@
 class_name Grid extends Node2D
 
 const SNAKE_GOAL_SCENE = preload("res://scenes/goals/snake_goal.tscn")
+const SEGMENT_GOAL_SCENE = preload("res://scenes/goals/segment_goal.tscn")
+const CLEAR_GOAL_SCENE = preload("res://scenes/goals/clear_goal.tscn")
 
 export (Vector2) var cell_size
 
@@ -42,10 +44,18 @@ func load_objects(raw_tiles: Array):
 	for x in range(size.x):
 		for y in range(size.y):
 			var raw_object = raw_tiles[x][y]
-			if Globals.COLORS_LETTERS.keys().has(raw_object):
-				var goal = SNAKE_GOAL_SCENE.instance()
+			if raw_object == 'x':
+				var goal = CLEAR_GOAL_SCENE.instance()
 				goal.setup(self, Vector2(x, y))
-				goal.set_color(Globals.COLORS_LETTERS[raw_object])
+			elif Globals.COLORS_LETTERS.keys().has(raw_object):
+				if raw_object == raw_object.to_upper():
+					var goal = SNAKE_GOAL_SCENE.instance()
+					goal.setup(self, Vector2(x, y))
+					goal.set_color(Globals.COLORS_LETTERS[raw_object])
+				else:
+					var goal = SEGMENT_GOAL_SCENE.instance()
+					goal.setup(self, Vector2(x, y))
+					goal.set_color(Globals.COLORS_LETTERS[raw_object])
 
 func add_object(object: GridObject):
 	tiles[object.grid_pos.x][object.grid_pos.y].add_object(object)
@@ -53,6 +63,7 @@ func add_object(object: GridObject):
 	object_holder.add_child(object)
 
 func get_tile(pos: Vector2) -> Tile:
+	return tiles[pos.x][pos.y]
 	return tiles[pos.x][pos.y]
 
 func is_free(pos: Vector2) -> bool:

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/level_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "test"
+level_string = "5,5
+#_#__
+G____
+_###_
+G#___
+##___"
+snakes_string = "g3/1-2/1-1/1-1/0
+g4/0-3/0"

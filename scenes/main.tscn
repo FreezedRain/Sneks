@@ -1,11 +1,16 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/game/game.tscn" type="PackedScene" id=1]
-[ext_resource path="res://resources/levels/test3.tres" type="Resource" id=3]
-[ext_resource path="res://resources/levels/test4.tres" type="Resource" id=4]
-[ext_resource path="res://resources/levels/test.tres" type="Resource" id=5]
+[ext_resource path="res://resources/levels/w1/turn.tres" type="Resource" id=2]
+[ext_resource path="res://resources/levels/w1/fullturn.tres" type="Resource" id=3]
+[ext_resource path="res://resources/levels/w1/stuckpair.tres" type="Resource" id=4]
+[ext_resource path="res://resources/levels/w1/movement.tres" type="Resource" id=5]
+[ext_resource path="res://resources/levels/w1/order.tres" type="Resource" id=6]
+[ext_resource path="res://resources/levels/colors/hash.tres" type="Resource" id=7]
+[ext_resource path="res://resources/levels/w1/blockwiggle2.tres" type="Resource" id=8]
 
 [node name="Main" type="Node"]
 
 [node name="Game" parent="." instance=ExtResource( 1 )]
-levels = [ ExtResource( 5 ), ExtResource( 3 ), ExtResource( 4 ) ]
+levels = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ) ]
+level_idx = 6
