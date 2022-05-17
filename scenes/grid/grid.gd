@@ -6,6 +6,7 @@ export (Vector2) var cell_size
 
 var size: Vector2
 var tiles: Array
+var objects: Array
 var bounds: Rect2
 
 onready var object_holder = $Objects
@@ -48,6 +49,7 @@ func load_objects(raw_tiles: Array):
 
 func add_object(object: GridObject):
 	tiles[object.grid_pos.x][object.grid_pos.y].add_object(object)
+	objects.append(object)
 	object_holder.add_child(object)
 
 func get_tile(pos: Vector2) -> Tile:
