@@ -1,6 +1,8 @@
 ## Everything related to a single level
 class_name Level extends Node2D
 
+signal completed
+
 const SNAKE_SCENE = preload("res://scenes/actors/snake/snake.tscn")
 
 onready var fsm = StateMachine.new(self, $States, $States/idle, false)

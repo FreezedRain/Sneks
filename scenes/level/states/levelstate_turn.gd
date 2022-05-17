@@ -8,8 +8,12 @@ var current_snake: Snake
 var making_turn: bool
 var move_timer: float = 0
 
+func _ready():
+	Events.connect("turn_updated", self, "_on_turn_updated")
+	Events.connect("post_turn_updated", self, "_on_post_turn_updated")
+
 func enter(from_state: State):
-	pass
+	Events.emit_signal("turn_updated")
 
 func exit(to_state: State):
 	pass
@@ -39,6 +43,7 @@ func process(delta):
 				while len(actions) > last_drag:
 					actions.pop_back().undo()
 				Events.emit_signal("turn_updated")
+				Events.emit_signal("post_turn_updated")
 
 func process_movement():
 	var direction = convert_direction(object.mouse_grid_pos - current_snake.grid_pos)
@@ -61,4 +66,17 @@ func execute_action(action: Actions.Action) -> bool:
 	actions.append(action)
 	action.execute()
 	Events.emit_signal("turn_updated")
+	Events.emit_signal("post_turn_updated")
 	return true
+
+func _on_turn_updated():
+	pass
+
+func _on_post_turn_updated():
+	var all_goals_met = true
+	for obj in object.grid.objects:
+		if obj is SnakeGoal and not obj.active:
+			all_goals_met = false
+			break
+	if all_goals_met:
+		fsm.next_state = fsm.states.complete
