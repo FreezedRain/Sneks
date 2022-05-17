@@ -41,7 +41,6 @@ func process(delta):
 
 func process_movement():
 	var direction = convert_direction(object.mouse_grid_pos - current_snake.grid_pos)
-
 	if direction != Vector2.ZERO:
 		var action = Actions.SnakeMoveAction.new(current_snake, direction)
 		if execute_action(action):

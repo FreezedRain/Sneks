@@ -46,4 +46,5 @@ func _on_snake_hovered(snake):
 	hovered_snake = snake
 
 func _on_snake_unhovered(snake):
-	hovered_snake = null
+	if hovered_snake == snake:
+		hovered_snake = null
