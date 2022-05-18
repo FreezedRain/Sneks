@@ -7,7 +7,6 @@ func _init():
 
 func _ready():
 	Events.connect("turn_updated", self, "_on_turn_updated")
-	_on_set_active()
 
 func set_active(value: bool):
 	if active == value:

@@ -6,5 +6,8 @@ func _on_set_active():
 	else:
 		hide()
 
+func _ready():
+	_on_set_active()
+
 func _on_turn_updated():
 	set_active(Grid.is_free(pos))
