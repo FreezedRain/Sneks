@@ -11,6 +11,8 @@ onready var highlight = $Visuals/Sprite/Highlight
 
 var color setget set_color
 var line: Line2D
+var line_highlight: Line2D
+var line_shadow: Line2D
 var segments: Array
 var target_position: Vector2
 
@@ -21,10 +23,13 @@ func _ready():
 	pass
 
 func _process(delta):
-	visuals.position = lerp(visuals.position, Vector2.ZERO, delta * 16)
-	sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 16)
-	for i in range(len(segments)):
-		line.set_point_position(i + 1, segments[i].position - position - visuals.position)
+	visuals.position = lerp(visuals.position, Vector2.ZERO, delta * 12)
+	if len(segments) > 0:
+		sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 16)
+		for i in range(len(segments)):
+			line.set_point_position(i + 1, segments[i].position - position - visuals.position)
+			line_shadow.set_point_position(i + 1, segments[i].position - position - visuals.position + Vector2.DOWN * 8)
+			line_highlight.set_point_position(i + 1, segments[i].position - position - visuals.position + Vector2.UP * 16)
 
 func align_visuals():
 	var previous_pos = position
@@ -79,7 +84,12 @@ func setup_segments(segment_positions: Array) -> Array:
 	set_pos(segment_positions[0])
 	align()
 	line = $Visuals/Line2D
+	line_highlight = $Visuals/Line2Dhighlight
+	line_shadow = $Visuals/Line2Dshadow
+	
 	line.add_point(Vector2.ZERO)
+	line_shadow.add_point(Vector2.ZERO + Vector2.DOWN * 8)
+	line_highlight.add_point(Vector2.ZERO + Vector2.UP * 16)
 	var count = 0
 	for pos in segment_positions:
 		count += 1
@@ -91,6 +101,9 @@ func setup_segments(segment_positions: Array) -> Array:
 		segment.align()
 		segments.append(segment)
 		line.add_point(segment.position - position)
+		line_shadow.add_point(segment.position - position + Vector2.DOWN * 8)
+		line_highlight.add_point(segment.position - position + Vector2.UP * 16)
+		
 	return segments
 
 func _on_HoverArea_mouse_entered():
