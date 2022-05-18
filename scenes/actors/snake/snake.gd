@@ -97,6 +97,7 @@ func setup_segments(segment_positions: Array) -> Array:
 		if count == 1:
 			continue
 		var segment = SEGMENT_SCENE.instance()
+		segment.set_segment_percent(count/segment_positions.size())
 		segment.set_pos(pos)
 		segment.set_snake(self)
 		segment.align()

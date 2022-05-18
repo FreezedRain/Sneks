@@ -4,6 +4,8 @@ var snake setget set_snake
 var target_position: Vector2
 var color
 
+var segment_percent
+
 func _init():
 	solid = true
 
@@ -15,7 +17,7 @@ func set_snake(value):
 	color = snake.color
 
 func _process(delta):
-	position = lerp(position, target_position, delta * 16)
+	position = lerp(position, target_position, delta * (16 - segment_percent * 8))
 
 func align():
 	.align()
@@ -23,3 +25,6 @@ func align():
 
 func align_visuals():
 	target_position = get_world_pos()
+
+func set_segment_percent(percent):
+	segment_percent = percent
