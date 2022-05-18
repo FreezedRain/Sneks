@@ -23,13 +23,14 @@ func _ready():
 	pass
 
 func _process(delta):
-	visuals.position = lerp(visuals.position, Vector2.ZERO, delta * 12)
+	visuals.position = lerp(visuals.position, Vector2.ZERO, delta * 16)
 	if len(segments) > 0:
 		sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 16)
 		for i in range(len(segments)):
 			line.set_point_position(i + 1, segments[i].position - position - visuals.position)
 			line_shadow.set_point_position(i + 1, segments[i].position - position - visuals.position + Vector2.DOWN * 8)
 			line_highlight.set_point_position(i + 1, segments[i].position - position - visuals.position + Vector2.UP * 16)
+
 
 func align_visuals():
 	var previous_pos = position

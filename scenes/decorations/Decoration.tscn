@@ -1,0 +1,15 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://sprites/decoration2.png" type="Texture" id=1]
+[ext_resource path="res://scenes/decorations/decoration.gd" type="Script" id=2]
+[ext_resource path="res://sprites/decoration3.png" type="Texture" id=3]
+[ext_resource path="res://sprites/decoration1.png" type="Texture" id=4]
+
+[node name="Decoration" type="Node2D"]
+script = ExtResource( 2 )
+sprites = [ ExtResource( 4 ), ExtResource( 1 ), ExtResource( 3 ) ]
+
+[node name="Sprite" type="Sprite" parent="."]
+self_modulate = Color( 0, 0, 0, 0.117647 )
+position = Vector2( 0, -16 )
+texture = ExtResource( 3 )

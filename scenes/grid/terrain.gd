@@ -67,6 +67,9 @@ func update_tiles():
 	$Back.position = Grid.bounds.size * 0.5
 	$Back.scale = Vector2(Grid.size.x + 1, Grid.size.y + 1);
 	
+	$Checker.position = Grid.bounds.size * 0.5 + Vector2(0, 16)
+	$Checker.region_rect = Rect2(Vector2.ZERO, Vector2(Grid.size.x, Grid.size.y) * 64);
+	
 	$Top.position = Grid.bounds.size * 0.5
 	$Top.scale = Vector2(20, 20);
 			

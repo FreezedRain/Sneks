@@ -10,6 +10,8 @@ onready var snake_holder = $Snakes
 onready var segment_holder = $Segments
 onready var goal_holder = $Goals
 
+onready var decorations = $Decorations
+
 # Data
 var level_data: LevelData
 var snakes: Array
@@ -51,6 +53,8 @@ func load_level(data: LevelData):
 	
 	for goal in level_objects.goals:
 		goal_holder.add_child(goal)
+	
+	decorations.setup()
 	
 
 func _on_snake_hovered(snake):
