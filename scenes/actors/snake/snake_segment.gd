@@ -1,15 +1,15 @@
 class_name SnakeSegment extends GridObject
 
-var snake
+var snake setget set_snake
 var target_position: Vector2
 var color
 
 func _ready():
 	pass
 
-func setup_snake(snake):
-	self.snake = snake
-	self.color = snake.color
+func set_snake(value):
+	snake = value
+	color = snake.color
 
 func _process(delta):
 	position = lerp(position, target_position, delta * 16)

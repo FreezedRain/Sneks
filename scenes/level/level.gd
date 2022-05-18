@@ -3,16 +3,17 @@ class_name Level extends Node2D
 
 signal completed
 
-const SNAKE_SCENE = preload("res://scenes/actors/snake/snake.tscn")
-
 onready var fsm = StateMachine.new(self, $States, $States/idle, false)
-onready var grid = $Grid
+onready var terrain = $Terrain
+
 onready var snake_holder = $Snakes
+onready var segment_holder = $Segments
+onready var goal_holder = $Goals
 
 # Data
 var level_data: LevelData
 var snakes: Array
-var hovered_snake: Snake
+var hovered_snake
 
 # Input
 var mouse_pos: Vector2
@@ -27,24 +28,30 @@ func _process(delta):
 
 func process_input():
 	mouse_pos = get_viewport().get_mouse_position()
-	mouse_grid_pos = grid.world_to_grid(mouse_pos)
+	mouse_grid_pos = Grid.world_to_grid(mouse_pos)
 
 func start():
 	fsm.next_state = fsm.states.turn
 
-func load_level(level_data: LevelData):
-	self.level_data = level_data
+func load_level(data: LevelData):
+	level_data = data
+	Grid.load_tiles(data.load_tiles())
 
-	grid.load_data(level_data)
+	yield(self, "ready")
+	terrain.update_tiles()
 
-	for snake_data in level_data.snakes:
-		var snake = SNAKE_SCENE.instance()
-		snake.setup(grid)
-		snake.setup_segments(snake_data.segments)
-		snake.set_color(snake_data.color)
+	var level_objects = data.load_objects()
+	for snake in level_objects.snakes:
 		snake.connect("hovered", self, "_on_snake_hovered")
 		snake.connect("unhovered", self, "_on_snake_unhovered")
-		snakes.append(snake)
+		snake_holder.add_child(snake)
+	
+	for segment in level_objects.segments:
+		segment_holder.add_child(segment)
+	
+	for goal in level_objects.goals:
+		goal_holder.add_child(goal)
+	
 
 func _on_snake_hovered(snake):
 	hovered_snake = snake

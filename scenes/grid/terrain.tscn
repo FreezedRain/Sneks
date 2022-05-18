@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://tilesets/basic_tileset_art.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/grid/terrain.gd" type="Script" id=2]
+[ext_resource path="res://tilesets/back.png" type="Texture" id=3]
+[ext_resource path="res://tilesets/top.png" type="Texture" id=4]
+
+[node name="Terrain" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Back" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+z_index = -10
+texture = ExtResource( 3 )
+
+[node name="Top" type="Sprite" parent="."]
+scale = Vector2( 3, 3 )
+z_index = -11
+texture = ExtResource( 4 )
+
+[node name="Tilemap" type="TileMap" parent="."]
+position = Vector2( -32, -32 )
+tile_set = ExtResource( 1 )
+cell_tile_origin = 1
+format = 1
