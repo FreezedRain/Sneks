@@ -14,6 +14,9 @@ var line: Line2D
 var segments: Array
 var target_position: Vector2
 
+func _init():
+	solid = true
+
 func _ready():
 	pass
 

@@ -1,5 +1,10 @@
 class_name ClearGoal extends Goal
 
+func _on_set_active():
+	if active:
+		show()
+	else:
+		hide()
+
 func _on_turn_updated():
-	var tile_objects = Grid.get_tile(pos).objects
-	set_active(tile_objects.size() == 0)
+	set_active(Grid.is_free(pos))

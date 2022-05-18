@@ -48,14 +48,15 @@ func load_goals() -> Array:
 			if raw_object == 'x':
 				goal = CLEAR_GOAL_SCENE.instance()
 			elif Globals.COLOR_LETTERS.keys().has(raw_object):
+				var color = Globals.COLOR_LETTERS[raw_object]
 				if raw_object == raw_object.to_upper():
 					goal = SNAKE_GOAL_SCENE.instance()
 				else:
 					goal = SEGMENT_GOAL_SCENE.instance()
+				goal.set_color(color)
 			if goal:
 				goal.set_pos(Vector2(x, y))
 				goal.align()
-				goal.set_color(Globals.COLOR_LETTERS[raw_object])
 				goals.append(goal)
 	return goals
 

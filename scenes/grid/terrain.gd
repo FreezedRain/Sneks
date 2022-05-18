@@ -20,21 +20,21 @@ func update_tiles():
 			var sw = false
 			var nw = false
 			
-			if Grid.is_solid(pos + halftilev + halftileh) or Grid.is_solid(pos + halftilev - halftileh):
+			if Grid.is_wall(pos + halftilev + halftileh) or Grid.is_wall(pos + halftilev - halftileh):
 				s = true
-			if Grid.is_solid(pos - halftilev + halftileh) or Grid.is_solid(pos - halftilev - halftileh):
+			if Grid.is_wall(pos - halftilev + halftileh) or Grid.is_wall(pos - halftilev - halftileh):
 				n = true
-			if Grid.is_solid(pos + halftileh + halftilev) or Grid.is_solid(pos + halftileh - halftilev):
+			if Grid.is_wall(pos + halftileh + halftilev) or Grid.is_wall(pos + halftileh - halftilev):
 				e = true
-			if Grid.is_solid(pos - halftileh + halftilev) or Grid.is_solid(pos - halftileh - halftilev):
+			if Grid.is_wall(pos - halftileh + halftilev) or Grid.is_wall(pos - halftileh - halftilev):
 				w = true
-			if Grid.is_solid(pos + halftileh + halftilev):
+			if Grid.is_wall(pos + halftileh + halftilev):
 				se = true
-			if Grid.is_solid(pos - halftileh + halftilev):
+			if Grid.is_wall(pos - halftileh + halftilev):
 				sw = true
-			if Grid.is_solid(pos + halftileh - halftilev):
+			if Grid.is_wall(pos + halftileh - halftilev):
 				ne = true
-			if Grid.is_solid(pos - halftileh - halftilev):
+			if Grid.is_wall(pos - halftileh - halftilev):
 				nw = true
 				
 			#FULL

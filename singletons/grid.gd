@@ -36,14 +36,10 @@ func is_free(pos: Vector2) -> bool:
 		return false
 	var tile = get_tile(pos)
 	for obj in tile.objects:
-		if obj is Actor or obj is SnakeSegment:
+		# print('[%s] is solid: [%s]' % [obj.name, obj.solid])
+		if obj.solid:
 			return false
 	return true
-
-func is_solid(pos: Vector2) -> bool:
-	if not in_bounds(pos):
-		return true
-	return tiles[pos.x][pos.y].solid
 
 func in_bounds(pos: Vector2) -> bool:
 	return pos.x >= 0 and pos.y >= 0 and pos.x < size.x and pos.y < size.y

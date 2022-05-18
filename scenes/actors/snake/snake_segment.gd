@@ -4,6 +4,9 @@ var snake setget set_snake
 var target_position: Vector2
 var color
 
+func _init():
+	solid = true
+
 func _ready():
 	pass
 
