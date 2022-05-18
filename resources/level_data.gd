@@ -1,5 +1,10 @@
 class_name LevelData extends Resource
 
+const SNAKE_SCENE = preload("res://scenes/actors/snake/snake.tscn")
+const SNAKE_GOAL_SCENE = preload("res://scenes/goals/snake_goal.tscn")
+const SEGMENT_GOAL_SCENE = preload("res://scenes/goals/segment_goal.tscn")
+const CLEAR_GOAL_SCENE = preload("res://scenes/goals/clear_goal.tscn")
+
 export (String) var name
 export (String, MULTILINE) var level_string
 export (String, MULTILINE) var snakes_string
@@ -13,9 +18,57 @@ func _init(name = "test", level_string = "", snakes_string = ""):
 	self.level_string = level_string
 	self.snakes_string = snakes_string
 
-func parse():
+func parse_raw():
 	parse_level()
 	parse_snakes()
+
+func load_objects() -> LevelObjects:
+	var goals = load_goals()
+	var snakes_and_segments = load_snakes()
+	
+	return LevelObjects.new(goals, snakes_and_segments[0], snakes_and_segments[1])
+	
+func load_tiles() -> Array:
+	var tiles = []
+	for x in range(size.x):
+		var col = []
+		for y in range(size.y):
+			var is_solid = level[x][y] == '#'
+			var tile = Tile.new(Vector2(x, y), is_solid)
+			col.append(tile)
+		tiles.append(col)
+	return tiles
+
+func load_goals() -> Array:
+	var goals = []
+	for x in range(size.x):
+		for y in range(size.y):
+			var raw_object = level[x][y]
+			var goal = null
+			if raw_object == 'x':
+				goal = CLEAR_GOAL_SCENE.instance()
+			elif Globals.COLOR_LETTERS.keys().has(raw_object):
+				if raw_object == raw_object.to_upper():
+					goal = SNAKE_GOAL_SCENE.instance()
+				else:
+					goal = SEGMENT_GOAL_SCENE.instance()
+			if goal:
+				goal.set_pos(Vector2(x, y))
+				goal.align()
+				goal.set_color(Globals.COLOR_LETTERS[raw_object])
+				goals.append(goal)
+	return goals
+
+func load_snakes() -> Array:
+	var snake_instances = []
+	var segments = []
+	for snake_data in snakes:
+		var snake = SNAKE_SCENE.instance()
+		var snake_segments = snake.setup_segments(snake_data.segments)
+		snake.set_color(snake_data.color)
+		segments.append_array(snake_segments)
+		snake_instances.append(snake)
+	return [snake_instances, segments]
 
 func parse_level():
 	var lines = level_string.split("\n")	
@@ -34,7 +87,7 @@ func parse_snakes():
 	for line in lines:
 		var segment_data = line.substr(1).split("-")
 		var segments = []
-		var color = Globals.COLORS_LETTERS[line[0]]
+		var color = Globals.COLOR_LETTERS[line[0]]
 		for pos_line in segment_data:
 			var pos_data = pos_line.split("/")
 			var pos = Vector2(int(pos_data[0]), int(pos_data[1]))
@@ -48,3 +101,13 @@ class SnakeData:
 	func _init(segments: Array, color):
 		self.segments = segments
 		self.color = color
+
+class LevelObjects:
+	var goals: Array
+	var snakes: Array
+	var segments: Array
+
+	func _init(goals: Array, snakes: Array, segments: Array):
+		self.goals = goals
+		self.snakes = snakes
+		self.segments = segments

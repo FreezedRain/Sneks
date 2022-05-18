@@ -1,13 +1,11 @@
 ## Stores information about the tile
 class_name Tile extends Object
 
-var grid
 var pos: Vector2
 var solid: bool
 var objects: Array
 
-func _init(grid, pos: Vector2, solid: bool):
-	self.grid = grid
+func _init(pos: Vector2, solid: bool):
 	self.pos = pos
 	self.solid = solid
 

@@ -3,16 +3,12 @@ extends Node2D
 const halftileh = Vector2(0.5, 0)
 const halftilev = Vector2(0, 0.5)
 
-var grid: Grid
-
 onready var tilemap = $Tilemap
 
-func setup(grid: Grid):
-	self.grid = grid
-
 func update_tiles():
-	for i in range(0, grid.size.x + 1):
-		for j in range(0, grid.size.y + 1):
+	position = Grid.bounds.position
+	for i in range(0, Grid.size.x + 1):
+		for j in range(0, Grid.size.y + 1):
 			var pos = Vector2(i - 0.5, j - 0.5)
 			
 			var n = false
@@ -24,21 +20,21 @@ func update_tiles():
 			var sw = false
 			var nw = false
 			
-			if grid.is_solid(pos + halftilev + halftileh) or grid.is_solid(pos + halftilev - halftileh):
+			if Grid.is_solid(pos + halftilev + halftileh) or Grid.is_solid(pos + halftilev - halftileh):
 				s = true
-			if grid.is_solid(pos - halftilev + halftileh) or grid.is_solid(pos - halftilev - halftileh):
+			if Grid.is_solid(pos - halftilev + halftileh) or Grid.is_solid(pos - halftilev - halftileh):
 				n = true
-			if grid.is_solid(pos + halftileh + halftilev) or grid.is_solid(pos + halftileh - halftilev):
+			if Grid.is_solid(pos + halftileh + halftilev) or Grid.is_solid(pos + halftileh - halftilev):
 				e = true
-			if grid.is_solid(pos - halftileh + halftilev) or grid.is_solid(pos - halftileh - halftilev):
+			if Grid.is_solid(pos - halftileh + halftilev) or Grid.is_solid(pos - halftileh - halftilev):
 				w = true
-			if grid.is_solid(pos + halftileh + halftilev):
+			if Grid.is_solid(pos + halftileh + halftilev):
 				se = true
-			if grid.is_solid(pos - halftileh + halftilev):
+			if Grid.is_solid(pos - halftileh + halftilev):
 				sw = true
-			if grid.is_solid(pos + halftileh - halftilev):
+			if Grid.is_solid(pos + halftileh - halftilev):
 				ne = true
-			if grid.is_solid(pos - halftileh - halftilev):
+			if Grid.is_solid(pos - halftileh - halftilev):
 				nw = true
 				
 			#FULL
@@ -68,19 +64,19 @@ func update_tiles():
 			
 			else: tilemap.set_cell(i, j, 8)
 			
-	$Back.position = grid.bounds.size * 0.5
-	$Back.scale = Vector2(grid.size.x + 1, grid.size.y + 1);
+	$Back.position = Grid.bounds.size * 0.5
+	$Back.scale = Vector2(Grid.size.x + 1, Grid.size.y + 1);
 	
-	$Top.position = grid.bounds.size * 0.5
+	$Top.position = Grid.bounds.size * 0.5
 	$Top.scale = Vector2(20, 20);
 			
 	
 
-## func update_tiles(grid):
-# 	dual_grid.update_tiles(grid)
+## func update_tiles(Grid):
+# 	dual_Grid.update_tiles(Grid)
 #
-# 	$Back.position = grid.size * grid.cell_size / 2
-# 	$Back.scale = Vector2(grid.size.x + 1, grid.size.y + 1);
+# 	$Back.position = Grid.size * Grid.cell_size / 2
+# 	$Back.scale = Vector2(Grid.size.x + 1, Grid.size.y + 1);
 #
-# 	$Top.position = grid.size * grid.cell_size / 2
+# 	$Top.position = Grid.size * Grid.cell_size / 2
 	

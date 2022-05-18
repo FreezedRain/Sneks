@@ -8,3 +8,5 @@ func exit(to_state: State):
 
 func process(delta):
 	pass
+	# if Input.is_action_just_pressed("click"):
+	# 	object.emit_signal("completed")

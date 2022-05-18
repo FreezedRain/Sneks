@@ -14,25 +14,25 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/actions/actions.gd"
 }, {
-"base": "Node2D",
+"base": "GridObject",
 "class": "Actor",
 "language": "GDScript",
 "path": "res://scenes/actors/actor.gd"
 }, {
-"base": "GridObject",
+"base": "Goal",
 "class": "ClearGoal",
 "language": "GDScript",
 "path": "res://scenes/goals/clear_goal.gd"
 }, {
-"base": "Node2D",
-"class": "Grid",
+"base": "GridObject",
+"class": "Goal",
 "language": "GDScript",
-"path": "res://scenes/grid/grid.gd"
+"path": "res://scenes/goals/goal.gd"
 }, {
 "base": "Node2D",
 "class": "GridObject",
 "language": "GDScript",
-"path": "res://scenes/grid/grid_object.gd"
+"path": "res://scripts/grid/grid_object.gd"
 }, {
 "base": "Node2D",
 "class": "Level",
@@ -44,7 +44,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://resources/level_data.gd"
 }, {
-"base": "GridObject",
+"base": "Goal",
 "class": "SegmentGoal",
 "language": "GDScript",
 "path": "res://scenes/goals/segment_goal.gd"
@@ -54,7 +54,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/actors/snake/snake.gd"
 }, {
-"base": "GridObject",
+"base": "Goal",
 "class": "SnakeGoal",
 "language": "GDScript",
 "path": "res://scenes/goals/snake_goal.gd"
@@ -77,7 +77,7 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "Tile",
 "language": "GDScript",
-"path": "res://scripts/tiles/tile.gd"
+"path": "res://scripts/grid/tile.gd"
 }, {
 "base": "Reference",
 "class": "Utils",
@@ -88,7 +88,7 @@ _global_script_class_icons={
 "Actions": "",
 "Actor": "",
 "ClearGoal": "",
-"Grid": "",
+"Goal": "",
 "GridObject": "",
 "Level": "",
 "LevelData": "",
@@ -112,6 +112,7 @@ config/icon="res://sprites/icon.png"
 
 Events="*res://singletons/events.gd"
 Globals="*res://singletons/globals.gd"
+Grid="*res://singletons/grid.gd"
 
 [display]
 
