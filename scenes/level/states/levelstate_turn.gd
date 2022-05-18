@@ -79,10 +79,8 @@ func _on_turn_updated():
 func _on_turn_finished():
 	var all_goals_met = true
 	for goal in object.goal_holder.get_children():
-		print(goal.active)
 		if not goal.active:
 			all_goals_met = false
 			break
 	if all_goals_met:
-		print('complete')
 		fsm.next_state = fsm.states.complete
