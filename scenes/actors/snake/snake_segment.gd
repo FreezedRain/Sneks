@@ -23,8 +23,10 @@ func align():
 	.align()
 	target_position = position
 
-func align_visuals():
+func align_visuals(random=false):
 	target_position = get_world_pos()
+	if random:
+		position += Vector2(rand_range(-64, 64), rand_range(-64, 64))
 
 func set_segment_percent(percent):
 	segment_percent = percent

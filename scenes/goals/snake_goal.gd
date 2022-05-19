@@ -4,6 +4,7 @@ class_name SnakeGoal extends Goal
 onready var sprite = $Sprite
 
 var color setget set_color
+var last_snake
 
 func set_color(value):
 	color = value
@@ -11,9 +12,13 @@ func set_color(value):
 
 func _on_set_active():
 	if active:
-		sprite.modulate = Color(4, 4, 4, 1)
+		hide()
+		#sprite.modulate = Color(4, 4, 4, 1)
 	else:
-		sprite.modulate = Color(1, 1, 1, 1)
+		show()
+		# sprite.modulate = Color(1, 1, 1, 1)
+	if last_snake:
+		last_snake.set_state(Snake.State.HAPPY if active else Snake.State.NORMAL)
 	# if active:
 	# 	anim_player.play("highlight")
 	# else:
@@ -24,5 +29,6 @@ func _on_turn_updated():
 	var now_active = false
 	for obj in tile_objects:
 		if obj is Snake:
+			last_snake = obj
 			now_active = obj.color == color
 	set_active(now_active)

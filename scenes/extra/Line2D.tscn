@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/extra/Line2Dshadow.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/extra/Line2Dhighlight.tscn" type="PackedScene" id=2]
+
+[node name="SnakeLine" type="Line2D"]
+width = 62.0
+default_color = Color( 0.580392, 0.698039, 0.403922, 1 )
+texture_mode = 1
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 16
+antialiased = true
+
+[node name="Line2Dhighlight" parent="." instance=ExtResource( 2 )]
+
+[node name="Line2Dshadow" parent="." instance=ExtResource( 1 )]
+show_behind_parent = true

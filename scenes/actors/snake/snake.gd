@@ -3,39 +3,66 @@ class_name Snake extends Actor
 signal hovered(snake)
 signal unhovered(snake)
 
+enum State {NORMAL, TIRED, HAPPY}
+const STATE_TEXTURES = {
+	State.NORMAL: preload("res://sprites/snake/eyes.png"),
+	State.TIRED: preload("res://sprites/snake/eyes_tired.png"),
+	State.HAPPY: preload("res://sprites/snake/eyes_happy.png")
+}
+
 const SEGMENT_SCENE = preload("res://scenes/actors/snake/snake_segment.tscn")
 
 onready var visuals = $Visuals
 onready var sprite = $Visuals/Sprite
 onready var highlight = $Visuals/Sprite/Highlight
+onready var line = $Visuals/SnakeLine
+# onready var line_highlight = $Visuals/Line2Dhighlight
+# onready var line_shadow = $Visuals/Line2Dshadow
+# onready var line = $Visuals/Line2D
 
 var color setget set_color
-var line: Line2D
-var line_highlight: Line2D
-var line_shadow: Line2D
 var segments: Array
 var target_position: Vector2
+var lerp_value: float = 0
+var state = State.NORMAL setget set_state
+
+# Segment calculations
+var prev: Array
+var new: Array
 
 func _init():
 	solid = true
 
 func _ready():
-	pass
+	# line.init_points(segments, position)
+	line.save_prev(segments, position)
+	line.save_new(segments, position)
 
 func _process(delta):
+	lerp_value = lerp(lerp_value, 1, delta * 16)
 	visuals.position = lerp(visuals.position, Vector2.ZERO, delta * 16)
-	if len(segments) > 0:
-		sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 16)
-		for i in range(len(segments)):
-			line.set_point_position(i + 1, segments[i].position - position - visuals.position)
-			line_shadow.set_point_position(i + 1, segments[i].position - position - visuals.position + Vector2.DOWN * 8)
-			line_highlight.set_point_position(i + 1, segments[i].position - position - visuals.position + Vector2.UP * 16)
+	sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 16)
 
+	line.compute_segments(-position - visuals.position, lerp_value)
+	# for i in range(len(segments)):
+	# 	# var segment_pos = segments[i].position - position - visuals.position
+	# 	# Odd segments between first and last
+	# 	# if i % 2 == 1 and i < len(segments) - 1:
+	# 	# print(i)
+	# 	# print('pos_grid: [%s]' % (segments[i].target_position))
+	# 	# print('pos_normal: [%s]' % (segments[i].position))
+
+	# 	line.set_point_position(i * 2 + 1, segments[i].get_world_pos() - position - visuals.position)
+	# 	line.set_point_position(i * 2 + 2, segments[i].position - position - visuals.position)
+
+func override_head_position(pos: Vector2):
+	visuals.position = pos
 
 func align_visuals():
 	var previous_pos = position
 	align()
 	visuals.position = previous_pos - position
+	lerp_value = 0
 
 func set_highlight(enabled: bool):
 	if enabled:
@@ -43,8 +70,16 @@ func set_highlight(enabled: bool):
 	else:
 		highlight.hide()
 
+func set_state(value):
+	state = value
+	if not sprite:
+		yield(self, "ready")
+	sprite.texture = STATE_TEXTURES[state]
+
 func set_color(value):
 	color = value
+	if not line:
+		yield(self, "ready")
 	line.default_color = Globals.COLOR_RGB[self.color]
 
 func get_tail_pos() -> Vector2:
@@ -58,17 +93,31 @@ func can_move(direction: Vector2) -> bool:
 func move(direction: Vector2):
 	var move_pos = pos + direction
 
+	line.save_prev(segments, position)
+
 	for i in range(len(segments) - 1, 0, -1):
 		segments[i].set_pos(segments[i - 1].pos)
-		segments[i].align_visuals()
+		segments[i].align()
 
 	# Update segments
 	segments[0].set_pos(pos)
-	segments[0].align_visuals()
+	segments[0].align()
 	
 	# Update head
 	set_pos(move_pos)
 	align_visuals()
+
+	line.save_new(segments, position)
+
+	# for i in range(len(prev) - 1):
+	# 	var first_diff = new[i] - prev[i]
+	# 	var next_diff = new[i + 1] - prev[i + 1]
+	# 	# print('segment: [%d] [%s] -> [%s]' % [i, prev[i], new[i]])
+	# 	# print('next: [%d] [%s] -> [%s]' % [i, prev[i + 1], new[i + 1]])
+	# 	# var next_diff = new[i + 1] - prev[i + 1]
+	# 	print('segment: [%d] first_diff: [%s], next_diff: [%s]' % [i, first_diff, next_diff])
+	# 	if first_diff != next_diff:
+	# 		print('corner')
 
 func reverse_move(last_tail_pos: Vector2):
 	set_pos(segments[0].pos)
@@ -76,21 +125,18 @@ func reverse_move(last_tail_pos: Vector2):
 	
 	for i in range(len(segments) - 1):
 		segments[i].set_pos(segments[i + 1].pos)
-		segments[i].align_visuals()
+		segments[i].align()
 
 	segments[len(segments) - 1].set_pos(last_tail_pos)
 	segments[len(segments) - 1].align_visuals()
 
+	line.save_prev(segments, position)
+	line.save_new(segments, position)
+
 func setup_segments(segment_positions: Array) -> Array:
 	set_pos(segment_positions[0])
 	align()
-	line = $Visuals/Line2D
-	line_highlight = $Visuals/Line2Dhighlight
-	line_shadow = $Visuals/Line2Dshadow
 	
-	line.add_point(Vector2.ZERO)
-	line_shadow.add_point(Vector2.ZERO + Vector2.DOWN * 8)
-	line_highlight.add_point(Vector2.ZERO + Vector2.UP * 16)
 	var count = 0
 	for pos in segment_positions:
 		count += 1
@@ -102,9 +148,6 @@ func setup_segments(segment_positions: Array) -> Array:
 		segment.set_snake(self)
 		segment.align()
 		segments.append(segment)
-		line.add_point(segment.position - position)
-		line_shadow.add_point(segment.position - position + Vector2.DOWN * 8)
-		line_highlight.add_point(segment.position - position + Vector2.UP * 16)
 		
 	return segments
 
