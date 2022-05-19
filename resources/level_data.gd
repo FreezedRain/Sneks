@@ -65,8 +65,8 @@ func load_snakes() -> Array:
 	var segments = []
 	for snake_data in snakes:
 		var snake = SNAKE_SCENE.instance()
-		var snake_segments = snake.setup_segments(snake_data.segments)
 		snake.set_color(snake_data.color)
+		var snake_segments = snake.setup_segments(snake_data.segments)
 		segments.append_array(snake_segments)
 		snake_instances.append(snake)
 	return [snake_instances, segments]
