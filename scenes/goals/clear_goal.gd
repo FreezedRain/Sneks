@@ -2,11 +2,13 @@ class_name ClearGoal extends Goal
 
 func _on_set_active():
 	if active:
-		show()
+		$Sprite.modulate = Color.white
 	else:
-		hide()
+		$Sprite.modulate = Color.red
+	pass
 
 func _ready():
+	active = true
 	_on_set_active()
 
 func _on_turn_updated():
