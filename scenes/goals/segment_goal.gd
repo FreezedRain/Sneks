@@ -1,7 +1,5 @@
 class_name SegmentGoal extends Goal
 
-onready var sprite = $Sprite
-
 var color setget set_color
 
 func set_color(value):
@@ -10,9 +8,11 @@ func set_color(value):
 
 func _on_set_active():
 	if active:
-		sprite.modulate = Color(4, 4, 4, 1)
+		target_color = Color.white
+		#sprite.modulate = Color(4, 4, 4, 1)
 	else:
-		sprite.modulate = Color(1, 1, 1, 1)
+		# show()
+		target_color = Globals.COLOR_RGB[color]
 
 func _on_turn_updated():
 	var tile_objects = Grid.get_tile(pos).objects

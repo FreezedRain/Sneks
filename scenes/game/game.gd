@@ -15,7 +15,7 @@ onready var overlay = $OverlayCanvas
 func _ready():
 	for level in levels:
 		level.parse_raw()
-	load_level(level_idx)
+	load_level(level_idx, true)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
@@ -27,8 +27,9 @@ func _process(delta):
 			level_idx = len(levels) - 1
 		load_level(level_idx)
 
-func load_level(idx: int):
-	yield(fade_out(0.5), "completed")
+func load_level(idx: int, skip_fadeout=false):
+	if not skip_fadeout:
+		yield(fade_out(0.5, 0.15), "completed")
 	if current_level:
 		current_level.queue_free()
 	var level_data = levels[idx]
@@ -39,11 +40,12 @@ func load_level(idx: int):
 	yield(fade_in(0.5), "completed")
 	current_level.start()
 
-func fade_out(duration: float):
+func fade_out(duration: float, post_delay: float):
 	overlay.show()
 	tween.interpolate_property(overlay, "fade", 0.0, 1.0, duration)
 	tween.start()
 	yield(tween, "tween_completed")
+	yield(get_tree().create_timer(post_delay), "timeout")
 
 func fade_in(duration: float):
 	tween.interpolate_property(overlay, "fade", 1.0, 0.0, duration)

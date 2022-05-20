@@ -1,15 +1,13 @@
 class_name ClearGoal extends Goal
 
+func _ready():
+	set_active(true)
+
 func _on_set_active():
 	if active:
-		$Sprite.modulate = Color.white
+		target_color = Color.white
 	else:
-		$Sprite.modulate = Color.red
-	pass
-
-func _ready():
-	active = true
-	_on_set_active()
+		target_color = Color.red
 
 func _on_turn_updated():
 	set_active(Grid.is_free(pos))
