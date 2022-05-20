@@ -119,6 +119,7 @@ config/icon="res://sprites/icon.png"
 Events="*res://singletons/events.gd"
 Globals="*res://singletons/globals.gd"
 Grid="*res://singletons/grid.gd"
+ParticleManager="*res://singletons/particle_manager.gd"
 
 [display]
 

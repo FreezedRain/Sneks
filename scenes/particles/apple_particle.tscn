@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/utility/circle_32.png" type="Texture" id=1]
+[ext_resource path="res://scenes/effects/particle_autodestroy.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0815217, 1 ), 0.0500638, 0.0500638, 0, 0, Vector2( 0.673913, 0 ), -3.98579, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=1]
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 200.0
+initial_velocity_random = 0.25
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 400.0
+scale = 0.35
+scale_random = 0.1
+scale_curve = SubResource( 3 )
+color = Color( 0.929412, 0.380392, 0.380392, 1 )
+
+[node name="AppleParticle" type="Particles2D"]
+z_index = 1
+emitting = false
+amount = 4
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource( 1 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

@@ -133,6 +133,9 @@ func move(direction: Vector2):
 
 	line.save_new(segments, position)
 
+	var dir = (line.prev[-1] - line.new[-1]).normalized()
+	ParticleManager.spawn('dust_particle', line.prev[-1] - dir * 16, dir.angle())
+
 	# for i in range(len(prev) - 1):
 	# 	var first_diff = new[i] - prev[i]
 	# 	var next_diff = new[i + 1] - prev[i + 1]

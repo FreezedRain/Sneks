@@ -9,7 +9,7 @@ onready var terrain = $Terrain
 onready var snake_holder = $Snakes
 onready var segment_holder = $Segments
 onready var goal_holder = $Goals
-
+onready var particle_holder = $Particles
 onready var decorations = $Decorations
 
 # Data
@@ -22,7 +22,7 @@ var mouse_pos: Vector2
 var mouse_grid_pos: Vector2
 
 func _ready():
-	pass
+	ParticleManager.parent_scene = particle_holder
 
 func _process(delta):
 	process_input()
