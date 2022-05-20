@@ -12,11 +12,13 @@ uniform vec4 color: hint_color;
 void fragment()
 {
 	float alpha = texture(TEXTURE, UV).a;
-	if (alpha > 0.0)
+	if (alpha > 0.0) {
 		COLOR = color;
-	else
+	} else {
+		COLOR = vec4(0);
+	}
 //		col.a = 0.1;
-	COLOR = vec4(0);
+		
 }"
 
 [sub_resource type="ShaderMaterial" id=4]
@@ -64,6 +66,10 @@ handle_input_locally = false
 usage = 0
 render_target_update_mode = 3
 
+[node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport"]
+visible = false
+texture = ExtResource( 4 )
+
 [node name="Highlight" type="Line2D" parent="ViewportContainer/Viewport"]
 position = Vector2( 320, 320 )
 z_index = 1
@@ -75,7 +81,4 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 32
-
-[node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport"]
-visible = false
-texture = ExtResource( 4 )
+antialiased = true

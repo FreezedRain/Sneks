@@ -1,8 +1,5 @@
 class_name SnakeGoal extends Goal
 
-# onready var anim_player = $AnimationPlayer
-onready var sprite = $Sprite
-
 var color setget set_color
 var last_snake
 
@@ -11,14 +8,18 @@ func set_color(value):
 	modulate = Globals.COLOR_RGB[color]
 
 func _on_set_active():
+	# print('set active')
 	if active:
-		hide()
+		# hide()
+		target_color = Color.white
 		#sprite.modulate = Color(4, 4, 4, 1)
 	else:
-		show()
+		# show()
+		target_color = Globals.COLOR_RGB[color]
 		# sprite.modulate = Color(1, 1, 1, 1)
 	if last_snake:
 		last_snake.set_state(Snake.State.HAPPY if active else Snake.State.NORMAL)
+	
 	# if active:
 	# 	anim_player.play("highlight")
 	# else:
