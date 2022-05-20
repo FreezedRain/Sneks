@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/decoration3.png-d25959d4a92e6ad7cdac5c5a45497144.stex"
+path="res://.import/tileSetTerrainArt.png-8cb6ebcbce46435482d22fb721184fde.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/decoration3.png"
-dest_files=[ "res://.import/decoration3.png-d25959d4a92e6ad7cdac5c5a45497144.stex" ]
+source_file="res://sprites/terrain/tileSetTerrainArt.png"
+dest_files=[ "res://.import/tileSetTerrainArt.png-8cb6ebcbce46435482d22fb721184fde.stex" ]
 
 [params]
 

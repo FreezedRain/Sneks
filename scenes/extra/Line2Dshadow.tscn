@@ -1,6 +1,7 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://sprites/shadow.png" type="Texture" id=1]
+[ext_resource path="res://sprites/snake/shadow.png" type="Texture" id=1]
+
 
 [node name="Line2Dshadow" type="Line2D"]
 self_modulate = Color( 1, 1, 1, 0.235294 )

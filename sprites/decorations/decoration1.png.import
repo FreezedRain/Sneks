@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/headgoal.png-045472c7aa1645d170479a9a119fe76c.stex"
+path="res://.import/decoration1.png-d053d2dcca8092438cbc2718f2ebd1c5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprites/headgoal.png"
-dest_files=[ "res://.import/headgoal.png-045472c7aa1645d170479a9a119fe76c.stex" ]
+source_file="res://sprites/decorations/decoration1.png"
+dest_files=[ "res://.import/decoration1.png-d053d2dcca8092438cbc2718f2ebd1c5.stex" ]
 
 [params]
 

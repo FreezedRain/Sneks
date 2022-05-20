@@ -4,7 +4,8 @@
 [ext_resource path="res://scenes/grid/terrain.gd" type="Script" id=2]
 [ext_resource path="res://tilesets/back.png" type="Texture" id=3]
 [ext_resource path="res://tilesets/top.png" type="Texture" id=4]
-[ext_resource path="res://sprites/checkers.png" type="Texture" id=5]
+[ext_resource path="res://sprites/decorations/checkers.png" type="Texture" id=5]
+
 
 [node name="Terrain" type="Node2D"]
 script = ExtResource( 2 )

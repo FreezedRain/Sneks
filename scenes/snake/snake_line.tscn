@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://sprites/shadow.png" type="Texture" id=2]
+[ext_resource path="res://sprites/snake/shadow.png" type="Texture" id=2]
 [ext_resource path="res://scenes/snake/snake_line.gd" type="Script" id=3]
 [ext_resource path="res://sprites/utility/square_64.png" type="Texture" id=4]
 
