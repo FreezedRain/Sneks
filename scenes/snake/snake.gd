@@ -11,6 +11,7 @@ const STATE_TEXTURES = {
 }
 
 const SEGMENT_SCENE = preload("res://scenes/snake/snake_segment.tscn")
+const GHOST_SEGMENT_SCENE = preload("res://scenes/snake/snake_ghost_segment.tscn")
 
 onready var visuals = $Visuals
 onready var sprite = $Visuals/Sprite
@@ -23,6 +24,7 @@ onready var last_tail_pos: Vector2 = get_tail_pos()
 
 var color setget set_color
 var segments: Array
+var segment_holder: Node2D setget set_segment_holder
 var target_position: Vector2
 var lerp_value: float = 0
 var state = State.NORMAL setget set_state
@@ -56,11 +58,15 @@ func _process(delta):
 	# 	line.set_point_position(i * 2 + 1, segments[i].get_world_pos() - position - visuals.position)
 	# 	line.set_point_position(i * 2 + 2, segments[i].position - position - visuals.position)
 
+func set_segment_holder(value):
+	segment_holder = value
+
 func override_head_position(pos: Vector2):
 	visuals.position = pos
 
-func add_segment():
-	var segment = SEGMENT_SCENE.instance()
+func add_segment(ghost=false):
+	var segment_scene = GHOST_SEGMENT_SCENE if ghost else SEGMENT_SCENE
+	var segment = segment_scene.instance()
 	# segment.set_segment_percent(1.0)
 	segment.set_pos(last_tail_pos)
 	segment.set_snake(self)
@@ -72,8 +78,7 @@ func add_segment():
 	line.new.append(segment.position)
 	# line.prev[len(line.prev) - 1] = segment.position
 	# line.new[len(line.new) - 1] = segment.position
-		
-	return segment
+	segment_holder.add_child(segment)
 
 func remove_segment():
 	var segment = segments.pop_back()
@@ -182,6 +187,9 @@ func setup_segments(segment_positions: Array) -> Array:
 			continue
 		var segment = SEGMENT_SCENE.instance()
 		# segment.set_segment_percent(count/segment_positions.size())
+		# var offset = Vector2(randi() % 3, randi() % 3)
+		# offset.x = clamp(offset.x, 0, Grid.size.x - 1)
+		# offset.y = clamp(offset.y, 0, Grid.size.y - 1)
 		segment.set_pos(pos)
 		segment.set_snake(self)
 		segment.align()

@@ -9,11 +9,10 @@ var making_turn: bool
 var move_timer: float = 0
 
 func _ready():
-	Events.connect("turn_updated", self, "_on_turn_updated")
-	Events.connect("turn_finished", self, "_on_turn_finished")
+	pass
 
 func enter(from_state: State):
-	Events.emit_signal("turn_updated")
+	pass
 
 func exit(to_state: State):
 	pass
@@ -52,16 +51,23 @@ func process_movement():
 	if direction != Vector2.ZERO:
 		var action = Actions.SnakeMoveAction.new(current_snake, direction)
 		if execute_action(action):
-			update_apples()
 			move_timer = MOVE_DELAY
 			end_turn()
 
-func update_apples():
-	var objects = Grid.get_tile(current_snake.pos).objects
-	for obj in objects:
-		if obj is Apple:
-			var action = Actions.AppleEatAction.new(current_snake, obj, object.segment_holder)
+func update_goals():
+	for goal in object.goal_holder.get_children():
+		var action = goal.update_turn_action()
+		if action != null:
 			execute_action(action)
+	for goal in object.goal_holder.get_children():
+		goal.update_turn()
+
+# func update_apples():
+# 	var objects = Grid.get_tile(current_snake.pos).objects
+# 	for obj in objects:
+# 		if obj is Apple:
+# 			var action = Actions.AppleEatAction.new(current_snake, obj, object.segment_holder)
+# 			execute_action(action)
 
 func convert_direction(direction: Vector2) -> Vector2:
 	if direction == Vector2.ZERO:
@@ -79,13 +85,10 @@ func execute_action(action: Actions.Action) -> bool:
 	return true
 
 func end_turn():
-	Events.emit_signal("turn_updated")
-	Events.emit_signal("turn_finished")
+	update_goals()
+	check_goals()
 
-func _on_turn_updated():
-	pass
-
-func _on_turn_finished():
+func check_goals():
 	var all_goals_met = true
 	for goal in object.goal_holder.get_children():
 		if not goal.active:

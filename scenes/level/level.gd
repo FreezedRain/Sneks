@@ -46,6 +46,7 @@ func load_level(data: LevelData):
 	for snake in level_objects.snakes:
 		snake.connect("hovered", self, "_on_snake_hovered")
 		snake.connect("unhovered", self, "_on_snake_unhovered")
+		snake.set_segment_holder(segment_holder)
 		snake_holder.add_child(snake)
 	
 	for segment in level_objects.segments:

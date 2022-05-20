@@ -9,7 +9,6 @@ func _init():
 	solid = false
 
 func _ready():
-	Events.connect("turn_updated", self, "_on_turn_updated")
 	_on_set_active()
 
 func _process(delta):
@@ -24,5 +23,8 @@ func set_active(value: bool):
 func _on_set_active():
 	pass
 
-func _on_turn_updated():
+func update_turn():
 	pass
+
+func update_turn_action() -> Actions.Action:
+	return null

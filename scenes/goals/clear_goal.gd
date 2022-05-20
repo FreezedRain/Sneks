@@ -9,5 +9,5 @@ func _on_set_active():
 	else:
 		target_color = Color.red
 
-func _on_turn_updated():
+func update_turn():
 	set_active(Grid.is_free(pos))

@@ -14,7 +14,12 @@ func _ready():
 	startpos = $Apple.position
 
 func _process(delta):
-	
 	t += delta
 	$Apple.position = startpos + Vector2.UP * sin(t*2) * 3;
-	
+
+func update_turn_action() -> Actions.Action:
+	var objects = Grid.get_tile(pos).objects
+	for obj in objects:
+		if obj is Snake:
+			return Actions.AppleEatAction.new(obj, self)
+	return null

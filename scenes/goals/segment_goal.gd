@@ -9,15 +9,13 @@ func set_color(value):
 func _on_set_active():
 	if active:
 		target_color = Color.white
-		#sprite.modulate = Color(4, 4, 4, 1)
 	else:
-		# show()
 		target_color = Globals.COLOR_RGB[color]
 
-func _on_turn_updated():
+func update_turn():
 	var tile_objects = Grid.get_tile(pos).objects
 	var now_active = false
 	for obj in tile_objects:
-		if obj is SnakeSegment:
+		if obj is Snake or obj is SnakeSegment:
 			now_active = obj.color == color
 	set_active(now_active)

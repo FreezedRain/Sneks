@@ -4,7 +4,7 @@ var snake setget set_snake
 var target_position: Vector2
 var color
 
-var segment_percent = 1
+# var segment_percent = 1
 
 func _init():
 	solid = true
@@ -28,5 +28,5 @@ func align():
 # 	if random:
 # 		position += Vector2(rand_range(-64, 64), rand_range(-64, 64))
 
-func set_segment_percent(percent):
-	segment_percent = percent
+# func set_segment_percent(percent):
+# 	segment_percent = percent
