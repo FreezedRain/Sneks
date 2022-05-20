@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/snake/snake.gd" type="Script" id=1]
 [ext_resource path="res://sprites/snake/eyes.png" type="Texture" id=2]
 [ext_resource path="res://sprites/snake/head.png" type="Texture" id=3]
 [ext_resource path="res://scenes/snake/snake_line.tscn" type="PackedScene" id=4]
+[ext_resource path="res://sounds/land.ogg" type="AudioStream" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -30,6 +31,11 @@ monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
 shape = SubResource( 1 )
+
+[node name="moveSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -25.0
+bus = "SFX"
 
 [connection signal="mouse_entered" from="HoverArea" to="." method="_on_HoverArea_mouse_entered"]
 [connection signal="mouse_exited" from="HoverArea" to="." method="_on_HoverArea_mouse_exited"]

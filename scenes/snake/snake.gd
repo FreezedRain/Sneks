@@ -145,6 +145,16 @@ func move(direction: Vector2):
 	# 	print('segment: [%d] first_diff: [%s], next_diff: [%s]' % [i, first_diff, next_diff])
 	# 	if first_diff != next_diff:
 	# 		print('corner')
+	
+	if direction == Vector2.UP:
+		$moveSFX.pitch_scale = 1.2
+	if direction == Vector2.RIGHT:
+		$moveSFX.pitch_scale = 1
+	if direction == Vector2.LEFT:
+		$moveSFX.pitch_scale = 0.8
+	if direction == Vector2.DOWN:
+		$moveSFX.pitch_scale = 0.6
+	$moveSFX.play()
 
 func reverse_move(last_tail_pos: Vector2):
 	set_pos(segments[0].pos)
