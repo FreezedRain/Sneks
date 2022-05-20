@@ -1,5 +1,7 @@
 class_name Apple extends Goal
 
+onready var apple_sprite = $Apple
+
 func _on_set_active():
 	if active:
 		ParticleManager.spawn('apple_particle', position)
@@ -11,11 +13,11 @@ var startpos
 var t = 0
 
 func _ready():
-	startpos = $Apple.position
+	startpos = apple_sprite.position
 
 func _process(delta):
 	t += delta
-	$Apple.position = startpos + Vector2.UP * sin(t*2) * 3;
+	apple_sprite.position = startpos + Vector2.UP * sin(t*2) * 3;
 
 func update_turn_action() -> Actions.Action:
 	var objects = Grid.get_tile(pos).objects
