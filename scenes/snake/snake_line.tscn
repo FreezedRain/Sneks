@@ -1,12 +1,27 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://sprites/white.png" type="Texture" id=1]
 [ext_resource path="res://sprites/shadow.png" type="Texture" id=2]
 [ext_resource path="res://scenes/snake/snake_line.gd" type="Script" id=3]
+[ext_resource path="res://sprites/utility/square_64.png" type="Texture" id=4]
 
-[sub_resource type="Gradient" id=2]
-offsets = PoolRealArray( 0, 0.994475, 1 )
-colors = PoolColorArray( 1, 1, 1, 1, 1, 1, 1, 0.647059, 1, 1, 1, 0.0588235 )
+[sub_resource type="Shader" id=3]
+code = "shader_type canvas_item;
+
+uniform vec4 color: hint_color;
+
+void fragment()
+{
+	float alpha = texture(TEXTURE, UV).a;
+	if (alpha > 0.0)
+		COLOR = color;
+	else
+//		col.a = 0.1;
+	COLOR = vec4(0);
+}"
+
+[sub_resource type="ShaderMaterial" id=4]
+shader = SubResource( 3 )
+shader_param/color = Color( 1, 1, 1, 0.0588235 )
 
 [node name="SnakeLine" type="Line2D"]
 points = PoolVector2Array( 0, 0, -32, 0, -64, 0 )
@@ -20,20 +35,6 @@ round_precision = 32
 antialiased = true
 script = ExtResource( 3 )
 
-[node name="Highlight" type="Line2D" parent="."]
-visible = false
-self_modulate = Color( 1, 1, 1, 0.0784314 )
-z_index = 1
-width = 32.0
-default_color = Color( 1, 1, 1, 1 )
-gradient = SubResource( 2 )
-texture = ExtResource( 1 )
-texture_mode = 2
-joint_mode = 2
-begin_cap_mode = 2
-end_cap_mode = 2
-round_precision = 32
-
 [node name="Shadow" type="Line2D" parent="."]
 self_modulate = Color( 1, 1, 1, 0.235294 )
 show_behind_parent = true
@@ -45,3 +46,36 @@ joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 round_precision = 16
+
+[node name="ViewportContainer" type="ViewportContainer" parent="."]
+material = SubResource( 4 )
+margin_left = -320.0
+margin_top = -320.0
+margin_right = 320.0
+margin_bottom = 320.0
+mouse_filter = 2
+stretch = true
+stretch_shrink = 2
+
+[node name="Viewport" type="Viewport" parent="ViewportContainer"]
+size = Vector2( 640, 640 )
+transparent_bg = true
+handle_input_locally = false
+usage = 0
+render_target_update_mode = 3
+
+[node name="Highlight" type="Line2D" parent="ViewportContainer/Viewport"]
+position = Vector2( 320, 320 )
+z_index = 1
+points = PoolVector2Array( 0, 0, 64, 0 )
+width = 32.0
+default_color = Color( 1, 1, 1, 1 )
+texture_mode = 2
+joint_mode = 2
+begin_cap_mode = 2
+end_cap_mode = 2
+round_precision = 32
+
+[node name="Sprite" type="Sprite" parent="ViewportContainer/Viewport"]
+visible = false
+texture = ExtResource( 4 )

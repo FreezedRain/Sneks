@@ -7,7 +7,7 @@ var prev: Array
 var new: Array
 
 onready var shadow = $Shadow
-onready var highlight = $Highlight
+onready var highlight = $ViewportContainer/Viewport/Highlight
 
 func clear_points():
 	.clear_points()
