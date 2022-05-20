@@ -16,4 +16,6 @@ func get_world_pos() -> Vector2:
 	return Grid.grid_to_world(pos)
 
 func _exit_tree():
-	Grid.get_tile(pos).remove_object(self)
+	var tile = Grid.get_tile(pos)
+	if tile:
+		tile.remove_object(self)

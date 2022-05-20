@@ -10,7 +10,7 @@ var current_level: Level
 
 # onready var animation_player = $AnimationPlayer
 onready var tween = $Tween
-onready var overlay = $CanvasLayer/Overlay
+onready var overlay = $OverlayCanvas
 
 func _ready():
 	for level in levels:
@@ -41,12 +41,12 @@ func load_level(idx: int):
 
 func fade_out(duration: float):
 	overlay.show()
-	tween.interpolate_property(overlay, "color:a", 0.0, 1.0, duration)
+	tween.interpolate_property(overlay, "fade", 0.0, 1.0, duration)
 	tween.start()
 	yield(tween, "tween_completed")
 
 func fade_in(duration: float):
-	tween.interpolate_property(overlay, "color:a", 1.0, 0.0, duration)
+	tween.interpolate_property(overlay, "fade", 1.0, 0.0, duration)
 	tween.start()
 	yield(tween, "tween_completed")
 	overlay.hide()

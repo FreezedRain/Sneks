@@ -1,17 +1,65 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://resources/levels/test.tres" type="Resource" id=2]
+[ext_resource path="res://scenes/effects/overlay_canvas.gd" type="Script" id=3]
+[ext_resource path="res://sprites/utility/transition.png" type="Texture" id=4]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+
+const float PI = 3.1415926538;
+const float TWO_PI = 6.2831853076;
+
+//uniform vec2 pixel_size;
+uniform sampler2D transition_texture;
+uniform float progress = 0.0;
+
+void fragment(){
+	vec2 uv = (UV - vec2(0.5));
+//	uv.y *= (pixel_size.x / pixel_size.y);
+	uv += vec2(0.5, 0.5);
+	// vec2 ps = vec2(pixel_size);
+	
+	float value = texture(transition_texture, uv).r;
+	COLOR.rgb = vec3(0.0);
+	COLOR.a = 1.0 - smoothstep(progress, progress + 0.05, value);
+	
+//	uv = toPolar(uv);
+//	uv.x += pow(uv.y, 2.0) * rotation;
+//	uv = toCartesian(uv) + vec2(0.5);
+//	float dist = uv.x * length(UV - vec2(0.5));
+//	COLOR.rgb = vec3(0);
+//	COLOR.a = 1.0 - smoothstep(progress, progress + 0.01, dist);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/progress = 0.0
+shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 levels = [ ExtResource( 2 ) ]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="OverlayCanvas" type="CanvasLayer" parent="."]
+script = ExtResource( 3 )
 
-[node name="Overlay" type="ColorRect" parent="CanvasLayer"]
+[node name="Overlay" type="ColorRect" parent="OverlayCanvas"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0 )
+
+[node name="Overlay3" type="ColorRect" parent="OverlayCanvas"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Overlay2" type="ColorRect" parent="OverlayCanvas"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.803922, 0.298039, 0.298039, 0 )
 
 [node name="Tween" type="Tween" parent="."]
