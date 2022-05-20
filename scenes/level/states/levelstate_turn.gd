@@ -52,8 +52,16 @@ func process_movement():
 	if direction != Vector2.ZERO:
 		var action = Actions.SnakeMoveAction.new(current_snake, direction)
 		if execute_action(action):
+			update_apples()
 			move_timer = MOVE_DELAY
 			end_turn()
+
+func update_apples():
+	var objects = Grid.get_tile(current_snake.pos).objects
+	for obj in objects:
+		if obj is Apple:
+			var action = Actions.AppleEatAction.new(current_snake, obj, object.segment_holder)
+			execute_action(action)
 
 func convert_direction(direction: Vector2) -> Vector2:
 	if direction == Vector2.ZERO:

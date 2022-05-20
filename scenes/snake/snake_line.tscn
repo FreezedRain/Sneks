@@ -2,7 +2,7 @@
 
 [ext_resource path="res://sprites/white.png" type="Texture" id=1]
 [ext_resource path="res://sprites/shadow.png" type="Texture" id=2]
-[ext_resource path="res://scenes/actors/snake/snake_line.gd" type="Script" id=3]
+[ext_resource path="res://scenes/snake/snake_line.gd" type="Script" id=3]
 
 [sub_resource type="Gradient" id=2]
 offsets = PoolRealArray( 0, 0.994475, 1 )

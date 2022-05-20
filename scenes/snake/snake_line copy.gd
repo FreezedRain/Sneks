@@ -41,6 +41,14 @@ func save_new(segments: Array, head_pos: Vector2):
 	for segment in segments:
 		new.append(segment.target_position)
 
+func save_prev_offset(segments: Array, head_pos: Vector2):
+	prev.clear()
+	prev.append(head_pos)
+	prev.append(head_pos)
+	for i in range(len(segments) - 1):
+		prev.append(segments[i].target_position)
+	
+
 func init_points(segments: Array, snake_pos: Vector2):
 	add_point(Vector2.ZERO)
 
@@ -58,12 +66,25 @@ func init_points(segments: Array, snake_pos: Vector2):
 func compute_segments(offset: Vector2, scale: float):
 	clear_points()
 	add_point(Vector2.ZERO)
+	var prev_pos = lerp(prev[0], new[0], scale)
 	for i in range(len(prev)):
-		if i > 0:
-			add_point(lerp(prev[i], new[i], scale) + offset)
-		if scale < 0.993 and i < len(prev) - 1:
-			if (new[i] - prev[i]) != (new[i + 1] - prev[i + 1]):
-				add_point(prev[i] + offset)
+		var new_pos
+		if i == len(prev) - 1:
+			new_pos = lerp(prev[i], new[i], scale)
+			if (new_pos - prev_pos).length() > 0:
+				
+				add_point(new_pos + offset)
+				prev_pos = new_pos
+		else:
+			# var last_fixed = i == len(prev) - 2 and (new[i + 1] - prev[i + 1]) == Vector2.ZERO
+			if (new[i + 1] - prev[i + 1]) != Vector2.ZERO and (new[i] - prev[i]) != (new[i + 1] - prev[i + 1]):
+				print('corner %d' % i)
+				new_pos = prev[i]
+				if (new_pos - prev_pos).length() > 0:
+					add_point(new_pos + offset)
+					prev_pos = new_pos
+			
+	# print('Drawing [%d] points.' % get_point_count())
 
 # func compute_segments(prev: Array, new: Array, offset: Vector2, scale: float):
 # 	clear_points()

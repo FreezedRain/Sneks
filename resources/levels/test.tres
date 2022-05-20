@@ -6,6 +6,6 @@
 script = ExtResource( 1 )
 name = "test"
 level_string = "6,2
-OOOOOG
-OOOOOO"
-snakes_string = "g2/0-1/0-0/0"
+OOaOOG
+OOOaOO"
+snakes_string = "g1/0-0/0"

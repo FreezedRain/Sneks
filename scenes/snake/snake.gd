@@ -10,7 +10,7 @@ const STATE_TEXTURES = {
 	State.HAPPY: preload("res://sprites/snake/eyes_happy.png")
 }
 
-const SEGMENT_SCENE = preload("res://scenes/actors/snake/snake_segment.tscn")
+const SEGMENT_SCENE = preload("res://scenes/snake/snake_segment.tscn")
 
 onready var visuals = $Visuals
 onready var sprite = $Visuals/Sprite
@@ -19,6 +19,7 @@ onready var line = $Visuals/SnakeLine
 # onready var line_highlight = $Visuals/Line2Dhighlight
 # onready var line_shadow = $Visuals/Line2Dshadow
 # onready var line = $Visuals/Line2D
+onready var last_tail_pos: Vector2 = get_tail_pos()
 
 var color setget set_color
 var segments: Array
@@ -58,6 +59,28 @@ func _process(delta):
 func override_head_position(pos: Vector2):
 	visuals.position = pos
 
+func add_segment():
+	var segment = SEGMENT_SCENE.instance()
+	# segment.set_segment_percent(1.0)
+	segment.set_pos(last_tail_pos)
+	segment.set_snake(self)
+	segment.align()
+	segments.append(segment)
+
+	# var dir = (segment.position - line.prev[len(line.prev) - 1]).normalized()
+	line.prev.append(segment.position)
+	line.new.append(segment.position)
+	# line.prev[len(line.prev) - 1] = segment.position
+	# line.new[len(line.new) - 1] = segment.position
+		
+	return segment
+
+func remove_segment():
+	var segment = segments.pop_back()
+	segment.queue_free()
+	line.prev.pop_back()
+	line.new.pop_back()
+
 func align_visuals():
 	var previous_pos = position
 	align()
@@ -93,6 +116,7 @@ func can_move(direction: Vector2) -> bool:
 func move(direction: Vector2):
 	var move_pos = pos + direction
 
+	last_tail_pos = get_tail_pos()
 	line.save_prev(segments, position)
 
 	for i in range(len(segments) - 1, 0, -1):
@@ -128,8 +152,9 @@ func reverse_move(last_tail_pos: Vector2):
 		segments[i].align()
 
 	segments[len(segments) - 1].set_pos(last_tail_pos)
-	segments[len(segments) - 1].align_visuals()
+	segments[len(segments) - 1].align()
 
+	last_tail_pos = get_tail_pos()
 	line.save_prev(segments, position)
 	line.save_new(segments, position)
 
@@ -143,7 +168,7 @@ func setup_segments(segment_positions: Array) -> Array:
 		if count == 1:
 			continue
 		var segment = SEGMENT_SCENE.instance()
-		segment.set_segment_percent(count/segment_positions.size())
+		# segment.set_segment_percent(count/segment_positions.size())
 		segment.set_pos(pos)
 		segment.set_snake(self)
 		segment.align()

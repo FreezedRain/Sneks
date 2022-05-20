@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://sprites/utility/square_64.png" type="Texture" id=1]
-[ext_resource path="res://scenes/actors/snake/snake_segment.gd" type="Script" id=2]
+[ext_resource path="res://scenes/snake/snake_segment.gd" type="Script" id=2]
 
 [node name="SnakeSegment" type="Sprite"]
 visible = false
