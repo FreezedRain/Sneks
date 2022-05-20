@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/level_data_hub.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "Hub"
+level_string = "6,6"
+snakes_string = "g1/1-2/1"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://scenes/testing/level_test.gd" type="Script" id=1]
-[ext_resource path="res://resources/levels/test.tres" type="Resource" id=2]
+[ext_resource path="res://resources/levels/hub.tres" type="Resource" id=2]
 
 [node name="LevelTest" type="Node"]
 script = ExtResource( 1 )

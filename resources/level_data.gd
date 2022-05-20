@@ -4,6 +4,7 @@ const SNAKE_SCENE = preload("res://scenes/snake/snake.tscn")
 const SNAKE_GOAL_SCENE = preload("res://scenes/goals/snake_goal.tscn")
 const SEGMENT_GOAL_SCENE = preload("res://scenes/goals/segment_goal.tscn")
 const CLEAR_GOAL_SCENE = preload("res://scenes/goals/clear_goal.tscn")
+const TRANSITION_GOAL_SCENE = preload("res://scenes/goals/transition_goal.tscn")
 const APPLE_SCENE = preload("res://scenes/goals/apple.tscn")
 
 export (String) var name
@@ -50,6 +51,10 @@ func load_goals() -> Array:
 				goal = CLEAR_GOAL_SCENE.instance()
 			elif raw_object == 'a':
 				goal = APPLE_SCENE.instance()
+			elif raw_object[0] == 'e':
+				var level_idx = int(raw_object.substr(1))
+				goal = TRANSITION_GOAL_SCENE.instance()
+				goal.set_level_idx(level_idx)
 			elif Globals.COLOR_LETTERS.keys().has(raw_object):
 				var color = Globals.COLOR_LETTERS[raw_object]
 				if raw_object == raw_object.to_upper():
