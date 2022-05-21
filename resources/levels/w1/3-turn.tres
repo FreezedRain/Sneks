@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "test"
+name = "turn"
 level_string = "7,3
 ####___
 G____#_

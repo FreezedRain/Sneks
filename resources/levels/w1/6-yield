@@ -4,7 +4,13 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "test"
-level_string = "5,1
-OOOOG"
-snakes_string = "g1/0-0/0"
+name = "wiggle"
+level_string = "6,5
+##_G##
+G____G
+______
+##__##
+______"
+snakes_string = "g0/2-1/2-2/2-3/2-4/2-5/2
+g3/3-3/4-4/4-5/4
+g2/4-1/4-0/4"

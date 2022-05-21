@@ -3,10 +3,10 @@ extends Node
 
 export (Array, Resource) var levels
 export (Resource) var level_hub
-export (int) var level_idx
 
 const LEVEL_SCENE = preload("res://scenes/level/level.tscn")
 
+var level_idx = 0
 var current_level: Level
 
 # onready var animation_player = $AnimationPlayer

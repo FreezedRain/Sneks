@@ -57,6 +57,8 @@ func load_level(data: LevelData):
 	
 	decorations.setup()
 	
+	$CanvasLayer/Title.text = level_data.name
+	
 
 func _on_snake_hovered(snake):
 	hovered_snake = snake

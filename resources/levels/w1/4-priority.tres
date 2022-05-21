@@ -4,9 +4,12 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "test"
-level_string = "5,3
+name = "priority"
+level_string = "5,5
+___#_
 _#___
-_#_#_
-___#G"
-snakes_string = "g0/2-0/1-0/0"
+___##
+##_G#
+G__##"
+snakes_string = "g2/1-2/0-1/0-0/0
+g3/1-4/1-4/0"
