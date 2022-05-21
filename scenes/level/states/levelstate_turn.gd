@@ -12,7 +12,7 @@ func _ready():
 	pass
 
 func enter(from_state: State):
-	pass
+	object.update_title(object.level_data.name)
 
 func exit(to_state: State):
 	pass

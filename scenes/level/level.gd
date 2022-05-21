@@ -4,8 +4,10 @@ class_name Level extends Node2D
 signal completed
 
 onready var fsm = StateMachine.new(self, $States, $States/idle, false)
-onready var terrain = $Terrain
+onready var tween = $Tween
 
+onready var terrain = $Terrain
+onready var title = $CanvasLayer/Title
 onready var snake_holder = $Snakes
 onready var segment_holder = $Segments
 onready var goal_holder = $Goals
@@ -56,9 +58,11 @@ func load_level(data: LevelData):
 		goal_holder.add_child(goal)
 	
 	decorations.setup()
-	
-	$CanvasLayer/Title.text = level_data.name
-	
+
+func update_title(text):
+	title.text = text
+	tween.interpolate_property(title, "percent_visible", 0, 1, 0.2)
+	tween.start()
 
 func _on_snake_hovered(snake):
 	hovered_snake = snake
