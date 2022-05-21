@@ -44,6 +44,7 @@ z_index = -1
 script = ExtResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
 
 [node name="Title" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5
@@ -55,3 +56,6 @@ margin_bottom = 32.0
 custom_fonts/font = SubResource( 1 )
 text = "- LEVEL TITLE -"
 align = 1
+percent_visible = 0.0
+
+[node name="Tween" type="Tween" parent="."]
