@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=3 format=2]
+
+[ext_resource path="res://resources/biome_data.gd" type="Script" id=1]
+[ext_resource path="res://tilesets/basic_tileset_jungle.tres" type="TileSet" id=2]
+
+[resource]
+script = ExtResource( 1 )
+name = "Grassy"
+tileset = ExtResource( 2 )
+move_particle = "grass_particle"
+color_top = Color( 0.262745, 0.372549, 0.2, 1 )
+color_bottom = Color( 0.203922, 0.278431, 0.164706, 1 )

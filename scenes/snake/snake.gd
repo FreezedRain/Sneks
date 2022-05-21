@@ -27,6 +27,7 @@ var segment_holder: Node2D setget set_segment_holder
 var target_position: Vector2
 var lerp_value: float = 0
 var state = State.NORMAL setget set_state
+var move_particle: String
 
 # Segment calculations
 var prev: Array
@@ -39,6 +40,7 @@ func _ready():
 	# line.init_points(segments, position)
 	line.save_prev(segments, position)
 	line.save_new(segments, position)
+	move_particle = Grid.biome.move_particle
 
 func _process(delta):
 	lerp_value = lerp(lerp_value, 1, delta * 16)
@@ -182,7 +184,7 @@ func move(direction: Vector2):
 	line.save_new(segments, position)
 
 	var dir = (line.prev[-1] - line.new[-1]).normalized()
-	ParticleManager.spawn('dust_particle', line.prev[-1] - dir * 16, dir.angle())
+	ParticleManager.spawn(move_particle, line.prev[-1] - dir * 16, dir.angle())
 
 	# for i in range(len(prev) - 1):
 	# 	var first_diff = new[i] - prev[i]

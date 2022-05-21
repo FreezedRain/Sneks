@@ -4,8 +4,13 @@ const halftileh = Vector2(0.5, 0)
 const halftilev = Vector2(0, 0.5)
 
 onready var tilemap = $Tilemap
+onready var back = $Back
+onready var top = $Top
+onready var checker = $Checker
 
 func update_tiles():
+	tilemap.tile_set = Grid.biome.tileset
+
 	position = Grid.bounds.position
 	for i in range(0, Grid.size.x + 1):
 		for j in range(0, Grid.size.y + 1):
@@ -64,15 +69,16 @@ func update_tiles():
 			
 			else: tilemap.set_cell(i, j, 8)
 			
-	$Back.position = Grid.bounds.size * 0.5
-	$Back.scale = Vector2(Grid.size.x + 1, Grid.size.y + 1);
-	
-	$Checker.position = Grid.bounds.size * 0.5 + Vector2(0, 16)
-	$Checker.region_rect = Rect2(Vector2.ZERO, Vector2(Grid.size.x, Grid.size.y) * 64);
-	
-	$Top.position = Grid.bounds.size * 0.5
-	$Top.scale = Vector2(20, 20);
-			
+	back.position = Grid.bounds.size * 0.5
+	back.scale = Vector2(Grid.size.x + 1, Grid.size.y + 1);
+	back.modulate = Grid.biome.color_bottom
+
+	top.position = Grid.bounds.size * 0.5
+	top.scale = Vector2(20, 20);
+	top.modulate = Grid.biome.color_top
+
+	checker.position = Grid.bounds.size * 0.5 + Vector2(0, 16)
+	checker.region_rect = Rect2(Vector2.ZERO, Vector2(Grid.size.x, Grid.size.y) * 64);			
 	
 
 ## func update_tiles(Grid):

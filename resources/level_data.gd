@@ -19,7 +19,7 @@ var size: Vector2
 var level: Array
 var snakes: Array
 
-func _init(name = "test", biome= Biome.DUSTY, level_string = "", snakes_string = ""):
+func _init(name = "test", biome = Biome.DUSTY, level_string = "", snakes_string = ""):
 	self.name = name
 	self.biome = biome
 	self.level_string = level_string
