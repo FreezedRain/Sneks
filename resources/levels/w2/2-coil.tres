@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "coil"
+biome = 0
 level_string = "9,7
 ####Y####
 ####---##

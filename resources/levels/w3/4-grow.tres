@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "grow"
+biome = 1
 level_string = "4,6
 -g-g
 gGag
