@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scenes/game/game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://resources/levels/w1/2-slither.tres" type="Resource" id=2]
@@ -11,10 +11,21 @@
 [ext_resource path="res://resources/levels/w2/1-pigment.tres" type="Resource" id=9]
 [ext_resource path="res://resources/levels/w2/3-roundabout.tres" type="Resource" id=10]
 [ext_resource path="res://resources/levels/w1/5-wiggle.tres" type="Resource" id=11]
+[ext_resource path="res://resources/levels/w1/7-forbiddenshape.tres" type="Resource" id=12]
+[ext_resource path="res://resources/levels/w2/7-bolivia.tres" type="Resource" id=13]
+[ext_resource path="res://resources/levels/w3/2-requiredshape.tres" type="Resource" id=14]
+[ext_resource path="res://resources/levels/w2/5-packingveggies.tres" type="Resource" id=15]
 [ext_resource path="res://resources/levels/hub.tres" type="Resource" id=16]
+[ext_resource path="res://resources/levels/w1/8-pack.tres" type="Resource" id=17]
+[ext_resource path="res://resources/levels/w1/9-6pack.tres" type="Resource" id=18]
+[ext_resource path="res://resources/levels/w3/3-snack.tres" type="Resource" id=19]
+[ext_resource path="res://resources/levels/w3/4-grow.tres" type="Resource" id=20]
+[ext_resource path="res://resources/levels/w3/1-diet.tres" type="Resource" id=21]
+[ext_resource path="res://resources/levels/w3/5-key.tres" type="Resource" id=22]
+[ext_resource path="res://resources/levels/w3/6-lockpick.tres" type="Resource" id=23]
 
 [node name="Main" type="Node"]
 
 [node name="Game" parent="." instance=ExtResource( 1 )]
-levels = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 7 ) ]
+levels = [ ExtResource( 5 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 6 ), ExtResource( 11 ), ExtResource( 4 ), ExtResource( 14 ), ExtResource( 12 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 10 ), ExtResource( 7 ), ExtResource( 15 ), ExtResource( 13 ), ExtResource( 21 ), ExtResource( 14 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 22 ), ExtResource( 23 ) ]
 level_hub = ExtResource( 16 )
