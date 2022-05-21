@@ -32,10 +32,9 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HoverArea"]
 shape = SubResource( 1 )
 
-[node name="moveSFX" type="AudioStreamPlayer" parent="."]
+[node name="SFXMove" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 5 )
 volume_db = -25.0
-bus = "SFX"
 
 [connection signal="mouse_entered" from="HoverArea" to="." method="_on_HoverArea_mouse_entered"]
 [connection signal="mouse_exited" from="HoverArea" to="." method="_on_HoverArea_mouse_exited"]

@@ -17,10 +17,9 @@ onready var visuals = $Visuals
 onready var sprite = $Visuals/Sprite
 onready var highlight = $Visuals/Sprite/Highlight
 onready var line = $Visuals/SnakeLine
-# onready var line_highlight = $Visuals/Line2Dhighlight
-# onready var line_shadow = $Visuals/Line2Dshadow
-# onready var line = $Visuals/Line2D
 onready var last_tail_pos: Vector2 = get_tail_pos()
+
+onready var sfx_move = $SFXMove
 
 var color setget set_color
 var segments: Array
@@ -152,14 +151,14 @@ func move(direction: Vector2):
 	# 		print('corner')
 	
 	if direction == Vector2.UP:
-		$moveSFX.pitch_scale = 1.2
+		sfx_move.pitch_scale = 0.9
 	if direction == Vector2.RIGHT:
-		$moveSFX.pitch_scale = 1
+		sfx_move.pitch_scale = 0.8
 	if direction == Vector2.LEFT:
-		$moveSFX.pitch_scale = 0.8
+		sfx_move.pitch_scale = 0.7
 	if direction == Vector2.DOWN:
-		$moveSFX.pitch_scale = 0.6
-	$moveSFX.play()
+		sfx_move.pitch_scale = 0.6
+	sfx_move.play()
 
 func reverse_move(last_tail_pos: Vector2):
 	set_pos(segments[0].pos)
