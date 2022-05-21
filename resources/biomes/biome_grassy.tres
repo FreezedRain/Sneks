@@ -1,7 +1,14 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://resources/biome_data.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/basic_tileset_jungle.tres" type="TileSet" id=2]
+[ext_resource path="res://resources/levels/hubs/hub_grassy.tres" type="Resource" id=3]
+[ext_resource path="res://resources/levels/w3/6-lockpick.tres" type="Resource" id=4]
+[ext_resource path="res://resources/levels/w3/1-diet.tres" type="Resource" id=5]
+[ext_resource path="res://resources/levels/w3/2-requiredshape.tres" type="Resource" id=6]
+[ext_resource path="res://resources/levels/w3/3-snack.tres" type="Resource" id=7]
+[ext_resource path="res://resources/levels/w3/5-key.tres" type="Resource" id=8]
+[ext_resource path="res://resources/levels/w3/4-grow.tres" type="Resource" id=9]
 
 [resource]
 script = ExtResource( 1 )
@@ -10,3 +17,5 @@ tileset = ExtResource( 2 )
 move_particle = "grass_particle"
 color_top = Color( 0.278431, 0.364706, 0.258824, 1 )
 color_bottom = Color( 0.203922, 0.278431, 0.164706, 1 )
+hub = ExtResource( 3 )
+levels = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 4 ) ]

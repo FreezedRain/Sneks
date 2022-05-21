@@ -1,7 +1,14 @@
-[gd_resource type="Resource" load_steps=3 format=2]
+[gd_resource type="Resource" load_steps=10 format=2]
 
 [ext_resource path="res://resources/biome_data.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/basic_tileset_mountain.tres" type="TileSet" id=2]
+[ext_resource path="res://resources/levels/hubs/hub_rocky.tres" type="Resource" id=3]
+[ext_resource path="res://resources/levels/w2/7-bolivia.tres" type="Resource" id=4]
+[ext_resource path="res://resources/levels/w2/4-makeway.tres" type="Resource" id=5]
+[ext_resource path="res://resources/levels/w2/3-roundabout.tres" type="Resource" id=6]
+[ext_resource path="res://resources/levels/w2/5-packingveggies.tres" type="Resource" id=7]
+[ext_resource path="res://resources/levels/w2/2-coil.tres" type="Resource" id=8]
+[ext_resource path="res://resources/levels/w2/1-pigment.tres" type="Resource" id=9]
 
 [resource]
 script = ExtResource( 1 )
@@ -10,3 +17,5 @@ tileset = ExtResource( 2 )
 move_particle = "rock_particle"
 color_top = Color( 0.396078, 0.368627, 0.337255, 1 )
 color_bottom = Color( 0.576471, 0.576471, 0.576471, 1 )
+hub = ExtResource( 3 )
+levels = [ ExtResource( 9 ), ExtResource( 8 ), ExtResource( 6 ), ExtResource( 5 ), ExtResource( 7 ), ExtResource( 4 ) ]

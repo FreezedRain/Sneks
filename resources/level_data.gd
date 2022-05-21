@@ -5,6 +5,7 @@ const SNAKE_GOAL_SCENE = preload("res://scenes/goals/snake_goal.tscn")
 const SEGMENT_GOAL_SCENE = preload("res://scenes/goals/segment_goal.tscn")
 const CLEAR_GOAL_SCENE = preload("res://scenes/goals/clear_goal.tscn")
 const TRANSITION_GOAL_SCENE = preload("res://scenes/goals/transition_goal.tscn")
+const BIOME_TRANSITION_GOAL_SCENE = preload("res://scenes/goals/biome_transition_goal.tscn")
 const APPLE_SCENE = preload("res://scenes/goals/apple.tscn")
 const GHOST_APPLE_SCENE = preload("res://scenes/goals/ghost_apple.tscn")
 
@@ -52,29 +53,37 @@ func load_goals() -> Array:
 	for x in range(size.x):
 		for y in range(size.y):
 			var raw_object = level[x][y]
-			var goal = null
-			if raw_object == 'x':
-				goal = CLEAR_GOAL_SCENE.instance()
-			elif raw_object == 'a':
-				goal = APPLE_SCENE.instance()
-			elif raw_object == 'A':
-				goal = GHOST_APPLE_SCENE.instance()
-			elif raw_object[0] == 'e':
-				var level_idx = int(raw_object.substr(1))
-				goal = TRANSITION_GOAL_SCENE.instance()
-				goal.set_level_idx(level_idx)
-			elif Globals.COLOR_LETTERS.keys().has(raw_object):
-				var color = Globals.COLOR_LETTERS[raw_object]
-				if raw_object == raw_object.to_upper():
-					goal = SNAKE_GOAL_SCENE.instance()
-				else:
-					goal = SEGMENT_GOAL_SCENE.instance()
-				goal.set_color(color)
+			var goal = parse_goal(raw_object)
 			if goal:
 				goal.set_pos(Vector2(x, y))
 				goal.align()
 				goals.append(goal)
 	return goals
+
+func parse_goal(raw_object):
+	var goal = null
+	if raw_object == 'x':
+		goal = CLEAR_GOAL_SCENE.instance()
+	elif raw_object == 'a':
+		goal = APPLE_SCENE.instance()
+	elif raw_object == 'A':
+		goal = GHOST_APPLE_SCENE.instance()
+	elif raw_object[0] == 'e':
+		var level_idx = int(raw_object.substr(1))
+		goal = TRANSITION_GOAL_SCENE.instance()
+		goal.set_level_idx(level_idx)
+	elif raw_object[0] == 'b':
+		var biome_idx = int(raw_object.substr(1))
+		goal = BIOME_TRANSITION_GOAL_SCENE.instance()
+		goal.set_biome_idx(biome_idx)
+	elif Globals.COLOR_LETTERS.keys().has(raw_object):
+		var color = Globals.COLOR_LETTERS[raw_object]
+		if raw_object == raw_object.to_upper():
+			goal = SNAKE_GOAL_SCENE.instance()
+		else:
+			goal = SEGMENT_GOAL_SCENE.instance()
+		goal.set_color(color)
+	return goal
 
 func load_snakes() -> Array:
 	var snake_instances = []

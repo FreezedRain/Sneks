@@ -1,5 +1,7 @@
 class_name LevelDataHub extends LevelData
 
+const TOTAL_BIOMES = 3
+
 func parse_level():
 	var lines = level_string.split("\n")	
 	var size_data = lines[0].split(",")
@@ -9,6 +11,9 @@ func parse_level():
 	for x in range(size.x):
 		var col = []
 		for y in range(size.y):
+			if lines[y + 1][x] == 'b':
+				if biome + 1 < TOTAL_BIOMES:
+					lines[y + 1][x] = 'b%d' % (biome + 1) 
 			col.append(lines[y + 1][x])
 			#col.append('O')
 		level.append(col)
