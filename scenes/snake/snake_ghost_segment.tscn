@@ -4,6 +4,7 @@
 [ext_resource path="res://scenes/snake/snake_ghost_segment.gd" type="Script" id=2]
 
 [node name="SnakeGhostSegment" type="Sprite"]
+visible = false
 modulate = Color( 0.74902, 0.807843, 0.811765, 0.282353 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )

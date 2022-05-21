@@ -79,6 +79,19 @@ func add_segment(ghost=false):
 	# line.new[len(line.new) - 1] = segment.position
 	segment_holder.add_child(segment)
 
+	var ghost_start = 0
+	var ghost_end = 0
+	for i in range(len(segments)):
+		if segments[i] is SnakeGhostSegment:
+			if ghost_start == 0:
+				ghost_start = i + 1
+				ghost_end = i + 2
+			else:
+				ghost_end = i + 2
+	print('%d %d' % [ghost_start, ghost_end])
+	line.set_ghost_points(ghost_start, ghost_end)
+		
+
 func remove_segment():
 	var segment = segments.pop_back()
 	segment.queue_free()
@@ -112,9 +125,40 @@ func set_color(value):
 func get_tail_pos() -> Vector2:
 	return segments[len(segments) - 1].pos
 
+func get_next_segment_pos(idx: int, pos: Vector2, new_pos: Vector2):
+	if idx == 0:
+		return new_pos
+	if idx == 1:
+		return pos
+	return segments[idx - 2].pos
+
+func is_segment_solid(idx: int):
+	if idx == 0:
+		return true
+	return segments[idx - 1].solid
+
 func can_move(direction: Vector2) -> bool:
-	if not Grid.is_free(pos + direction):
+	var new_pos = pos + direction
+	if not Grid.is_free(new_pos):
 		return false
+	for i in range(len(segments) + 1):
+		var i_next_pos = get_next_segment_pos(i, pos, new_pos)
+		for j in range(len(segments) + 1):
+			if i == j:
+				continue
+			var j_next_pos = get_next_segment_pos(j, pos, new_pos)
+			if i_next_pos == j_next_pos and is_segment_solid(i) and is_segment_solid(j):
+				# print('[%d] into [%d]' % [i, j])
+				return false
+			# if j != i - 1 and segments[j].pos == next_pos and segments[j].solid and segments[i].solid:
+			# 	print('Moving segment [%d] into [%d]' % [i, j])
+			# 	return false
+			# if j > 0 and segments[j].pos == new_pos and segments[j].solid:
+			# 	return false
+	# for j in range(1, len(segments)):
+	# 	if segments[j - 1].pos == new_pos and segments[j].solid:
+	# 		print('Head into solid')
+	# 		return false
 	return true
 
 func move(direction: Vector2):

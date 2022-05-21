@@ -7,6 +7,8 @@ const LEVEL_SCENE = preload("res://scenes/level/level.tscn")
 var level: Level
 
 func _ready():
+	yield(get_tree(), "idle_frame")
+	print('loading')
 	load_level()
 
 func load_level():

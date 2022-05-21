@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "pigment"
+biome = 0
 level_string = "8,3
 #------R
 ####--##

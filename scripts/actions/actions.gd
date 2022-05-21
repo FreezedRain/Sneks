@@ -51,17 +51,19 @@ class SnakeMoveAction extends Action:
 class AppleEatAction extends Action:
 	var snake: Snake
 	var apple
+	var ghost: bool
 
-	func _init(snake, apple):
+	func _init(snake, apple, ghost):
 		self.snake = snake
 		self.apple = apple
+		self.ghost = ghost
 
 	func is_allowed() -> bool:
 		return not apple.active
 
 	func execute():
 		apple.set_active(true)
-		snake.add_segment()
+		snake.add_segment(ghost)
 		# segment_holder.add_child(snake.add_segment())
 
 	func undo():
