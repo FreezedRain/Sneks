@@ -5,9 +5,9 @@
 [resource]
 script = ExtResource( 1 )
 name = "pigment"
-level_string = "7,3
-#-----R
--##--##
-------G"
+level_string = "8,3
+#------R
+####--##
+-------G"
 snakes_string = "g3/0-2/0-1/0
-r3/2-2/2-1/2-0/2-0/1"
+r4/2-3/2-2/2-1/2-0/2"
