@@ -49,10 +49,10 @@ layer = 0
 [node name="Title" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -122.5
-margin_top = 16.0
-margin_right = 122.5
-margin_bottom = 32.0
+margin_left = -320.0
+margin_top = 32.0
+margin_right = 320.0
+margin_bottom = 80.0
 custom_fonts/font = SubResource( 1 )
 text = "- LEVEL TITLE -"
 align = 1

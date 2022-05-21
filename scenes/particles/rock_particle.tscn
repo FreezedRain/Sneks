@@ -15,20 +15,19 @@ emission_box_extents = Vector3( 24, 24, 1 )
 flag_disable_z = true
 spread = 30.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 60.0
+initial_velocity = 30.0
 initial_velocity_random = 0.3
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-damping = 80.0
+damping = 25.0
 scale = 0.25
 scale_random = 0.1
 scale_curve = SubResource( 3 )
-color = Color( 0.47451, 0.643137, 0.435294, 1 )
+color = Color( 0.470588, 0.470588, 0.470588, 1 )
 
 [node name="GrassParticle" type="Particles2D"]
 emitting = false
-amount = 2
-lifetime = 0.8
+amount = 1
 one_shot = true
 explosiveness = 0.8
 process_material = SubResource( 4 )

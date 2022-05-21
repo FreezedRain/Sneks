@@ -26,10 +26,8 @@ scale_curve = SubResource( 3 )
 color = Color( 0.47451, 0.643137, 0.435294, 1 )
 
 [node name="GrassParticle" type="Particles2D"]
-emitting = false
 amount = 2
 lifetime = 0.8
-one_shot = true
 explosiveness = 0.8
 process_material = SubResource( 4 )
 texture = ExtResource( 2 )
