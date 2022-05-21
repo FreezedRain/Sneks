@@ -8,7 +8,7 @@ const TRANSITION_GOAL_SCENE = preload("res://scenes/goals/transition_goal.tscn")
 const APPLE_SCENE = preload("res://scenes/goals/apple.tscn")
 const GHOST_APPLE_SCENE = preload("res://scenes/goals/ghost_apple.tscn")
 
-enum Biome {DUSTY, GRASSY, GRAVEYARD}
+enum Biome {DUSTY, ROCKY, GRASSY, GRAVEYARD}
 
 export (String) var name
 export (Biome) var biome

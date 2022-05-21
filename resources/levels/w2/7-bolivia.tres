@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "bolivia"
-biome = 0
+biome = 1
 level_string = "7,8
 #------
 -------

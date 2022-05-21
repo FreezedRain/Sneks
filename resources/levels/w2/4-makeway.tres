@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "make way"
-biome = 0
+biome = 1
 level_string = "8,6
 ________
 _######_

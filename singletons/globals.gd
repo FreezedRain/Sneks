@@ -11,5 +11,6 @@ const COLOR_LETTERS = {
 
 const BIOME_RESOURCES = {
 	LevelData.Biome.DUSTY: preload("res://resources/biomes/biome_dusty.tres"),
-	LevelData.Biome.GRASSY: preload("res://resources/biomes/biome_grassy.tres")
+	LevelData.Biome.GRASSY: preload("res://resources/biomes/biome_grassy.tres"),
+	LevelData.Biome.ROCKY: preload("res://resources/biomes/biome_rocky.tres")
 }

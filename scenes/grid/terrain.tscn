@@ -21,11 +21,9 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1024, 1024 )
 
 [node name="Top" type="Sprite" parent="."]
-position = Vector2( 137, 20 )
 scale = Vector2( 3, 3 )
 z_index = -20
 texture = ExtResource( 1 )
-offset = Vector2( -45.6667, -6.66667 )
 
 [node name="Tilemap" type="TileMap" parent="."]
 position = Vector2( -32, -32 )
