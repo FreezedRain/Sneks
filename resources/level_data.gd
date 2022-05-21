@@ -19,8 +19,9 @@ func _init(name = "test", level_string = "", snakes_string = ""):
 	self.name = name
 	self.level_string = level_string
 	self.snakes_string = snakes_string
+	call_deferred("ready")
 
-func parse_raw():
+func ready():
 	parse_level()
 	parse_snakes()
 
@@ -80,6 +81,7 @@ func load_snakes() -> Array:
 	return [snake_instances, segments]
 
 func parse_level():
+	level.clear()
 	var lines = level_string.split("\n")	
 	var size_data = lines[0].split(",")
 	size.x = int(size_data[0])
@@ -92,6 +94,7 @@ func parse_level():
 		level.append(col)
 
 func parse_snakes():
+	snakes.clear()
 	var lines = snakes_string.split("\n")
 	for line in lines:
 		var segment_data = line.substr(1).split("-")
