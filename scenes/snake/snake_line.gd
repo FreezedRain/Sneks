@@ -25,8 +25,9 @@ func set_point_position(i: int, position: Vector2):
 	highlight.set_point_position(i, position + Vector2.UP * HIGHLIGHT_OFFSET)
 
 func set_ghost_points(start, end):
-	material.set_shader_param("ghost_start", start)
-	material.set_shader_param("ghost_end", end)
+	pass
+	# material.set_shader_param("ghost_start", start)
+	# material.set_shader_param("ghost_end", end)
 
 # func get_segment_pos(segments: Array, i: int, snake_pos: Vector2):
 # 	if i >= 0:
@@ -75,7 +76,7 @@ func compute_segments(offset: Vector2, scale: float):
 		if scale < 0.99 and prev[i] != new[i]:
 			add_point(lerp(prev[i], new[i], scale) + offset)
 
-	material.set_shader_param("segment_count", get_point_count())
+	# material.set_shader_param("segment_count", get_point_count())
 		# var new_pos
 		# if i == len(prev) - 1:
 		# 	new_pos = lerp(prev[i], new[i], scale)

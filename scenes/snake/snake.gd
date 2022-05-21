@@ -90,7 +90,6 @@ func add_segment(ghost=false):
 				ghost_end = i + 2
 			else:
 				ghost_end = i + 2
-	print('%d %d' % [ghost_start, ghost_end])
 	line.set_ghost_points(ghost_start, ghost_end)
 		
 

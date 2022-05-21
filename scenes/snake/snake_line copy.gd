@@ -78,7 +78,6 @@ func compute_segments(offset: Vector2, scale: float):
 		else:
 			# var last_fixed = i == len(prev) - 2 and (new[i + 1] - prev[i + 1]) == Vector2.ZERO
 			if (new[i + 1] - prev[i + 1]) != Vector2.ZERO and (new[i] - prev[i]) != (new[i + 1] - prev[i + 1]):
-				print('corner %d' % i)
 				new_pos = prev[i]
 				if (new_pos - prev_pos).length() > 0:
 					add_point(new_pos + offset)

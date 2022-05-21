@@ -1,36 +1,8 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://sprites/snake/shadow.png" type="Texture" id=2]
 [ext_resource path="res://scenes/snake/snake_line.gd" type="Script" id=3]
 [ext_resource path="res://sprites/utility/square_64.png" type="Texture" id=4]
-
-[sub_resource type="Shader" id=5]
-code = "shader_type canvas_item;
-
-uniform float line_length;
-uniform vec4 ghost_color: hint_color;
-uniform int segment_count = 1;
-uniform int ghost_start;
-uniform int ghost_end;
-//uniform float thick_base : hint_range(0.1, 1.0) = 0.4;
-
-void fragment() {
-	vec2 new_uv = vec2(UV.x / float(segment_count), UV.y);
-	float size = float(ghost_end - ghost_start);
-	float center = float(ghost_start) + size * 0.5;
-	COLOR = mix(COLOR, ghost_color, clamp(1.0 - abs(UV.x - center) / size, 0.0, 1.0));
-//	if (UV.x > float(ghost_start) && UV.x < float(ghost_end))
-//		COLOR = ghost_color;
-//	COLOR.a = new_uv.x;
-}"
-
-[sub_resource type="ShaderMaterial" id=6]
-shader = SubResource( 5 )
-shader_param/line_length = 0.243
-shader_param/ghost_color = Color( 0.482353, 0.72549, 0.737255, 1 )
-shader_param/segment_count = 4
-shader_param/ghost_start = 0
-shader_param/ghost_end = 0
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;
@@ -54,7 +26,6 @@ shader = SubResource( 3 )
 shader_param/color = Color( 1, 1, 1, 0.0588235 )
 
 [node name="SnakeLine" type="Line2D"]
-material = SubResource( 6 )
 points = PoolVector2Array( 0, 0, -64, 0, -64, 64, -64, 96 )
 width = 62.0
 default_color = Color( 0.580392, 0.698039, 0.403922, 1 )

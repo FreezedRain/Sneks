@@ -7,6 +7,7 @@ export (Resource) var level_hub
 const LEVEL_SCENE = preload("res://scenes/level/level.tscn")
 
 var level_idx = 0
+var loading_level: bool = false
 var current_level: Level
 
 # onready var animation_player = $AnimationPlayer
@@ -38,6 +39,9 @@ func load_level_idx(level_idx: int, skip_fadeout=false):
 	load_level(levels[level_idx], skip_fadeout)
 
 func load_level(level_data: LevelData, skip_fadeout=false):
+	if loading_level:
+		return
+	loading_level = true
 	if not skip_fadeout:
 		yield(fade_out(0.5, 0.15), "completed")
 	if current_level:
@@ -48,6 +52,7 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 	add_child(current_level)
 	yield(fade_in(0.5), "completed")
 	current_level.start()
+	loading_level = false
 
 func fade_out(duration: float, post_delay: float):
 	overlay.show()
