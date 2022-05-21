@@ -4,7 +4,7 @@ var biome_idx: int setget set_biome_idx
 
 func set_biome_idx(value: int):
 	biome_idx = value
-	modulate = Globals.BIOME_RESOURCES[value].color_top
+	target_color = Globals.BIOME_RESOURCES[value].color_top
 	# $Label.text = str(value)
 
 func update_turn():

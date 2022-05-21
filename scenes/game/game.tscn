@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
-[ext_resource path="res://resources/levels/test.tres" type="Resource" id=2]
+[ext_resource path="res://sprites/utility/square_32.png" type="Texture" id=2]
 [ext_resource path="res://scenes/effects/overlay_canvas.gd" type="Script" id=3]
 [ext_resource path="res://sprites/utility/transition3.png" type="Texture" id=4]
 
@@ -40,7 +40,6 @@ shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
-levels = [ ExtResource( 2 ) ]
 
 [node name="OverlayCanvas" type="CanvasLayer" parent="."]
 script = ExtResource( 3 )
@@ -62,4 +61,32 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.803922, 0.298039, 0.298039, 0 )
 
+[node name="UICanvas" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="UICanvas"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+
+[node name="HubButton" type="TextureButton" parent="UICanvas/Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -117.0
+margin_right = 117.0
+texture_normal = ExtResource( 2 )
+expand = true
+
+[node name="UndoButton" type="TextureButton" parent="UICanvas/Control"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -117.0
+margin_top = -117.0
+texture_normal = ExtResource( 2 )
+expand = true
+
 [node name="Tween" type="Tween" parent="."]
+
+[connection signal="pressed" from="UICanvas/Control/HubButton" to="." method="_on_HubButton_pressed"]
+[connection signal="pressed" from="UICanvas/Control/UndoButton" to="." method="_on_UndoButton_pressed"]

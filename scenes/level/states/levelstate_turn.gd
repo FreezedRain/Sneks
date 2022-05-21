@@ -9,7 +9,7 @@ var making_turn: bool
 var move_timer: float = 0
 
 func _ready():
-	pass
+	Events.connect("undo_pressed", self, "_on_undo_pressed")
 
 func enter(from_state: State):
 	object.update_title(object.level_data.name)
@@ -39,11 +39,7 @@ func process(delta):
 				drags.pop_back()
 	else:
 		if Input.is_action_just_pressed("undo"):
-			if len(drags) > 0:
-				var last_drag = drags.pop_back()
-				while len(actions) > last_drag:
-					actions.pop_back().undo()
-				end_turn()
+			undo()
 
 func process_movement():
 	var direction = convert_direction(object.mouse_grid_pos - current_snake.pos)
@@ -88,6 +84,13 @@ func end_turn():
 	update_goals()
 	check_goals()
 
+func undo():
+	if len(drags) > 0:
+		var last_drag = drags.pop_back()
+		while len(actions) > last_drag:
+			actions.pop_back().undo()
+		end_turn()
+
 func check_goals():
 	var all_goals_met = true
 	for goal in object.goal_holder.get_children():
@@ -96,3 +99,7 @@ func check_goals():
 			break
 	if all_goals_met:
 		fsm.next_state = fsm.states.complete
+
+func _on_undo_pressed():
+	if not making_turn:
+		undo()

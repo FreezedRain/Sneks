@@ -14,7 +14,11 @@ func parse_level():
 			if lines[y + 1][x] == 'b':
 				if biome + 1 < TOTAL_BIOMES:
 					lines[y + 1][x] = 'b%d' % (biome + 1) 
-			col.append(lines[y + 1][x])
+					col.append('b%d' % (biome + 1) )
+				else:
+					col.append('_')
+			else:
+				col.append(lines[y + 1][x])
 			#col.append('O')
 		level.append(col)
 

@@ -80,4 +80,10 @@ func _on_level_transition(idx):
 func _on_biome_transition(idx):
 	current_biome = idx
 	level_idx = 0
-	load_level_idx(idx)
+	load_level_idx(level_idx)
+
+func _on_HubButton_pressed():
+	load_level_idx(-1)
+
+func _on_UndoButton_pressed():
+	Events.emit_signal("undo_pressed")
