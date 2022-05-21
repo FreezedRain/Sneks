@@ -6,8 +6,12 @@ const SEGMENT_GOAL_SCENE = preload("res://scenes/goals/segment_goal.tscn")
 const CLEAR_GOAL_SCENE = preload("res://scenes/goals/clear_goal.tscn")
 const TRANSITION_GOAL_SCENE = preload("res://scenes/goals/transition_goal.tscn")
 const APPLE_SCENE = preload("res://scenes/goals/apple.tscn")
+const GHOST_APPLE_SCENE = preload("res://scenes/goals/ghost_apple.tscn")
+
+enum Biome {DUSTY, GRASSY, GRAVEYARD}
 
 export (String) var name
+export (Biome) var biome
 export (String, MULTILINE) var level_string
 export (String, MULTILINE) var snakes_string
 
@@ -15,8 +19,9 @@ var size: Vector2
 var level: Array
 var snakes: Array
 
-func _init(name = "test", level_string = "", snakes_string = ""):
+func _init(name = "test", biome= Biome.DUSTY, level_string = "", snakes_string = ""):
 	self.name = name
+	self.biome = biome
 	self.level_string = level_string
 	self.snakes_string = snakes_string
 	call_deferred("ready")
@@ -52,6 +57,8 @@ func load_goals() -> Array:
 				goal = CLEAR_GOAL_SCENE.instance()
 			elif raw_object == 'a':
 				goal = APPLE_SCENE.instance()
+			elif raw_object == 'A':
+				goal = GHOST_APPLE_SCENE.instance()
 			elif raw_object[0] == 'e':
 				var level_idx = int(raw_object.substr(1))
 				goal = TRANSITION_GOAL_SCENE.instance()

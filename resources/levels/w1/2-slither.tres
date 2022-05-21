@@ -5,6 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "slither"
+biome = 0
 level_string = "5,3
 _#___
 _#_#_

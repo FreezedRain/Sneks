@@ -1,10 +1,10 @@
-class_name Apple extends Goal
+class_name GhostApple extends Goal
 
 onready var apple_sprite = $Apple
 
 func _on_set_active():
 	if active:
-		ParticleManager.spawn('apple_particle', position)
+		ParticleManager.spawn('ghost_apple_particle', position)
 		hide()
 	else:
 		show()
@@ -23,5 +23,5 @@ func update_turn_action() -> Actions.Action:
 	var objects = Grid.get_tile(pos).objects
 	for obj in objects:
 		if obj is Snake:
-			return Actions.AppleEatAction.new(obj, self, false)
+			return Actions.AppleEatAction.new(obj, self, true)
 	return null

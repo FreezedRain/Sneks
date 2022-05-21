@@ -5,10 +5,11 @@
 [resource]
 script = ExtResource( 1 )
 name = "test"
+biome = 0
 level_string = "5,5
 _____
 _____
-_____
-_____
-___GG"
-snakes_string = "g0/0-0/1"
+__A__
+_aAA_
+aa_GG"
+snakes_string = "g0/0-0/1-0/2-0/3"
