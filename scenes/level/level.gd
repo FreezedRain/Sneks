@@ -39,7 +39,7 @@ func start():
 
 func load_level(data: LevelData):
 	level_data = data
-	Grid.load_tiles(data.load_tiles())
+	Grid.load_tiles(data.load_tiles(), Globals.BIOME_RESOURCES[data.biome])
 
 	yield(self, "ready")
 	terrain.update_tiles()

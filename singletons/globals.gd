@@ -7,4 +7,9 @@ const COLOR_RGB = {Colors.GREEN: Color("#249142"), Colors.RED: Color("#de3526"),
 const COLOR_LETTERS = {
 	'r': Colors.RED, 'g': Colors.GREEN, 'y': Colors.YELLOW,
 	'R': Colors.RED, 'G': Colors.GREEN, 'Y': Colors.YELLOW
-	}
+}
+
+const BIOME_RESOURCES = {
+	LevelData.Biome.DUSTY: preload("res://resources/biomes/biome_dusty.tres"),
+	LevelData.Biome.GRASSY: preload("res://resources/biomes/biome_grassy.tres")
+}

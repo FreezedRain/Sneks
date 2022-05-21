@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/effects/particle_autodestroy.gd" type="Script" id=1]
+[ext_resource path="res://sprites/utility/circle_32.png" type="Texture" id=2]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.0923913, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.73913, 0.0124999 ), -5.01818, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=3]
+curve = SubResource( 2 )
+
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 24, 24, 1 )
+flag_disable_z = true
+spread = 30.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 60.0
+initial_velocity_random = 0.3
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+damping = 80.0
+scale = 0.25
+scale_random = 0.1
+scale_curve = SubResource( 3 )
+color = Color( 0.47451, 0.643137, 0.435294, 1 )
+
+[node name="GrassParticle" type="Particles2D"]
+emitting = false
+amount = 2
+lifetime = 0.8
+one_shot = true
+explosiveness = 0.8
+process_material = SubResource( 4 )
+texture = ExtResource( 2 )
+script = ExtResource( 1 )

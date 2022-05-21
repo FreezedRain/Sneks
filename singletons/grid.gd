@@ -11,9 +11,11 @@ var half_cell_size = cell_size * 0.5
 var size: Vector2 setget set_size
 var bounds: Rect2
 var tiles: Array
+var biome
 
-func load_tiles(tiles: Array):
+func load_tiles(tiles: Array, biome):
 	self.tiles = tiles
+	self.biome = biome
 	set_size(Vector2(len(tiles), len(tiles[0])))
 		
 func set_size(value: Vector2):

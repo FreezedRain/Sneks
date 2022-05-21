@@ -9,7 +9,6 @@
 script = ExtResource( 2 )
 
 [node name="Back" type="Sprite" parent="."]
-modulate = Color( 0.552941, 0.498039, 0.380392, 1 )
 scale = Vector2( 3, 3 )
 z_index = -12
 texture = ExtResource( 1 )
@@ -22,10 +21,11 @@ region_enabled = true
 region_rect = Rect2( 0, 0, 1024, 1024 )
 
 [node name="Top" type="Sprite" parent="."]
-self_modulate = Color( 0.345098, 0.270588, 0.215686, 1 )
+position = Vector2( 137, 20 )
 scale = Vector2( 3, 3 )
 z_index = -20
 texture = ExtResource( 1 )
+offset = Vector2( -45.6667, -6.66667 )
 
 [node name="Tilemap" type="TileMap" parent="."]
 position = Vector2( -32, -32 )
