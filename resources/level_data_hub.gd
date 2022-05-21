@@ -9,26 +9,28 @@ func parse_level():
 	for x in range(size.x):
 		var col = []
 		for y in range(size.y):
-			# col.append(lines[y + 1][x])
-			col.append('O')
+			col.append(lines[y + 1][x])
+			#col.append('O')
 		level.append(col)
 
 	var count = 0
 	for x in range(1, size.x):
-		level[x][0] = 'e%s' % count
-		count += 1
+		count = place_entrance(level, x, 0, count)
 
 	for y in range(1, size.y):
-		level[size.x - 1][y] = 'e%s' % count
-		count += 1
+		count = place_entrance(level, size.x - 1, y, count)
 
 	for x in range(1, size.x):
-		level[size.x - 1 - x][size.y - 1] = 'e%s' % count
-		count += 1
+		count = place_entrance(level, size.x - 1 - x, size.y - 1, count)
 
 	for y in range(1, size.y):
-		level[0][size.y - 1 - y] = 'e%s' % count
+		count = place_entrance(level, 0, size.y - 1 - y, count)
+
+func place_entrance(level, x, y, count):
+	if level[x][y] == 'e':
+		level[x][y] = 'e%s' % count
 		count += 1
+	return count
 		# for y in range(size.y):
 		# 	if x == 0 or x == size.x - 1 or y == 0 or y == size.y - 1:
 		# 		# level[x][y] = '#'

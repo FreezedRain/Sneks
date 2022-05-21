@@ -7,7 +7,6 @@ const LEVEL_SCENE = preload("res://scenes/level/level.tscn")
 var level: Level
 
 func _ready():
-	level_data.parse_raw()
 	load_level()
 
 func load_level():
