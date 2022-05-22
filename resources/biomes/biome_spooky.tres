@@ -10,7 +10,7 @@
 script = ExtResource( 1 )
 name = "Rocky"
 tileset = ExtResource( 2 )
-move_particle = "rock_particle"
+move_particle = "ghost_particle"
 color_top = Color( 0.247059, 0.235294, 0.352941, 1 )
 color_bottom = Color( 0.415686, 0.447059, 0.466667, 1 )
 hub = ExtResource( 4 )
