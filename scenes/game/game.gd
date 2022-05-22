@@ -15,11 +15,12 @@ var current_level: Level
 onready var tween = $Tween
 onready var overlay = $OverlayCanvas
 onready var hub_button = $UICanvas/Control/HubButton
+onready var sfx_transition = $SFXTransition
 
 func _ready():
 	Events.connect("level_transition", self, "_on_level_transition")
 	Events.connect("biome_transition", self, "_on_biome_transition")
-	load_level_idx(-1)
+	load_level_idx(-1, true)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
@@ -48,7 +49,10 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 		return
 	loading_level = true
 	if not skip_fadeout:
+		sfx_transition.play()
 		yield(fade_out(0.5, 0.15), "completed")
+	else:
+		yield(get_tree(), "idle_frame")
 	if current_level:
 		current_level.queue_free()
 	current_level = LEVEL_SCENE.instance()

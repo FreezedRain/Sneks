@@ -152,6 +152,13 @@ window/size/height=720
 window/size/resizable=false
 window/dpi/allow_hidpi=true
 
+[importer_defaults]
+
+ogg_vorbis={
+"loop": false,
+"loop_offset": 0
+}
+
 [input]
 
 click={
