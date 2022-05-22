@@ -2,7 +2,7 @@
 
 [ext_resource path="res://resources/biome_data.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/basic_tileset_mountain.tres" type="TileSet" id=2]
-[ext_resource path="res://resources/levels/hubs/hub_rocky.tres" type="Resource" id=3]
+[ext_resource path="res://resources/levels/hubs/hub_graveyard.tres" type="Resource" id=3]
 [ext_resource path="res://resources/levels/w2/7-bolivia.tres" type="Resource" id=4]
 [ext_resource path="res://resources/levels/w2/4-makeway.tres" type="Resource" id=5]
 [ext_resource path="res://resources/levels/w2/3-roundabout.tres" type="Resource" id=6]

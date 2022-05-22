@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/level_data_hub.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "Hub"
+biome = 3
+level_string = "8,7
+# e1 e2 # # e3 e4 #
+# - - - - - - #
+# # - - - - # #
+b2 - - - - - - -
+# - - # # - - #
+# - - e5 e6 - - #
+# # - - - - # #"
+snakes_string = "g4/3-3/3"
