@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/woosh_longer.ogg-cda5130eef3b34b9295f6de08f48dab8.oggstr"
+
+[deps]
+
+source_file="res://sounds/woosh_longer.ogg"
+dest_files=[ "res://.import/woosh_longer.ogg-cda5130eef3b34b9295f6de08f48dab8.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

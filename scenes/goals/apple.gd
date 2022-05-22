@@ -1,10 +1,12 @@
 class_name Apple extends Goal
 
 onready var apple_sprite = $Apple
+onready var sfx_pop = $SFXPop
 
 func _on_set_active():
 	if active:
 		ParticleManager.spawn('apple_particle', position)
+		sfx_pop.play()
 		hide()
 	else:
 		show()

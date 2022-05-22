@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://sprites/goals/ghost_apple.png" type="Texture" id=1]
 [ext_resource path="res://sprites/goals/apple_shadow.png" type="Texture" id=2]
 [ext_resource path="res://scenes/goals/ghost_apple.gd" type="Script" id=3]
+[ext_resource path="res://sounds/pop.ogg" type="AudioStream" id=4]
 
 [node name="GhostApple" type="Node2D"]
 script = ExtResource( 3 )
@@ -17,3 +18,8 @@ self_modulate = Color( 1, 1, 1, 0.117647 )
 position = Vector2( 0, 17 )
 z_index = -1
 texture = ExtResource( 2 )
+
+[node name="SFXPop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+volume_db = -13.0
+pitch_scale = 1.2

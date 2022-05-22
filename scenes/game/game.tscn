@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/menu/undo_button.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://resources/biomes/biome_grassy.tres" type="Resource" id=9]
 [ext_resource path="res://sprites/menu/hub_button.png" type="Texture" id=10]
 [ext_resource path="res://resources/biomes/biome_graveyard.tres" type="Resource" id=11]
+[ext_resource path="res://sounds/woosh_longer.ogg" type="AudioStream" id=12]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -48,7 +49,6 @@ shader_param/transition_texture = ExtResource( 4 )
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 biomes = [ ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 11 ) ]
-current_biome = 3
 
 [node name="OverlayCanvas" type="CanvasLayer" parent="."]
 script = ExtResource( 3 )
@@ -106,6 +106,12 @@ texture_normal = ExtResource( 2 )
 expand = true
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="SFXTransition" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 12 )
+volume_db = -24.0
+pitch_scale = 1.05
+bus = "SFX"
 
 [connection signal="pressed" from="UICanvas/Control/HubButton" to="." method="_on_HubButton_pressed"]
 [connection signal="pressed" from="UICanvas/Control/UndoButton" to="." method="_on_UndoButton_pressed"]
