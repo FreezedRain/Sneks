@@ -23,7 +23,7 @@ damping = 80.0
 scale = 0.25
 scale_random = 0.1
 scale_curve = SubResource( 3 )
-color = Color( 0.643137, 0.541176, 0.435294, 1 )
+color = Color( 0.4, 0.333333, 0.266667, 1 )
 
 [node name="DustParticle" type="Particles2D"]
 emitting = false
