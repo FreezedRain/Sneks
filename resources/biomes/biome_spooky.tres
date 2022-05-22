@@ -1,8 +1,9 @@
-[gd_resource type="Resource" load_steps=4 format=2]
+[gd_resource type="Resource" load_steps=5 format=2]
 
 [ext_resource path="res://resources/biome_data.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/basic_tileset_graveyard.tres" type="TileSet" id=2]
-[ext_resource path="res://resources/levels/hubs/hub_rocky.tres" type="Resource" id=3]
+[ext_resource path="res://resources/levels/w4/1-ghost.tres" type="Resource" id=3]
+[ext_resource path="res://resources/levels/hubs/hub_graveyard.tres" type="Resource" id=4]
 
 [resource]
 script = ExtResource( 1 )
@@ -11,5 +12,5 @@ tileset = ExtResource( 2 )
 move_particle = "rock_particle"
 color_top = Color( 0.247059, 0.235294, 0.352941, 1 )
 color_bottom = Color( 0.415686, 0.447059, 0.466667, 1 )
-hub = ExtResource( 3 )
-levels = [  ]
+hub = ExtResource( 4 )
+levels = [ ExtResource( 3 ) ]

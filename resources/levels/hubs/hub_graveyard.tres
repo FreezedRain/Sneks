@@ -7,10 +7,10 @@ script = ExtResource( 1 )
 name = "Hub"
 biome = 3
 level_string = "8,7
-# e1 e2 # # e3 e4 #
+# e0 e2 # # e3 e4 #
 # - - - - - - #
 # # - - - - # #
-b2 - - - - - - -
+b2 - - - - - - #
 # - - # # - - #
 # - - e5 e6 - - #
 # # - - - - # #"

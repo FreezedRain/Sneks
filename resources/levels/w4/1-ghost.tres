@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/level_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "ghost"
+biome = 3
+level_string = "5,6
+###G#
+____G
+_##_#
+_____
+##___
+##___"
+snakes_string = "g4/4-3/4-2/4
+g4/5-g3/5-2/5"
