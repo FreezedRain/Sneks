@@ -91,7 +91,7 @@ func load_snakes() -> Array:
 	for snake_data in snakes:
 		var snake = SNAKE_SCENE.instance()
 		snake.set_color(snake_data.color)
-		var snake_segments = snake.setup_segments(snake_data.segments)
+		var snake_segments = snake.setup_segments(snake_data.segments, snake_data.ghosts)
 		segments.append_array(snake_segments)
 		snake_instances.append(snake)
 	return [snake_instances, segments]
@@ -115,19 +115,27 @@ func parse_snakes():
 	for line in lines:
 		var segment_data = line.substr(1).split("-")
 		var segments = []
+		var ghosts = []
 		var color = Globals.COLOR_LETTERS[line[0]]
 		for pos_line in segment_data:
 			var pos_data = pos_line.split("/")
+			if pos_data[0].is_valid_integer():
+				ghosts.append(false)
+			else:
+				pos_data[0] = pos_data[0].substr(1)
+				ghosts.append(true)
 			var pos = Vector2(int(pos_data[0]), int(pos_data[1]))
 			segments.append(pos)
-		snakes.append(SnakeData.new(segments, color))
+		snakes.append(SnakeData.new(segments, ghosts, color))
 
 class SnakeData:
 	var segments: Array
+	var ghosts: Array
 	var color
 
-	func _init(segments: Array, color):
+	func _init(segments: Array, ghosts: Array, color):
 		self.segments = segments
+		self.ghosts = ghosts
 		self.color = color
 
 class LevelObjects:

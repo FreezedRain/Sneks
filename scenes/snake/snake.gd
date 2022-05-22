@@ -33,9 +33,6 @@ var move_particle: String
 
 var ghost_lines: Array # line: indices
 
-
-
-
 func _init():
 	solid = true
 
@@ -44,6 +41,7 @@ func _ready():
 	line.save_prev(segments, position)
 	line.save_new(segments, position)
 	move_particle = Grid.biome.move_particle
+	setup_ghost_segments()
 
 func _process(delta):
 	lerp_value = lerp(lerp_value, 1, delta * 16)
@@ -80,6 +78,25 @@ func save_new():
 	for ghost_line in ghost_lines:
 		ghost_line.save_new(segments)
 
+func setup_ghost_segments():
+	var ghost_indices = []
+	for i in range(len(segments)):
+		if segments[i] is SnakeGhostSegment:
+			# if len(ghost_indices) == 0:
+			# 	ghost_indices.append(i - 1)
+			ghost_indices.append(i)
+		if not (segments[i] is SnakeGhostSegment) or i == len(segments) - 1:
+			if len(ghost_indices) > 0:
+				# print('Adding line with indices: [%s]' % ghost_indices)
+				var ghost_line = GHOST_LINE_SCENE.instance()
+				ghost_line.set_indices(ghost_indices.duplicate())
+				visuals.add_child(ghost_line)
+				ghost_lines.append(ghost_line)
+				ghost_indices.clear()
+	for ghost_line in ghost_lines:
+		ghost_line.copy_prev(line.prev)
+		ghost_line.save_new(segments)
+
 func add_segment(ghost=false):
 	var segment_scene = GHOST_SEGMENT_SCENE if ghost else SEGMENT_SCENE
 	var segment = segment_scene.instance()
@@ -108,27 +125,10 @@ func add_segment(ghost=false):
 		ghost_line.queue_free()
 	ghost_lines.clear()
 
-	var ghost_indices = []
-	for i in range(len(segments)):
-		if segments[i] is SnakeGhostSegment:
-			# if len(ghost_indices) == 0:
-			# 	ghost_indices.append(i - 1)
-			ghost_indices.append(i)
-		if not (segments[i] is SnakeGhostSegment) or i == len(segments) - 1:
-			if len(ghost_indices) > 0:
-				# print('Adding line with indices: [%s]' % ghost_indices)
-				var ghost_line = GHOST_LINE_SCENE.instance()
-				ghost_line.set_indices(ghost_indices.duplicate())
-				visuals.add_child(ghost_line)
-				ghost_lines.append(ghost_line)
-				ghost_indices.clear()
-	for ghost_line in ghost_lines:
-		ghost_line.copy_prev(line.prev)
-		ghost_line.save_new(segments)
+	setup_ghost_segments()
 
 	if len(ghost_lines) > 0:
 		z_index = 0
-		
 
 func remove_segment():
 	var segment = segments.pop_back()
@@ -188,6 +188,8 @@ func is_segment_solid(idx: int):
 
 func can_move(direction: Vector2) -> bool:
 	var new_pos = pos + direction
+	if new_pos == segments[0].pos:
+		return false
 	if not Grid.is_free(new_pos):
 		return false
 	for i in range(len(segments) + 1):
@@ -275,21 +277,20 @@ func reverse_move(last_tail_pos: Vector2):
 	save_new()
 	lerp_value = 1.0
 
-func setup_segments(segment_positions: Array) -> Array:
+func setup_segments(segment_positions: Array, segment_ghosts: Array) -> Array:
 	set_pos(segment_positions[0])
 	align()
 	
-	var count = 0
-	for pos in segment_positions:
-		count += 1
-		if count == 1:
+	for i in range(len(segment_positions)):
+		if i == 0:
 			continue
-		var segment = SEGMENT_SCENE.instance()
+		var segment_scene = GHOST_SEGMENT_SCENE if segment_ghosts[i] else SEGMENT_SCENE
+		var segment = segment_scene.instance()
 		# segment.set_segment_percent(count/segment_positions.size())
 		# var offset = Vector2(randi() % 3, randi() % 3)
 		# offset.x = clamp(offset.x, 0, Grid.size.x - 1)
 		# offset.y = clamp(offset.y, 0, Grid.size.y - 1)
-		segment.set_pos(pos)
+		segment.set_pos(segment_positions[i])
 		segment.set_snake(self)
 		segment.align()
 		segments.append(segment)
