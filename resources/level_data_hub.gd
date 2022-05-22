@@ -6,7 +6,6 @@ func parse_level():
 	var lines = level_string.split("\n")
 	# print(name, lines)
 	var size_data = lines[0].split(",")
-	print(size_data)
 	size.x = int(size_data[0])
 	size.y = int(size_data[1])
 
