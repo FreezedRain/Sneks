@@ -32,15 +32,17 @@ func _process(delta):
 		load_level_idx(level_idx)
 
 func load_level_idx(level_idx: int, skip_fadeout=false):
+	hub_button.show()
 	if level_idx == -1:
 		# print(biomes[current_biome])
+		hub_button.hide()
 		load_level(biomes[current_biome].hub, skip_fadeout)
 		return
-
-	if level_idx > 0:
-		hub_button.show()
-	else:
+	
+	if level_idx == 0 and current_biome == 0:
 		hub_button.hide()
+	# elif current_biome == 0:
+	# 	hub_button.hide()
 	# print('Loading level [%d] from biome [%d] - %s' % [level_idx, current_biome, biomes[current_biome].levels[level_idx]])
 	load_level(biomes[current_biome].levels[level_idx], skip_fadeout)
 
