@@ -15,16 +15,18 @@ export (String) var name
 export (Biome) var biome
 export (String, MULTILINE) var level_string
 export (String, MULTILINE) var snakes_string
+export (PackedScene) var extra_scene
 
 var size: Vector2
 var level: Array
 var snakes: Array
 
-func _init(name = "test", biome = Biome.DUSTY, level_string = "", snakes_string = ""):
+func _init(name = "test", biome = Biome.DUSTY, level_string = "", snakes_string = "", extra_scene = null):
 	self.name = name
 	self.biome = biome
 	self.level_string = level_string
 	self.snakes_string = snakes_string
+	self.extra_scene = extra_scene
 	call_deferred("ready")
 
 func ready():
