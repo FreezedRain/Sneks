@@ -4,6 +4,7 @@ var active: bool = false setget set_active
 var target_color: Color = Color.white
 
 onready var sprite = $Sprite
+onready var overlay = $SpriteOverlay
 
 func _init():
 	solid = false

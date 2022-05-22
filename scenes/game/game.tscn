@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/utility/square_32.png" type="Texture" id=2]
@@ -6,6 +6,9 @@
 [ext_resource path="res://sprites/utility/transition3.png" type="Texture" id=4]
 [ext_resource path="res://sprites/rat.webm" type="VideoStream" id=5]
 [ext_resource path="res://scenes/game/test.gd" type="Script" id=6]
+[ext_resource path="res://resources/biomes/biome_dusty.tres" type="Resource" id=7]
+[ext_resource path="res://resources/biomes/biome_rocky.tres" type="Resource" id=8]
+[ext_resource path="res://resources/biomes/biome_grassy.tres" type="Resource" id=9]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -42,6 +45,7 @@ shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
+biomes = [ ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ) ]
 
 [node name="OverlayCanvas" type="CanvasLayer" parent="."]
 script = ExtResource( 3 )
@@ -81,7 +85,6 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="HubButton" type="TextureButton" parent="UICanvas/Control"]
-visible = false
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -117.0
@@ -90,7 +93,6 @@ texture_normal = ExtResource( 2 )
 expand = true
 
 [node name="UndoButton" type="TextureButton" parent="UICanvas/Control"]
-visible = false
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0

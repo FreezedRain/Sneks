@@ -1,11 +1,7 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=2 format=2]
 
 [ext_resource path="res://scenes/game/game.tscn" type="PackedScene" id=1]
-[ext_resource path="res://resources/biomes/biome_dusty.tres" type="Resource" id=16]
-[ext_resource path="res://resources/biomes/biome_grassy.tres" type="Resource" id=24]
-[ext_resource path="res://resources/biomes/biome_rocky.tres" type="Resource" id=25]
 
 [node name="Main" type="Node"]
 
 [node name="Game" parent="." instance=ExtResource( 1 )]
-biomes = [ ExtResource( 16 ), ExtResource( 24 ), ExtResource( 25 ) ]
