@@ -10,8 +10,9 @@ level_string = "8,7
 # # - - - - # #
 # - - e1 e2 - # #
 # - - - - - e3 #
-b2 - - # # - - b3
+b1 - - # # - - b3
 # - - e4 # # - #
 # # - - e5 e6 - #
 # # # - - - - #"
 snakes_string = "g2/1-1/1"
+extra_scene = null
