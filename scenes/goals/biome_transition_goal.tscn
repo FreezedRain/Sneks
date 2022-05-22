@@ -28,3 +28,8 @@ valign = 1
 [node name="Sprite" parent="." index="1"]
 position = Vector2( 0, 16 )
 texture = ExtResource( 2 )
+
+[node name="SpriteOverlay" parent="." index="2"]
+visible = true
+modulate = Color( 1, 1, 1, 0.0980392 )
+position = Vector2( 0, 16 )

@@ -1,10 +1,15 @@
 extends Goal
 
 var biome_idx: int setget set_biome_idx
+# onready var sprite_overlay = $SpriteOverlay
 
 func set_biome_idx(value: int):
 	biome_idx = value
-	target_color = Globals.BIOME_RESOURCES[value].color_top
+	if not sprite:
+		yield(self, "ready")
+	sprite.texture = Globals.BIOME_ICONS[value]
+	overlay.texture = Globals.BIOME_ICONS[value]
+	# target_color = Globals.BIOME_RESOURCES[value].color_top
 	# $Label.text = str(value)
 
 func update_turn():
