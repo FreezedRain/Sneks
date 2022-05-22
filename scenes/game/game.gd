@@ -49,6 +49,7 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 		return
 	loading_level = true
 	if not skip_fadeout:
+		sfx_transition.pitch_scale = rand_range(1.0, 1.15)
 		sfx_transition.play()
 		yield(fade_out(0.5, 0.15), "completed")
 	else:
