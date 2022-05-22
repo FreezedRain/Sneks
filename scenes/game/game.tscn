@@ -10,7 +10,7 @@
 [ext_resource path="res://resources/biomes/biome_rocky.tres" type="Resource" id=8]
 [ext_resource path="res://resources/biomes/biome_grassy.tres" type="Resource" id=9]
 [ext_resource path="res://sprites/menu/hub_button.png" type="Texture" id=10]
-[ext_resource path="res://resources/biomes/biome_graveyard.tres" type="Resource" id=11]
+[ext_resource path="res://resources/biomes/biome_spooky.tres" type="Resource" id=11]
 [ext_resource path="res://sounds/woosh_longer.ogg" type="AudioStream" id=12]
 
 [sub_resource type="Shader" id=1]
@@ -48,7 +48,8 @@ shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
-biomes = [ ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 11 ) ]
+biomes = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ) ]
+current_biome = 3
 
 [node name="OverlayCanvas" type="CanvasLayer" parent="."]
 script = ExtResource( 3 )
