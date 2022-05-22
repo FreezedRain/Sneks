@@ -16,7 +16,6 @@ onready var decorations = $Decorations
 
 # Data
 var level_data: LevelData
-var snakes: Array
 var hovered_snake
 
 # Input

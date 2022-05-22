@@ -6,10 +6,12 @@
 script = ExtResource( 1 )
 name = "test"
 biome = 1
-level_string = "5,5
-_____
-_____
-__A__
-_aAA_
-aa_GG"
-snakes_string = "g0/0-0/1-0/2-0/3"
+level_string = "6,6
+OOOOOO
+OOOGOO
+OOOgOO
+OOOOOO
+OOOOOO
+OOOOOG"
+snakes_string = "g0/0-0/1-0/2-0/3
+g1/1-1/2"

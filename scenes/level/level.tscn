@@ -9,7 +9,9 @@
 [ext_resource path="res://fonts/Multicolore.otf" type="DynamicFontData" id=7]
 
 [sub_resource type="DynamicFont" id=1]
-size = 32
+size = 36
+use_mipmaps = true
+use_filter = true
 font_data = ExtResource( 7 )
 
 [node name="Level" type="Node2D"]
@@ -50,12 +52,13 @@ layer = 0
 anchor_left = 0.5
 anchor_right = 0.5
 margin_left = -320.0
-margin_top = 32.0
+margin_top = 48.0
 margin_right = 320.0
-margin_bottom = 80.0
+margin_bottom = 96.0
 custom_fonts/font = SubResource( 1 )
 text = "- LEVEL TITLE -"
 align = 1
+valign = 1
 percent_visible = 0.0
 
 [node name="Tween" type="Tween" parent="."]

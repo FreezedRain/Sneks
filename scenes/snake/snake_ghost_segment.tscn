@@ -5,6 +5,6 @@
 
 [node name="SnakeGhostSegment" type="Sprite"]
 visible = false
-modulate = Color( 0.74902, 0.807843, 0.811765, 0.282353 )
+modulate = Color( 0.74902, 0.807843, 0.811765, 0.470588 )
 texture = ExtResource( 1 )
 script = ExtResource( 2 )
