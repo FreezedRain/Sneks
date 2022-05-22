@@ -23,7 +23,7 @@ damping = 80.0
 scale = 0.2
 scale_random = 0.1
 scale_curve = SubResource( 3 )
-color = Color( 0.47451, 0.643137, 0.435294, 1 )
+color = Color( 0.454902, 0.611765, 0.419608, 1 )
 
 [node name="GrassParticle" type="Particles2D"]
 emitting = false

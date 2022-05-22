@@ -17,7 +17,7 @@ spread = 40.0
 gravity = Vector3( 0, 0, 0 )
 initial_velocity = 30.0
 initial_velocity_random = 0.3
-orbit_velocity = 0.25
+orbit_velocity = 0.4
 orbit_velocity_random = 0.75
 damping = 25.0
 scale = 0.25
@@ -26,7 +26,10 @@ scale_curve = SubResource( 3 )
 color = Color( 0.671768, 0.859863, 0.847039, 0.784314 )
 
 [node name="GhostParticle" type="Particles2D"]
+emitting = false
 amount = 1
+lifetime = 0.8
+one_shot = true
 explosiveness = 0.8
 process_material = SubResource( 4 )
 texture = ExtResource( 2 )
