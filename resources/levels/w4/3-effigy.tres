@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/level_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "effigy"
+biome = 3
+level_string = "7,6
+###G####
+##___##
+##__Y##
+###_####
+__A_a__#
+__aAa__#
+______#"
+snakes_string = "y1/4-0/4
+g5/4-6/4"
