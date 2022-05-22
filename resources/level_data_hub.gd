@@ -3,15 +3,21 @@ class_name LevelDataHub extends LevelData
 const TOTAL_BIOMES = 3
 
 func parse_level():
-	var lines = level_string.split("\n")	
+	var lines = level_string.split("\n")
+	# print(name, lines)
 	var size_data = lines[0].split(",")
+	print(size_data)
 	size.x = int(size_data[0])
 	size.y = int(size_data[1])
+
+	var rows = []
+	for y in range(size.y):
+		rows.append(lines[y + 1].split(' '))
 
 	for x in range(size.x):
 		var col = []
 		for y in range(size.y):
-			col.append(lines[y + 1][x].split(' '))
+			col.append(rows[y][x])
 		level.append(col)
 			# if lines[y + 1][x] == 'b':
 			# 	if biome + 1 < TOTAL_BIOMES:

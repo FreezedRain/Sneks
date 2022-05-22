@@ -19,7 +19,7 @@ onready var hub_button = $UICanvas/Control/HubButton
 func _ready():
 	Events.connect("level_transition", self, "_on_level_transition")
 	Events.connect("biome_transition", self, "_on_biome_transition")
-	load_level_idx(0)
+	load_level_idx(-1)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
@@ -32,13 +32,14 @@ func _process(delta):
 
 func load_level_idx(level_idx: int, skip_fadeout=false):
 	if level_idx == -1:
+		# print(biomes[current_biome])
 		load_level(biomes[current_biome].hub, skip_fadeout)
 		return
 
-	# if biomes[current_biome].hub_unlocked:
-	# 	hub_button.show()
-	# else:
-	# 	hub_button.hide()
+	if level_idx > 0:
+		hub_button.show()
+	else:
+		hub_button.hide()
 	# print('Loading level [%d] from biome [%d] - %s' % [level_idx, current_biome, biomes[current_biome].levels[level_idx]])
 	load_level(biomes[current_biome].levels[level_idx], skip_fadeout)
 
@@ -86,7 +87,7 @@ func _on_level_transition(idx):
 
 func _on_biome_transition(idx):
 	current_biome = idx
-	level_idx = 0
+	level_idx = -1
 	load_level_idx(level_idx)
 
 func _on_HubButton_pressed():
