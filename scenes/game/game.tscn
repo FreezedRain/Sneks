@@ -1,16 +1,14 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/menu/undo_button.png" type="Texture" id=2]
 [ext_resource path="res://scenes/effects/overlay_canvas.gd" type="Script" id=3]
 [ext_resource path="res://sprites/utility/transition3.png" type="Texture" id=4]
-[ext_resource path="res://sprites/rat.webm" type="VideoStream" id=5]
-[ext_resource path="res://scenes/game/test.gd" type="Script" id=6]
 [ext_resource path="res://resources/biomes/biome_dusty.tres" type="Resource" id=7]
 [ext_resource path="res://resources/biomes/biome_rocky.tres" type="Resource" id=8]
 [ext_resource path="res://resources/biomes/biome_grassy.tres" type="Resource" id=9]
 [ext_resource path="res://sprites/menu/hub_button.png" type="Texture" id=10]
-[ext_resource path="res://resources/biomes/biome_graveyard.tres" type="Resource" id=11]
+[ext_resource path="res://resources/biomes/biome_spooky.tres" type="Resource" id=11]
 [ext_resource path="res://sounds/woosh_longer.ogg" type="AudioStream" id=12]
 
 [sub_resource type="Shader" id=1]
@@ -48,7 +46,8 @@ shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
-biomes = [ ExtResource( 7 ), ExtResource( 9 ), ExtResource( 8 ), ExtResource( 11 ) ]
+biomes = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ) ]
+current_biome = 3
 
 [node name="OverlayCanvas" type="CanvasLayer" parent="."]
 script = ExtResource( 3 )
@@ -71,16 +70,6 @@ anchor_bottom = 1.0
 color = Color( 0.803922, 0.298039, 0.298039, 0 )
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
-
-[node name="VideoPlayer" type="VideoPlayer" parent="UICanvas"]
-visible = false
-margin_left = 409.0
-margin_top = 358.0
-margin_right = 475.0
-margin_bottom = 418.0
-mouse_filter = 2
-stream = ExtResource( 5 )
-script = ExtResource( 6 )
 
 [node name="Control" type="Control" parent="UICanvas"]
 anchor_right = 1.0

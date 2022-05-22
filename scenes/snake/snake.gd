@@ -42,6 +42,8 @@ func _ready():
 	line.save_new(segments, position)
 	move_particle = Grid.biome.move_particle
 	setup_ghost_segments()
+	if len(ghost_lines) > 0:
+		z_index = 0
 
 func _process(delta):
 	lerp_value = lerp(lerp_value, 1, delta * 16)
