@@ -20,7 +20,7 @@ onready var sfx_transition = $SFXTransition
 func _ready():
 	Events.connect("level_transition", self, "_on_level_transition")
 	Events.connect("biome_transition", self, "_on_biome_transition")
-	load_level_idx(-1, true)
+	load_level_idx(0, true)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):

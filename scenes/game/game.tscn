@@ -47,7 +47,6 @@ shader_param/transition_texture = ExtResource( 4 )
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 biomes = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ) ]
-current_biome = 3
 
 [node name="OverlayCanvas" type="CanvasLayer" parent="."]
 script = ExtResource( 3 )

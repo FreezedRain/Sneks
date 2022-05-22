@@ -4,7 +4,7 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "Hub"
+name = ""
 biome = 3
 level_string = "8,7
 # e0 e1 # # e2 e3 #
