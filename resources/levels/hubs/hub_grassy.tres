@@ -5,12 +5,11 @@
 [resource]
 script = ExtResource( 1 )
 name = "Hub"
-biome = 0
-level_string = "6,6
-OeOeOO
-OOOOOe
-eOObOO
-OOOOOe
-eOOOOO
-OOeOeO"
-snakes_string = "g1/1-2/1"
+biome = 2
+level_string = "5,5
+OOOOO
+OOOOO
+OOOOO
+OOOOO
+OOOOO"
+snakes_string = "g2/2-3/2"
