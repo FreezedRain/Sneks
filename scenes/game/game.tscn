@@ -71,6 +71,7 @@ color = Color( 0.803922, 0.298039, 0.298039, 0 )
 [node name="UICanvas" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="UICanvas"]
+visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
