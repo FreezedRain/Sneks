@@ -7,14 +7,14 @@ script = ExtResource( 1 )
 name = "lockpick"
 biome = 2
 level_string = "5,8
-##--#
-G--Y#
-##-g#
-#G--#
+----#
+-R-Y#
+##xx#
+#G-x#
 ###a#
-##aaa
+##-a-
 ##---
-##---"
-snakes_string = "g2/6-2/7
-g4/6-4/7
-y3/6-3/7"
+##--a"
+snakes_string = "r2/5-2/6-2/7
+y4/5-4/6
+g3/6-3/7"

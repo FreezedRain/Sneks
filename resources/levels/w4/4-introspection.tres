@@ -4,14 +4,13 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "required shape"
-biome = 2
-level_string = "5,6
------
--gG-g
-g-G--
-#---g
------
------"
-snakes_string = "g4/4-3/4-2/4-1/4-0/4
-g4/5-3/5-2/5-1/5-0/5"
+name = "introspection"
+biome = 3
+level_string = "8,6
+##_r___a
+R______A
+##r#___a
+##_____A
+##_____a
+##_____A"
+snakes_string = "r5/3-g5/2"

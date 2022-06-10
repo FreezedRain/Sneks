@@ -1,4 +1,4 @@
-[gd_resource type="Resource" load_steps=7 format=2]
+[gd_resource type="Resource" load_steps=8 format=2]
 
 [ext_resource path="res://resources/biome_data.gd" type="Script" id=1]
 [ext_resource path="res://tilesets/basic_tileset_graveyard.tres" type="TileSet" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://resources/levels/hubs/hub_graveyard.tres" type="Resource" id=4]
 [ext_resource path="res://resources/levels/w4/2-ghostkey.tres" type="Resource" id=5]
 [ext_resource path="res://resources/levels/w4/3-effigy.tres" type="Resource" id=6]
+[ext_resource path="res://resources/levels/w4/4-introspection.tres" type="Resource" id=7]
 
 [resource]
 script = ExtResource( 1 )
@@ -15,4 +16,4 @@ move_particle = "ghost_particle"
 color_top = Color( 0.247059, 0.235294, 0.352941, 1 )
 color_bottom = Color( 0.415686, 0.447059, 0.466667, 1 )
 hub = ExtResource( 4 )
-levels = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ) ]
+levels = [ ExtResource( 3 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ]
