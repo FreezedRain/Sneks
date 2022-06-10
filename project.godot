@@ -135,7 +135,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GWJ45"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/game/game.tscn"
 config/icon="res://sprites/icon.png"
 
 [autoload]

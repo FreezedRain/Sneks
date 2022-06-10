@@ -11,8 +11,6 @@ var level_idx = 0
 var loading_level: bool = false
 var current_level: Level
 
-# onready var animation_player = $AnimationPlayer
-onready var tween = $Tween
 onready var overlay = $OverlayCanvas
 onready var hub_button = $UICanvas/Control/HubButton
 onready var sfx_transition = $SFXTransition
@@ -34,7 +32,6 @@ func _process(delta):
 func load_level_idx(level_idx: int, skip_fadeout=false):
 	hub_button.show()
 	if level_idx == -1:
-		# print(biomes[current_biome])
 		hub_button.hide()
 		load_level(biomes[current_biome].hub, skip_fadeout)
 		return
@@ -50,39 +47,25 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 	if loading_level:
 		return
 	loading_level = true
-	if not skip_fadeout:
+	if skip_fadeout:
+		yield(get_tree(), "idle_frame")
+	else:
 		sfx_transition.pitch_scale = rand_range(1.0, 1.15)
 		sfx_transition.play()
-		yield(fade_out(0.5, 0.15), "completed")
-	else:
-		yield(get_tree(), "idle_frame")
+		yield(overlay.fade_out(0.5, 0.15), "completed")
 	if current_level:
 		current_level.queue_free()
 	current_level = LEVEL_SCENE.instance()
 	current_level.load_level(level_data)
 	current_level.connect("completed", self, "_on_level_completed")
 	add_child(current_level)
-	yield(fade_in(0.5), "completed")
+	yield(overlay.fade_in(0.5), "completed")
 	current_level.start()
 	loading_level = false
-
-func fade_out(duration: float, post_delay: float):
-	overlay.show()
-	tween.interpolate_property(overlay, "fade", 0.0, 1.0, duration)
-	tween.start()
-	yield(tween, "tween_completed")
-	yield(get_tree().create_timer(post_delay), "timeout")
-
-func fade_in(duration: float):
-	tween.interpolate_property(overlay, "fade", 1.0, 0.0, duration)
-	tween.start()
-	yield(tween, "tween_completed")
-	overlay.hide()
 
 func _on_level_completed():
 	level_idx += 1
 	if level_idx > len(biomes[current_biome].levels) - 1:
-		# biomes[current_biome].hub_unlocked = true
 		current_biome = clamp(current_biome + 1, 0, len(biomes) - 1)
 		level_idx = 0
 	load_level_idx(level_idx)

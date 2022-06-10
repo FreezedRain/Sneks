@@ -48,30 +48,9 @@ shader_param/transition_texture = ExtResource( 4 )
 script = ExtResource( 1 )
 biomes = [ ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 11 ) ]
 
-[node name="OverlayCanvas" type="CanvasLayer" parent="."]
-script = ExtResource( 3 )
-
-[node name="Overlay" type="ColorRect" parent="OverlayCanvas"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 0 )
-
-[node name="Overlay3" type="ColorRect" parent="OverlayCanvas"]
-visible = false
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Overlay2" type="ColorRect" parent="OverlayCanvas"]
-material = SubResource( 2 )
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0.803922, 0.298039, 0.298039, 0 )
-
 [node name="UICanvas" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="UICanvas"]
-visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
@@ -94,7 +73,23 @@ margin_top = -117.0
 texture_normal = ExtResource( 2 )
 expand = true
 
-[node name="Tween" type="Tween" parent="."]
+[node name="OverlayCanvas" type="CanvasLayer" parent="."]
+script = ExtResource( 3 )
+overlay_rect = NodePath("OverlayShader")
+
+[node name="OverlaySimple" type="ColorRect" parent="OverlayCanvas"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0 )
+
+[node name="OverlayShader" type="ColorRect" parent="OverlayCanvas"]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.803922, 0.298039, 0.298039, 0 )
+
+[node name="Tween" type="Tween" parent="OverlayCanvas"]
 
 [node name="SFXTransition" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 12 )

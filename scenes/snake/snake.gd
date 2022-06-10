@@ -37,7 +37,6 @@ func _init():
 	solid = true
 
 func _ready():
-	# line.init_points(segments, position)
 	line.save_prev(segments, position)
 	line.save_new(segments, position)
 	move_particle = Grid.biome.move_particle
@@ -53,16 +52,6 @@ func _process(delta):
 	line.compute_segments(-position - visuals.position, lerp_value)
 	for ghost_line in ghost_lines:
 		ghost_line.compute_segments(-position - visuals.position, lerp_value)
-	# for i in range(len(segments)):
-	# 	# var segment_pos = segments[i].position - position - visuals.position
-	# 	# Odd segments between first and last
-	# 	# if i % 2 == 1 and i < len(segments) - 1:
-	# 	# print(i)
-	# 	# print('pos_grid: [%s]' % (segments[i].target_position))
-	# 	# print('pos_normal: [%s]' % (segments[i].position))
-
-	# 	line.set_point_position(i * 2 + 1, segments[i].get_world_pos() - position - visuals.position)
-	# 	line.set_point_position(i * 2 + 2, segments[i].position - position - visuals.position)
 
 func set_segment_holder(value):
 	segment_holder = value
@@ -84,8 +73,6 @@ func setup_ghost_segments():
 	var ghost_indices = []
 	for i in range(len(segments)):
 		if segments[i] is SnakeGhostSegment:
-			# if len(ghost_indices) == 0:
-			# 	ghost_indices.append(i - 1)
 			ghost_indices.append(i)
 		if not (segments[i] is SnakeGhostSegment) or i == len(segments) - 1:
 			if len(ghost_indices) > 0:
@@ -102,7 +89,6 @@ func setup_ghost_segments():
 func add_segment(ghost=false):
 	var segment_scene = GHOST_SEGMENT_SCENE if ghost else SEGMENT_SCENE
 	var segment = segment_scene.instance()
-	# segment.set_segment_percent(1.0)
 	segment.set_pos(last_tail_pos)
 	segment.set_snake(self)
 	segment.align()
@@ -234,16 +220,6 @@ func move(direction: Vector2):
 
 	var dir = (line.prev[-1] - line.new[-1]).normalized()
 	ParticleManager.spawn(move_particle, line.prev[-1] - dir * 16, dir.angle())
-
-	# for i in range(len(prev) - 1):
-	# 	var first_diff = new[i] - prev[i]
-	# 	var next_diff = new[i + 1] - prev[i + 1]
-	# 	# print('segment: [%d] [%s] -> [%s]' % [i, prev[i], new[i]])
-	# 	# print('next: [%d] [%s] -> [%s]' % [i, prev[i + 1], new[i + 1]])
-	# 	# var next_diff = new[i + 1] - prev[i + 1]
-	# 	print('segment: [%d] first_diff: [%s], next_diff: [%s]' % [i, first_diff, next_diff])
-	# 	if first_diff != next_diff:
-	# 		print('corner')
 	
 	if direction == Vector2.UP:
 		sfx_move.pitch_scale = 0.9
