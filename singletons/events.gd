@@ -1,8 +1,7 @@
 ## Keep track of global events
 extends Node
 
-signal game_started
-signal game_finished
+signal level_completed(level)
 
 signal level_transition(idx)
 signal biome_transition(idx)

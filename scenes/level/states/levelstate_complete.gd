@@ -1,7 +1,7 @@
 extends State
 
 func enter(from_state: State):
-	object.emit_signal("completed")
+	Events.emit_signal("level_completed", object.level_data)
 
 func exit(to_state: State):
 	pass

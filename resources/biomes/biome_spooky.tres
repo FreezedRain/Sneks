@@ -10,8 +10,8 @@
 
 [resource]
 script = ExtResource( 1 )
-name = "Rocky"
-tileset = ExtResource( 2 )
+name = "Spooky"
+tileset = ExtResource( 3 )
 move_particle = "ghost_particle"
 color_top = Color( 0.247059, 0.235294, 0.352941, 1 )
 color_bottom = Color( 0.415686, 0.447059, 0.466667, 1 )

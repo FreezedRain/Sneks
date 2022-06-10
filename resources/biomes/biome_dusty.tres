@@ -1,24 +1,24 @@
 [gd_resource type="Resource" load_steps=13 format=2]
 
 [ext_resource path="res://resources/biome_data.gd" type="Script" id=1]
-[ext_resource path="res://tilesets/basic_tileset_dirt.tres" type="TileSet" id=2]
-[ext_resource path="res://resources/levels/hubs/hub_dusty.tres" type="Resource" id=3]
-[ext_resource path="res://resources/levels/w1/6-yield.tres" type="Resource" id=4]
-[ext_resource path="res://resources/levels/w1/2-slither.tres" type="Resource" id=5]
-[ext_resource path="res://resources/levels/w1/3-turn.tres" type="Resource" id=6]
-[ext_resource path="res://resources/levels/w1/1-movement.tres" type="Resource" id=7]
-[ext_resource path="res://resources/levels/w1/5-wiggle.tres" type="Resource" id=8]
-[ext_resource path="res://resources/levels/w1/8-pack.tres" type="Resource" id=9]
-[ext_resource path="res://resources/levels/w1/9-6pack.tres" type="Resource" id=10]
-[ext_resource path="res://resources/levels/w1/7-forbiddenshape.tres" type="Resource" id=11]
-[ext_resource path="res://resources/levels/w1/4-priority.tres" type="Resource" id=12]
+[ext_resource path="res://resources/levels/w1/9-6pack.tres" type="Resource" id=2]
+[ext_resource path="res://resources/levels/w1/7-forbiddenshape.tres" type="Resource" id=3]
+[ext_resource path="res://resources/levels/w1/2-slither.tres" type="Resource" id=4]
+[ext_resource path="res://resources/levels/w1/6-yield.tres" type="Resource" id=5]
+[ext_resource path="res://resources/levels/w1/4-priority.tres" type="Resource" id=6]
+[ext_resource path="res://resources/levels/w1/5-wiggle.tres" type="Resource" id=7]
+[ext_resource path="res://resources/levels/w1/8-pack.tres" type="Resource" id=8]
+[ext_resource path="res://resources/levels/w1/1-movement.tres" type="Resource" id=9]
+[ext_resource path="res://resources/levels/w1/3-turn.tres" type="Resource" id=10]
+[ext_resource path="res://resources/levels/hubs/hub_dusty.tres" type="Resource" id=11]
+[ext_resource path="res://tilesets/basic_tileset_dirt.tres" type="TileSet" id=12]
 
 [resource]
 script = ExtResource( 1 )
 name = "Dusty"
-tileset = ExtResource( 2 )
+tileset = ExtResource( 12 )
 move_particle = "dust_particle"
 color_top = Color( 0.345098, 0.270588, 0.215686, 1 )
 color_bottom = Color( 0.682353, 0.54902, 0.447059, 1 )
-hub = ExtResource( 3 )
-levels = [ ExtResource( 7 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 12 ), ExtResource( 8 ), ExtResource( 4 ), ExtResource( 11 ), ExtResource( 9 ), ExtResource( 10 ) ]
+hub = ExtResource( 11 )
+levels = [ ExtResource( 9 ), ExtResource( 4 ), ExtResource( 10 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 5 ), ExtResource( 3 ), ExtResource( 8 ), ExtResource( 2 ) ]

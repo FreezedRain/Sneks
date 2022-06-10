@@ -13,6 +13,8 @@ func parse_level():
 	for y in range(size.y):
 		rows.append(lines[y + 1].split(' '))
 
+	size.x = size.x
+
 	for x in range(size.x):
 		var col = []
 		for y in range(size.y):

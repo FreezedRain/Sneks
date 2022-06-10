@@ -7,7 +7,7 @@ export (LevelData.Biome) var current_biome
 
 const LEVEL_SCENE = preload("res://scenes/level/level.tscn")
 
-var level_idx = 0
+var level_idx: int = 0
 var loading_level: bool = false
 var current_level: Level
 
@@ -16,32 +16,33 @@ onready var hub_button = $UICanvas/Control/HubButton
 onready var sfx_transition = $SFXTransition
 
 func _ready():
+	Events.connect("level_completed", self, "_on_level_completed")
 	Events.connect("level_transition", self, "_on_level_transition")
 	Events.connect("biome_transition", self, "_on_biome_transition")
 	load_level_idx(0, true)
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
-		_on_level_completed()
+		load_level_idx(clamp(level_idx + 1, 0, len(biomes[current_biome.levels])))
 	elif Input.is_action_just_pressed("ui_left"):
-		level_idx -= 1
-		if level_idx < 0:
-			level_idx = len(biomes[current_biome].levels) - 1
-		load_level_idx(level_idx)
+		load_level_idx(clamp(level_idx - 1, 0, len(biomes[current_biome.levels])))
 
-func load_level_idx(level_idx: int, skip_fadeout=false):
+func load_level_idx(idx: int, skip_fadeout=false):
+	if loading_level:
+		return
+	level_idx = idx
 	hub_button.show()
-	if level_idx == -1:
+	if idx == -1:
 		hub_button.hide()
 		load_level(biomes[current_biome].hub, skip_fadeout)
 		return
 	
-	if level_idx == 0 and current_biome == 0:
+	if idx == 0 and current_biome == 0:
 		hub_button.hide()
 	# elif current_biome == 0:
 	# 	hub_button.hide()
 	# print('Loading level [%d] from biome [%d] - %s' % [level_idx, current_biome, biomes[current_biome].levels[level_idx]])
-	load_level(biomes[current_biome].levels[level_idx], skip_fadeout)
+	load_level(biomes[current_biome].levels[idx], skip_fadeout)
 
 func load_level(level_data: LevelData, skip_fadeout=false):
 	if loading_level:
@@ -57,13 +58,12 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 		current_level.queue_free()
 	current_level = LEVEL_SCENE.instance()
 	current_level.load_level(level_data)
-	current_level.connect("completed", self, "_on_level_completed")
 	add_child(current_level)
 	yield(overlay.fade_in(0.5), "completed")
 	current_level.start()
 	loading_level = false
 
-func _on_level_completed():
+func _on_level_completed(level: LevelData):
 	level_idx += 1
 	if level_idx > len(biomes[current_biome].levels) - 1:
 		current_biome = clamp(current_biome + 1, 0, len(biomes) - 1)
