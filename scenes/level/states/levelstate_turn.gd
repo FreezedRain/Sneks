@@ -51,6 +51,14 @@ func process_movement():
 		if execute_action(action):
 			move_timer = MOVE_DELAY
 			end_turn()
+		else:
+			var head_direction = convert_direction(current_snake.get_direction())
+			if current_snake.can_turn_corner(head_direction, direction):
+				var forward_action = Actions.SnakeMoveAction.new(current_snake, head_direction)
+				if execute_action(forward_action):
+					move_timer = MOVE_DELAY
+					end_turn()
+				
 
 func update_goals():
 	for goal in object.goal_holder.get_children():

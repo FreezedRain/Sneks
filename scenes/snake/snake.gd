@@ -53,6 +53,14 @@ func _process(delta):
 	for ghost_line in ghost_lines:
 		ghost_line.compute_segments(-position - visuals.position, lerp_value)
 
+func can_turn_corner(head_direction, turn_direction):
+	var new_pos = pos + head_direction + turn_direction
+	return Grid.is_free(new_pos)
+
+
+func get_direction():
+	return (position - segments[0].position).normalized()
+
 func set_segment_holder(value):
 	segment_holder = value
 
