@@ -7,8 +7,8 @@ func set_biome_idx(value: int):
 	biome_idx = value
 	if not sprite:
 		yield(self, "ready")
-	sprite.texture = Globals.BIOME_ICONS[value]
-	overlay.texture = Globals.BIOME_ICONS[value]
+	sprite.texture = Globals.BIOMES[value].icon
+	overlay.texture = Globals.BIOMES[value].icon
 	# target_color = Globals.BIOME_RESOURCES[value].color_top
 	# $Label.text = str(value)
 

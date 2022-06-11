@@ -5,5 +5,6 @@ export (TileSet) var tileset
 export (String) var move_particle
 export (Color) var color_top
 export (Color) var color_bottom
+export (Texture) var icon
 export (Resource) var hub
 export (Array, Resource) var levels
