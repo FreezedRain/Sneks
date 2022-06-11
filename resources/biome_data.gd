@@ -1,4 +1,4 @@
-class_name BiomeData extends Resource
+extends Resource
 
 export (String) var name
 export (TileSet) var tileset

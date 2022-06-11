@@ -24,10 +24,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scenes/goals/apple.gd"
 }, {
-"base": "Resource",
+"base": "Node",
 "class": "BiomeData",
 "language": "GDScript",
-"path": "res://resources/biome_data.gd"
+"path": "res://scenes/extra/biome_data.gd"
 }, {
 "base": "Goal",
 "class": "ClearGoal",

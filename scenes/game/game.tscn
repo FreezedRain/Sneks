@@ -1,15 +1,45 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/menu/undo_button.png" type="Texture" id=2]
 [ext_resource path="res://scenes/effects/overlay_canvas.gd" type="Script" id=3]
 [ext_resource path="res://sprites/utility/transition3.png" type="Texture" id=4]
-[ext_resource path="res://resources/biomes/biome_dusty.tres" type="Resource" id=5]
-[ext_resource path="res://resources/biomes/biome_rocky.tres" type="Resource" id=6]
-[ext_resource path="res://resources/biomes/biome_spooky.tres" type="Resource" id=7]
-[ext_resource path="res://resources/biomes/biome_grassy.tres" type="Resource" id=8]
+[ext_resource path="res://resources/levels/w1/1-movement.tres" type="Resource" id=5]
+[ext_resource path="res://resources/levels/hubs/hub_dusty.tres" type="Resource" id=6]
+[ext_resource path="res://resources/levels/w1/6-yield.tres" type="Resource" id=7]
+[ext_resource path="res://resources/levels/w1/2-slither.tres" type="Resource" id=8]
+[ext_resource path="res://tilesets/basic_tileset_dirt.tres" type="TileSet" id=9]
 [ext_resource path="res://sprites/menu/hub_button.png" type="Texture" id=10]
+[ext_resource path="res://scenes/extra/biome_data.gd" type="Script" id=11]
 [ext_resource path="res://sounds/woosh_longer.ogg" type="AudioStream" id=12]
+[ext_resource path="res://resources/levels/w1/8-pack.tres" type="Resource" id=13]
+[ext_resource path="res://resources/levels/w1/9-6pack.tres" type="Resource" id=14]
+[ext_resource path="res://resources/levels/w1/4-priority.tres" type="Resource" id=15]
+[ext_resource path="res://resources/levels/w1/3-turn.tres" type="Resource" id=16]
+[ext_resource path="res://resources/levels/w1/5-wiggle.tres" type="Resource" id=17]
+[ext_resource path="res://resources/levels/w1/7-forbiddenshape.tres" type="Resource" id=18]
+[ext_resource path="res://resources/levels/w3/1-diet.tres" type="Resource" id=19]
+[ext_resource path="res://resources/levels/w2/5-packingveggies.tres" type="Resource" id=20]
+[ext_resource path="res://resources/levels/hubs/hub_grassy.tres" type="Resource" id=21]
+[ext_resource path="res://resources/levels/w3/2-requiredshape.tres" type="Resource" id=22]
+[ext_resource path="res://resources/levels/w2/7-bolivia.tres" type="Resource" id=23]
+[ext_resource path="res://resources/levels/hubs/hub_rocky.tres" type="Resource" id=24]
+[ext_resource path="res://resources/levels/w2/1-pigment.tres" type="Resource" id=25]
+[ext_resource path="res://resources/levels/w2/3-roundabout.tres" type="Resource" id=26]
+[ext_resource path="res://resources/levels/w4/4-introspection.tres" type="Resource" id=27]
+[ext_resource path="res://resources/levels/w2/4-makeway.tres" type="Resource" id=28]
+[ext_resource path="res://resources/levels/w2/2-coil.tres" type="Resource" id=29]
+[ext_resource path="res://resources/levels/w3/6-lockpick.tres" type="Resource" id=30]
+[ext_resource path="res://resources/levels/w3/3-snack.tres" type="Resource" id=31]
+[ext_resource path="res://resources/levels/w3/4-grow.tres" type="Resource" id=32]
+[ext_resource path="res://resources/levels/w3/5-key.tres" type="Resource" id=33]
+[ext_resource path="res://resources/levels/hubs/hub_graveyard.tres" type="Resource" id=34]
+[ext_resource path="res://resources/levels/w4/1-ghost.tres" type="Resource" id=35]
+[ext_resource path="res://resources/levels/w4/3-effigy.tres" type="Resource" id=36]
+[ext_resource path="res://resources/levels/w4/2-ghostkey.tres" type="Resource" id=37]
+[ext_resource path="res://tilesets/basic_tileset_mountain.tres" type="TileSet" id=38]
+[ext_resource path="res://tilesets/basic_tileset_graveyard.tres" type="TileSet" id=39]
+[ext_resource path="res://tilesets/basic_tileset_jungle.tres" type="TileSet" id=40]
 
 [sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
@@ -46,7 +76,47 @@ shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
-biomes = [ ExtResource( 5 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 7 ) ]
+
+[node name="Biomes" type="Node" parent="."]
+
+[node name="Dusty" type="Node" parent="Biomes"]
+script = ExtResource( 11 )
+tileset = ExtResource( 9 )
+move_particle = "dust_particle"
+color_top = Color( 0.345098, 0.270588, 0.215686, 1 )
+color_bottom = Color( 0.682353, 0.54902, 0.447059, 1 )
+hub = ExtResource( 6 )
+levels = [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 7 ), ExtResource( 18 ), ExtResource( 13 ), ExtResource( 14 ) ]
+
+[node name="Rocky" type="Node" parent="Biomes"]
+script = ExtResource( 11 )
+biome = 1
+tileset = ExtResource( 38 )
+move_particle = "rock_particle"
+color_top = Color( 0.396078, 0.368627, 0.337255, 1 )
+color_bottom = Color( 0.576471, 0.576471, 0.576471, 1 )
+hub = ExtResource( 24 )
+levels = [ ExtResource( 25 ), ExtResource( 29 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 20 ), ExtResource( 23 ) ]
+
+[node name="Grassy" type="Node" parent="Biomes"]
+script = ExtResource( 11 )
+biome = 2
+tileset = ExtResource( 40 )
+move_particle = "grass_particle"
+color_top = Color( 0.278431, 0.364706, 0.258824, 1 )
+color_bottom = Color( 0.203922, 0.278431, 0.164706, 1 )
+hub = ExtResource( 21 )
+levels = [ ExtResource( 19 ), ExtResource( 22 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 30 ) ]
+
+[node name="Spooky" type="Node" parent="Biomes"]
+script = ExtResource( 11 )
+biome = 3
+tileset = ExtResource( 39 )
+move_particle = "ghost_particle"
+color_top = Color( 0.247059, 0.235294, 0.352941, 1 )
+color_bottom = Color( 0.415686, 0.447059, 0.466667, 1 )
+hub = ExtResource( 34 )
+levels = [ ExtResource( 35 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 27 ) ]
 
 [node name="UICanvas" type="CanvasLayer" parent="."]
 

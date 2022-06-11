@@ -40,7 +40,7 @@ func load_level(data: LevelData):
 	level_data = data
 	if data.extra_scene != null:
 		$CanvasLayer.add_child(data.extra_scene.instance())
-	Grid.load_tiles(data.load_tiles(), Globals.BIOME_RESOURCES[data.biome])
+	Grid.load_tiles(data.load_tiles(), Globals.BIOMES[data.biome])
 
 	yield(self, "ready")
 	terrain.update_tiles()
