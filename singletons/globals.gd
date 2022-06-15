@@ -10,7 +10,19 @@ const COLOR_LETTERS = {
 }
 
 var BIOMES: Dictionary
+var LEVELS: Dictionary
 
 func load_biomes(holder: Node):
 	for biome in holder.get_children():
 		BIOMES[biome.biome] = biome
+	load_levels()
+
+func load_levels():
+	for biome_id in BIOMES:
+		var biome = BIOMES[biome_id]
+		for level_idx in range(len(biome.levels)):
+			var level = biome.levels[level_idx]
+			level.index = level_idx
+			LEVELS[level.get_id()] = level
+		biome.hub.index = -1
+		LEVELS[biome.hub.get_id()] = biome.hub

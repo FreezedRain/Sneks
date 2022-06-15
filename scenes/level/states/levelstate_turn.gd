@@ -12,7 +12,8 @@ func _ready():
 	Events.connect("undo_pressed", self, "_on_undo_pressed")
 
 func enter(from_state: State):
-	object.update_title(object.level_data.name)
+	if object.level_data.name.length() > 0:
+		object.update_title("%d. %s" % [object.level_data.index + 1, object.level_data.name])
 
 func exit(to_state: State):
 	pass
@@ -58,7 +59,6 @@ func process_movement():
 				if execute_action(forward_action):
 					move_timer = MOVE_DELAY
 					end_turn()
-				
 
 func update_goals():
 	for goal in object.goal_holder.get_children():
@@ -67,13 +67,6 @@ func update_goals():
 			execute_action(action)
 	for goal in object.goal_holder.get_children():
 		goal.update_turn()
-
-# func update_apples():
-# 	var objects = Grid.get_tile(current_snake.pos).objects
-# 	for obj in objects:
-# 		if obj is Apple:
-# 			var action = Actions.AppleEatAction.new(current_snake, obj, object.segment_holder)
-# 			execute_action(action)
 
 func convert_direction(direction: Vector2) -> Vector2:
 	if direction == Vector2.ZERO:

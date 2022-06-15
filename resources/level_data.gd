@@ -1,5 +1,7 @@
 class_name LevelData extends Resource
 
+const ID_TEMPLATE = "%s_%s"
+
 const SNAKE_SCENE = preload("res://scenes/snake/snake.tscn")
 const SNAKE_GOAL_SCENE = preload("res://scenes/goals/snake_goal.tscn")
 const SEGMENT_GOAL_SCENE = preload("res://scenes/goals/segment_goal.tscn")
@@ -20,6 +22,7 @@ export (PackedScene) var extra_scene
 var size: Vector2
 var level: Array
 var snakes: Array
+var index: int
 
 func _init(name = "test", biome = Biome.DUSTY, level_string = "", snakes_string = "", extra_scene = null):
 	self.name = name
@@ -32,6 +35,9 @@ func _init(name = "test", biome = Biome.DUSTY, level_string = "", snakes_string 
 func ready():
 	parse_level()
 	parse_snakes()
+
+func get_id() -> String:
+	return ID_TEMPLATE % [biome, index if index >= 0 else 'hub']
 
 func load_objects() -> LevelObjects:
 	var goals = load_goals()
@@ -72,8 +78,9 @@ func parse_goal(raw_object):
 		goal = GHOST_APPLE_SCENE.instance()
 	elif raw_object[0] == 'e':
 		var level_idx = int(raw_object.substr(1))
+		var level_id = Globals.BIOMES[biome].levels[level_idx].get_id()
 		goal = TRANSITION_GOAL_SCENE.instance()
-		goal.set_level_idx(level_idx)
+		goal.set_level_id(level_id)
 	elif raw_object[0] == 'b':
 		var biome_idx = int(raw_object.substr(1))
 		goal = BIOME_TRANSITION_GOAL_SCENE.instance()

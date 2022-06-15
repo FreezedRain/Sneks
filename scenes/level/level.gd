@@ -27,6 +27,8 @@ func _ready():
 
 func _process(delta):
 	process_input()
+	if Input.is_action_just_pressed("complete"):
+		fsm.next_state = fsm.states.complete
 	fsm.process(delta)
 
 func process_input():

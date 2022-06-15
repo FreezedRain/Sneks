@@ -16,4 +16,4 @@ func update_turn():
 	var tile_objects = Grid.get_tile(pos).objects
 	for obj in tile_objects:
 		if obj is Snake:
-			Events.emit_signal("biome_transition", biome_idx)
+			Events.emit_signal("level_transition", Globals.BIOMES[biome_idx].hub.get_id())
