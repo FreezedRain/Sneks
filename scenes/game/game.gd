@@ -31,11 +31,11 @@ func load_level_idx(idx: int, skip_fadeout=false):
 	if loading_level:
 		return
 	if idx == -1:
-		load_level(Globals.BIOMES[biome_idx].hub.get_id(), skip_fadeout)
+		load_level(Globals.BIOMES[biome_idx].hub, skip_fadeout)
 		return
-	load_level(Globals.BIOMES[biome_idx].levels[idx].get_id(), skip_fadeout)
+	load_level(Globals.BIOMES[biome_idx].levels[idx], skip_fadeout)
 
-func load_level(id: String, skip_fadeout=false):
+func load_level(level_data: LevelData, skip_fadeout=false):
 	if loading_level:
 		return
 	loading_level = true
@@ -47,11 +47,10 @@ func load_level(id: String, skip_fadeout=false):
 		yield(overlay.fade_out(0.5, 0.15), "completed")
 	if current_level:
 		current_level.queue_free()
-	var level_data = Globals.LEVELS[id]
 	biome_idx = level_data.biome
 	level_idx = level_data.index
 	current_level = LEVEL_SCENE.instance()
-	current_level.load_level(Globals.LEVELS[id])
+	current_level.load_level(level_data)
 	add_child(current_level)
 	yield(overlay.fade_in(0.5), "completed")
 	current_level.start()
@@ -66,12 +65,7 @@ func _on_level_completed(level_id):
 
 func _on_level_transition(level_id):
 	current_level.fsm.next_state = current_level.fsm.states.idle
-	load_level(level_id)
-
-# func _on_biome_transition(idx):
-# 	biome_idx = idx
-# 	level_idx = -1
-# 	load_level_idx(level_idx)
+	load_level(Globals.LEVELS[level_id])
 
 func _on_HubButton_pressed():
 	load_level_idx(-1)
