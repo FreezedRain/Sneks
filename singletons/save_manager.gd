@@ -31,6 +31,9 @@ func load_game():
 	current_save = load(save_file_path)
 	print('Loaded.')
 
+func get_last_level() -> String:
+	return current_save.last_level_id
+
 func is_level_complete(level_id) -> bool:
 	return current_save.completed_levels.has(level_id)
 
@@ -38,6 +41,10 @@ func complete_level(level_id):
 	if not current_save.completed_levels.has(level_id):
 		current_save.completed_levels.append(level_id)
 		save_game()
+
+func set_last_level(level_id):
+	current_save.last_level_id = level_id
+	save_game()
 
 func _on_level_completed(level_id):
 	complete_level(level_id)

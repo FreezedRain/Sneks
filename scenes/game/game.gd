@@ -19,7 +19,8 @@ func _ready():
 	Events.connect("level_completed", self, "_on_level_completed")
 	Events.connect("level_transition", self, "_on_level_transition")
 	if load_initial:
-		load_level_idx(0, true)
+		SaveManager.complete_level(Globals.BIOMES[0].levels[0].get_id())
+		load_level(Globals.LEVELS[SaveManager.get_last_level()])
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
@@ -47,6 +48,7 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 		yield(overlay.fade_out(0.5, 0.15), "completed")
 	if current_level:
 		current_level.queue_free()
+	SaveManager.set_last_level(level_data.get_id())
 	biome_idx = level_data.biome
 	level_idx = level_data.index
 	current_level = LEVEL_SCENE.instance()
