@@ -4,7 +4,6 @@ extends Node
 signal level_completed(level)
 
 signal level_transition(idx)
-signal biome_transition(idx)
 
 signal undo_pressed
 
