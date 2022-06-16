@@ -38,7 +38,6 @@ func is_level_complete(level_id) -> bool:
 	return current_save.completed_levels.has(level_id)
 
 func complete_level(level_id):
-	print('completeing %s' % level_id)
 	if not current_save.completed_levels.has(level_id):
 		current_save.completed_levels.append(level_id)
 		save_game()
