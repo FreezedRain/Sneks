@@ -8,3 +8,8 @@ export (Color) var color_bottom
 export (Texture) var icon
 export (Resource) var hub
 export (Array, Resource) var levels
+
+func get_level(idx: int) -> LevelData:
+	if idx == -1:
+		return hub
+	return levels[idx]

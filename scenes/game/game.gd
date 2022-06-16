@@ -19,7 +19,6 @@ func _ready():
 	Events.connect("level_completed", self, "_on_level_completed")
 	Events.connect("level_transition", self, "_on_level_transition")
 	if load_initial:
-		SaveManager.complete_level(Globals.BIOMES[0].levels[0].get_id())
 		load_level(Globals.LEVELS[SaveManager.get_last_level()])
 
 func _process(delta):
@@ -32,8 +31,10 @@ func load_level_idx(idx: int, skip_fadeout=false):
 	if loading_level:
 		return
 	if idx == -1:
+		hub_button.hide()
 		load_level(Globals.BIOMES[biome_idx].hub, skip_fadeout)
 		return
+	
 	load_level(Globals.BIOMES[biome_idx].levels[idx], skip_fadeout)
 
 func load_level(level_data: LevelData, skip_fadeout=false):
@@ -50,7 +51,12 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 		current_level.queue_free()
 	SaveManager.set_last_level(level_data.get_id())
 	biome_idx = level_data.biome
+	SaveManager.complete_level(Globals.BIOMES[biome_idx].hub.get_id())
 	level_idx = level_data.index
+	if level_idx == -1:
+		hub_button.hide()
+	else:
+		hub_button.show()
 	current_level = LEVEL_SCENE.instance()
 	current_level.load_level(level_data)
 	add_child(current_level)

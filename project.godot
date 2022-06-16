@@ -30,6 +30,11 @@ _global_script_classes=[ {
 "path": "res://scenes/extra/biome_data.gd"
 }, {
 "base": "Goal",
+"class": "BiomeTransitionGoal",
+"language": "GDScript",
+"path": "res://scenes/goals/biome_transition_goal.gd"
+}, {
+"base": "Goal",
 "class": "ClearGoal",
 "language": "GDScript",
 "path": "res://scenes/goals/clear_goal.gd"
@@ -109,6 +114,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://scripts/grid/tile.gd"
 }, {
+"base": "Goal",
+"class": "TransitionGoal",
+"language": "GDScript",
+"path": "res://scenes/goals/transition_goal.gd"
+}, {
 "base": "Reference",
 "class": "Utils",
 "language": "GDScript",
@@ -119,6 +129,7 @@ _global_script_class_icons={
 "Actor": "",
 "Apple": "",
 "BiomeData": "",
+"BiomeTransitionGoal": "",
 "ClearGoal": "",
 "GameSave": "",
 "GhostApple": "",
@@ -135,6 +146,7 @@ _global_script_class_icons={
 "State": "",
 "StateMachine": "",
 "Tile": "",
+"TransitionGoal": "",
 "Utils": ""
 }
 

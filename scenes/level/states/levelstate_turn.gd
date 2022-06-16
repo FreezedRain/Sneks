@@ -97,6 +97,9 @@ func undo():
 func check_goals():
 	var all_goals_met = true
 	for goal in object.goal_holder.get_children():
+		if goal is TransitionGoal:
+			all_goals_met = false
+			break
 		if not goal.active:
 			all_goals_met = false
 			break

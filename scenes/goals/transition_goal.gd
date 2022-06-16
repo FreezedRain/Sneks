@@ -1,4 +1,4 @@
-extends Goal
+class_name TransitionGoal extends Goal
 
 var level_id: String setget set_level_id
 
@@ -7,7 +7,7 @@ func set_level_id(value: String):
 	set_active(SaveManager.is_level_complete(value))
 	if not active:
 		var level = Globals.LEVELS[value]
-		var previous_level = Globals.BIOMES[level.biome].levels[level.index - 1]
+		var previous_level = Globals.BIOMES[level.biome].get_level(level.index - 1)
 		set_active(SaveManager.is_level_complete(previous_level.get_id()))
 	$Label.text = str(Globals.LEVELS[value].index + 1)
 
