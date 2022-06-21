@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://sprites/menu/hub_button.png" type="Texture" id=1]
+[ext_resource path="res://scenes/ui/simple_button.gd" type="Script" id=2]
+
+[node name="SimpleButton" type="TextureButton"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_top = -117.0
+margin_right = 117.0
+rect_pivot_offset = Vector2( 58, 58 )
+texture_normal = ExtResource( 1 )
+expand = true
+script = ExtResource( 2 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

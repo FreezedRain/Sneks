@@ -11,12 +11,15 @@ var loading_level: bool = false
 var current_level: Level
 
 onready var overlay = $OverlayCanvas
+onready var undo_label = $UICanvas/Control/UndoButton/Label
+onready var undo_button = $UICanvas/Control/UndoButton
 onready var hub_button = $UICanvas/Control/HubButton
 onready var sfx_transition = $SFXTransition
 
 func _ready():
 	Globals.load_biomes($Biomes)
 	Events.connect("level_completed", self, "_on_level_completed")
+	Events.connect("undo_remaining", self, "_on_undo_remaining")
 	Events.connect("level_transition", self, "_on_level_transition")
 	if load_initial:
 		load_level(Globals.LEVELS[SaveManager.get_last_level()])
@@ -31,7 +34,7 @@ func load_level_idx(idx: int, skip_fadeout=false):
 	if loading_level:
 		return
 	if idx == -1:
-		hub_button.hide()
+		hub_button.set_active(false)
 		load_level(Globals.BIOMES[biome_idx].hub, skip_fadeout)
 		return
 	
@@ -53,10 +56,7 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 	biome_idx = level_data.biome
 	SaveManager.complete_level(Globals.BIOMES[biome_idx].hub.get_id())
 	level_idx = level_data.index
-	if level_idx == -1:
-		hub_button.hide()
-	else:
-		hub_button.show()
+	hub_button.set_active(level_idx != -1)
 	current_level = LEVEL_SCENE.instance()
 	current_level.load_level(level_data)
 	add_child(current_level)
@@ -80,3 +80,10 @@ func _on_HubButton_pressed():
 
 func _on_UndoButton_pressed():
 	Events.emit_signal("undo_pressed")
+
+func _on_undo_remaining(remaining):
+	undo_button.set_active(remaining > 0)
+	undo_label.text = str(remaining)
+	# if remaining > 0:
+	# 	undo_label.show()
+		

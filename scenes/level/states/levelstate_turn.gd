@@ -10,6 +10,7 @@ var move_timer: float = 0
 
 func _ready():
 	Events.connect("undo_pressed", self, "_on_undo_pressed")
+	update_undo()
 
 func enter(from_state: State):
 	if object.level_data.name.length() > 0:
@@ -86,6 +87,10 @@ func execute_action(action: Actions.Action) -> bool:
 func end_turn():
 	update_goals()
 	check_goals()
+	update_undo()
+
+func update_undo():
+	Events.emit_signal("undo_remaining", len(drags))
 
 func undo():
 	if len(drags) > 0:

@@ -1,8 +1,6 @@
 ## Everything related to a single level
 class_name Level extends Node2D
 
-signal completed
-
 onready var fsm = StateMachine.new(self, $States, $States/idle, false)
 onready var tween = $Tween
 
