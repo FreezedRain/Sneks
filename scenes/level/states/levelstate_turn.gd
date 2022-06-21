@@ -7,6 +7,7 @@ var drags: Array
 var current_snake: Snake
 var making_turn: bool
 var move_timer: float = 0
+var last_drags: int = -1
 
 func _ready():
 	Events.connect("undo_pressed", self, "_on_undo_pressed")
@@ -41,6 +42,7 @@ func process(delta):
 			making_turn = false
 			if drags[len(drags) - 1] - len(actions) == 0:
 				drags.pop_back()
+			update_undo()
 	else:
 		if Input.is_action_just_pressed("undo"):
 			undo()
@@ -87,10 +89,11 @@ func execute_action(action: Actions.Action) -> bool:
 func end_turn():
 	update_goals()
 	check_goals()
-	update_undo()
 
 func update_undo():
-	Events.emit_signal("undo_remaining", len(drags))
+	if last_drags != len(drags):
+		Events.emit_signal("undo_remaining", len(drags))
+		last_drags = len(drags)
 
 func undo():
 	if len(drags) > 0:
@@ -98,6 +101,7 @@ func undo():
 		while len(actions) > last_drag:
 			actions.pop_back().undo()
 		end_turn()
+		update_undo()
 
 func check_goals():
 	var all_goals_met = true
