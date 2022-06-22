@@ -8,9 +8,9 @@ name = "introspection"
 biome = 3
 level_string = "8,6
 ##_r___a
-_______A
-_______a
-_a__A__A
-_a__A__a
-#______A"
-snakes_string = "g5/2-4/2"
+R______A
+##r#___a
+##_____A
+##_____a
+##_____A"
+snakes_string = "r5/3-g5/2"
