@@ -5,6 +5,7 @@ const HIGHLIGHT_OFFSET = 16
 
 var prev: Array
 var new: Array
+var segment_indices: Array setget set_indices
 
 onready var shadow = $Shadow
 onready var highlight = $ViewportContainer/Viewport/Highlight
@@ -24,57 +25,61 @@ func set_point_position(i: int, position: Vector2):
 	shadow.set_point_position(i, position + Vector2.UP * SHADOW_OFFSET)
 	highlight.set_point_position(i, position + Vector2.UP * HIGHLIGHT_OFFSET)
 
-func set_ghost_points(start, end):
-	pass
-	# material.set_shader_param("ghost_start", start)
-	# material.set_shader_param("ghost_end", end)
+func set_indices(value):
+	segment_indices = value
 
 # func get_segment_pos(segments: Array, i: int, snake_pos: Vector2):
 # 	if i >= 0:
 # 		return segments[i].position - snake_pos
 # 	return Vector2.ZERO
 
-func save_prev(segments: Array, head_pos: Vector2):
+func save_prev(segments: Array):
 	prev.clear()
-	prev.append(head_pos)
-	for segment in segments:
-		prev.append(segment.target_position)
+	for idx in segment_indices:
+		prev.append(segments[idx])
 
-func save_new(segments: Array, head_pos: Vector2):
+func save_new(segments: Array):
 	new.clear()
-	new.append(head_pos)
-	for segment in segments:
-		new.append(segment.target_position)
+	for idx in segment_indices:
+		new.append(segments[idx])
 
-func save_prev_offset(segments: Array, head_pos: Vector2):
+func save_prev_offset(segments: Array):
 	prev.clear()
-	prev.append(head_pos)
-	prev.append(head_pos)
-	for i in range(len(segments) - 1):
+	prev.append(segments[0])
+	prev.append(segments[0])
+	for i in range(len(segments) - 2):
 		prev.append(segments[i].target_position)
-	
-
-# func init_points(segments: Array, snake_pos: Vector2):
-# 	add_point(Vector2.ZERO)
-
-# 	var prev_pos = Vector2.ZERO
-
-# 	for i in range(len(segments)):
-# 		var segment_pos = segments[i].position - snake_pos
-# 		# print('Added segment at [%s].' % (0.5 * (segment_pos + prev_pos)))
-# 		add_point(0.5 * (segment_pos + prev_pos))
-# 		# print('Added segment at [%s].' % segment_pos)
-# 		add_point(segment_pos)
-		
-# 		prev_pos = segment_pos
 
 func compute_segments(offset: Vector2, scale: float):
 	clear_points()
-	add_point(Vector2.ZERO)
-	for i in range(1, len(prev)):
-		add_point(new[i] + offset)
-		if scale < 0.99 and prev[i] != new[i]:
-			add_point(lerp(prev[i], new[i], scale) + offset)
+	
+	if len(prev) == 1:
+		for i in range(len(prev)):
+		# print(new[i], prev[i])
+			var new_offset = offset if new[i] != Vector2.ZERO else Vector2.ZERO
+			var diff = (new[i] - prev[i])
+			if diff != Vector2.ZERO:
+				add_point(lerp(prev[i], new[i], scale) - diff.normalized() + new_offset)
+			else:
+				add_point(lerp(prev[i], new[i], scale) - Vector2(0.01, 0.01) + new_offset)
+			add_point(lerp(prev[i], new[i], scale) + new_offset)
+	else:
+		for i in range(len(prev)):
+			if segment_indices[i] == 0:
+				add_point(new[i])
+				continue
+			if i != 0:
+				add_point(new[i] + offset)
+			# var prev_dir = prev[i] - prev[i - 1]
+			# var new_dir = new[i] - new[i - 1]
+			if scale < 0.99 and prev[i] != new[i]:
+				add_point(lerp(prev[i], new[i], scale) + offset)
+			elif i == 0:
+				add_point(new[i] + offset)
+			# if prev[i] != new[i] and prev_dir != new_dir:
+			# 	add_point(lerp(prev[i], new[i], scale) + offset)
+			# elif i == len(prev) - 1 or i == 1:
+			# 	add_point(lerp(prev[i], new[i], scale) + offset)
 
 	# material.set_shader_param("segment_count", get_point_count())
 		# var new_pos

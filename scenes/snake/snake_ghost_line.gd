@@ -2,110 +2,47 @@ extends Line2D
 
 var prev: Array
 var new: Array
-var indices: Array setget set_indices
+var segment_indices: Array setget set_indices
 
-onready var shadow = $Shadow
-onready var highlight = $ViewportContainer/Viewport/Highlight
 
-# func clear_points():
-# 	.clear_points()
-# 	shadow.clear_points()
-# 	highlight.clear_points()
+func set_indices(value):
+	segment_indices = value
 
-# func add_point(position: Vector2, at_position: int = -1):
-# 	.add_point(position, at_position)
-# 	shadow.add_point(position + Vector2.UP * SHADOW_OFFSET)
-# 	highlight.add_point(position + Vector2.UP * HIGHLIGHT_OFFSET)
+# func get_segment_pos(segments: Array, i: int, snake_pos: Vector2):
+# 	if i >= 0:
+# 		return segments[i].position - snake_pos
+# 	return Vector2.ZERO
 
-# func set_point_position(i: int, position: Vector2):
-# 	.set_point_position(i, position)
-# 	shadow.set_point_position(i, position + Vector2.UP * SHADOW_OFFSET)
-# 	highlight.set_point_position(i, position + Vector2.UP * HIGHLIGHT_OFFSET)
-
-func set_indices(value: Array):
-	indices = value
-
-func save_prev(segments: Array):#, head_pos: Vector2):
+func save_prev(segments: Array):
 	prev.clear()
-	for idx in indices:
-		prev.append(segments[idx].target_position)
+	for idx in segment_indices:
+		prev.append(segments[idx])
 
-func copy_prev(main_prev: Array, offset: int = 1):#, head_pos: Vector2):
-	prev.clear()
-	for idx in indices:
-		prev.append(main_prev[idx + offset])
-
-func copy_prev_single(main_prev: Array):#, head_pos: Vector2):
-	var prev_pos = prev[0]
-	prev.clear()
-	for idx in indices:
-		prev.append(prev_pos)
-
-func save_new(segments: Array):#, head_pos: Vector2):
+func save_new(segments: Array):
 	new.clear()
-	for idx in indices:
-		new.append(segments[idx].target_position)
+	for idx in segment_indices:
+		new.append(segments[idx])
 
-# func save_prev_offset(segments: Array, head_pos: Vector2):
-# 	prev.clear()
-# 	prev.append(head_pos)
-# 	prev.append(head_pos)
-# 	for i in range(len(segments) - 1):
-# 		prev.append(segments[i].target_position)
-	
-
-# func init_points(segments: Array, snake_pos: Vector2):
-# 	add_point(Vector2.ZERO)
-
-# 	var prev_pos = Vector2.ZERO
-
-# 	for i in range(len(segments)):
-# 		var segment_pos = segments[i].position - snake_pos
-# 		# print('Added segment at [%s].' % (0.5 * (segment_pos + prev_pos)))
-# 		add_point(0.5 * (segment_pos + prev_pos))
-# 		# print('Added segment at [%s].' % segment_pos)
-# 		add_point(segment_pos)
-		
-# 		prev_pos = segment_pos
+func save_prev_offset(segments: Array):
+	prev.clear()
+	prev.append(segments[0])
+	prev.append(segments[0])
+	for i in range(len(segments) - 2):
+		prev.append(segments[i].target_position)
 
 func compute_segments(offset: Vector2, scale: float):
 	clear_points()
-	# add_point(Vector2.ZERO)
-	# if len(prev) == 1:
-	# 	var grid_offset = (new[0] - prev[0]) 
-	# 	add_point(new[0] + grid_offset + offset)
-	# 	add_point(prev[0] + grid_offset + offset)
-	# 	return
-
-	for i in range(len(prev)):
-		# print('hello')
-		if i == len(prev) - 1:
-			if len(prev) == 1:
-				# print(new[i], prev[i])
-				var diff = (new[i] - prev[i])
-				if diff != Vector2.ZERO:
-					add_point(lerp(prev[i], new[i], scale) - diff.normalized() + offset)
-				else:
-					add_point(lerp(prev[i], new[i], scale) - Vector2(0.01, 0.01) + offset)
-				add_point(lerp(prev[i], new[i], scale) + offset)
-			else:
-				add_point(new[i] + offset)
-				if scale < 0.99 and prev[i] != new[i]:
-					add_point(lerp(prev[i], new[i], scale) + offset)
-		elif i == 0:
-			# if len(prev) == 1:
-			# 	add_point(new[i] - (new[i] - prev[i]).normalized() + offset)
+	add_point(Vector2.ZERO)
+	for i in range(1, len(prev)):
+		add_point(new[i] + offset)
+		# var prev_dir = prev[i] - prev[i - 1]
+		# var new_dir = new[i] - new[i - 1]
+		if scale < 0.99 and prev[i] != new[i]:
 			add_point(lerp(prev[i], new[i], scale) + offset)
-		else:
-			add_point(new[i] + offset)
-			if scale < 0.99 and prev[i] != new[i]:
-				add_point(lerp(prev[i], new[i], scale) + offset)
-		# if scale < 0.99 and prev[i] != new[i]:
-		# 	add_point(lerp(prev[i], new[i], scale) + offset)
-		# elif len(prev) == 1:
-		# 	add_point(new[i] - (new[i] - prev[i]).normalized() + offset)
-		# elif len(prev) == 1:
-		# 	add_point(prev[i] + (new[i] - prev[i]) * 0.5 + offset)
+			# if prev[i] != new[i] and prev_dir != new_dir:
+			# 	add_point(lerp(prev[i], new[i], scale) + offset)
+			# elif i == len(prev) - 1 or i == 1:
+			# 	add_point(lerp(prev[i], new[i], scale) + offset)
 
 	# material.set_shader_param("segment_count", get_point_count())
 		# var new_pos

@@ -154,6 +154,7 @@ disabled_color = Color( 0.588235, 0.588235, 0.588235, 1 )
 target_rotation = -10.0
 
 [node name="Label" type="Label" parent="UICanvas/Control/UndoButton"]
+visible = false
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_left = -20.0

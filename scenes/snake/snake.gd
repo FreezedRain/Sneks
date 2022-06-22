@@ -11,13 +11,14 @@ const STATE_TEXTURES = {
 }
 
 const SEGMENT_SCENE = preload("res://scenes/snake/snake_segment.tscn")
+const LINE_SCENE = preload("res://scenes/snake/snake_line.tscn")
 const GHOST_SEGMENT_SCENE = preload("res://scenes/snake/snake_ghost_segment.tscn")
 const GHOST_LINE_SCENE = preload("res://scenes/snake/snake_ghost_line.tscn")
 
 onready var visuals = $Visuals
 onready var sprite = $Visuals/Sprite
 onready var highlight = $Visuals/Sprite/Highlight
-onready var line = $Visuals/SnakeLine
+onready var base_line = $Visuals/SnakeLine
 onready var last_tail_pos: Vector2 = get_tail_pos()
 onready var before_last_tail_pos: Vector2 = last_tail_pos
 
@@ -31,32 +32,48 @@ var lerp_value: float = 0
 var state = State.NORMAL setget set_state
 var move_particle: String
 
-var ghost_lines: Array # line: indices
+var lines: Array
 
 func _init():
 	solid = true
 
 func _ready():
-	line.save_prev(segments, position)
-	line.save_new(segments, position)
+	setup_lines()
+	save_prev()
+	save_new()
 	move_particle = Grid.biome.move_particle
-	setup_ghost_segments()
-	if len(ghost_lines) > 0:
-		z_index = 0
+
+func setup_lines():
+	var segment_indices = [0]
+	for i in range(len(segments)):
+		if not segments[i] is SnakeGhostSegment:
+			segment_indices.append(i + 1)
+		if segments[i] is SnakeGhostSegment or i == len(segments) - 1:
+			if len(segment_indices) > 0:
+				var line = LINE_SCENE.instance()
+				line.set_indices(segment_indices.duplicate())
+				print(segment_indices)
+				segment_indices.clear()
+				visuals.add_child(line)
+				lines.append(line)
+				# line.hide()
+	segment_indices.clear()
+	for i in range(len(segments) + 1):
+		segment_indices.append(i)
+	print(segment_indices)
+	base_line.set_indices(segment_indices.duplicate())
 
 func _process(delta):
 	lerp_value = lerp(lerp_value, 1, delta * 16)
 	visuals.position = lerp(visuals.position, Vector2.ZERO, delta * 16)
 	sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 16)
-
-	line.compute_segments(-position - visuals.position, lerp_value)
-	for ghost_line in ghost_lines:
-		ghost_line.compute_segments(-position - visuals.position, lerp_value)
+	base_line.compute_segments(-position - visuals.position, lerp_value)
+	for line in lines:
+		line.compute_segments(-position - visuals.position, lerp_value)
 
 func can_turn_corner(head_direction, turn_direction):
 	var new_pos = pos + head_direction + turn_direction
 	return Grid.is_free(new_pos)
-
 
 func get_direction():
 	return (position - segments[0].position).normalized()
@@ -64,35 +81,25 @@ func get_direction():
 func set_segment_holder(value):
 	segment_holder = value
 
-func override_head_position(pos: Vector2):
-	visuals.position = pos
-
 func save_prev():
-	line.save_prev(segments, position)
-	for ghost_line in ghost_lines:
-		ghost_line.save_prev(segments)
+	var segment_pos = [Vector2.ZERO]
+	for segment in segments:
+		segment_pos.append(segment.target_position)
+	base_line.save_prev(segment_pos)
+	print('prev')
+	print(segment_pos)
+	for line in lines:
+		line.save_prev(segment_pos)
 
 func save_new():
-	line.save_new(segments, position)
-	for ghost_line in ghost_lines:
-		ghost_line.save_new(segments)
-
-func setup_ghost_segments():
-	var ghost_indices = []
-	for i in range(len(segments)):
-		if segments[i] is SnakeGhostSegment:
-			ghost_indices.append(i)
-		if not (segments[i] is SnakeGhostSegment) or i == len(segments) - 1:
-			if len(ghost_indices) > 0:
-				# print('Adding line with indices: [%s]' % ghost_indices)
-				var ghost_line = GHOST_LINE_SCENE.instance()
-				ghost_line.set_indices(ghost_indices.duplicate())
-				visuals.add_child(ghost_line)
-				ghost_lines.append(ghost_line)
-				ghost_indices.clear()
-	for ghost_line in ghost_lines:
-		ghost_line.copy_prev(line.prev)
-		ghost_line.save_new(segments)
+	var segment_pos = [Vector2.ZERO]
+	for segment in segments:
+		segment_pos.append(segment.target_position)
+	base_line.save_new(segment_pos)
+	print('new')
+	print(segment_pos)
+	for line in lines:
+		line.save_new(segment_pos)
 
 func add_segment(ghost=false):
 	var segment_scene = GHOST_SEGMENT_SCENE if ghost else SEGMENT_SCENE
@@ -102,46 +109,84 @@ func add_segment(ghost=false):
 	segment.align()
 	segments.append(segment)
 
-	# var dir = (segment.position - line.prev[len(line.prev) - 1]).normalized()
-	if ghost:
-		line.prev.append(Grid.grid_to_world(before_last_tail_pos))
-	else:
-		line.prev.append(segment.position)
-	line.new.append(segment.position)
-	# line.prev[len(line.prev) - 1] = segment.position
-	# line.new[len(line.new) - 1] = segment.position
-	segment_holder.add_child(segment)
+	base_line.segment_indices.append(len(segments))
+	base_line.prev.append(segment.position)
+	base_line.new.append(segment.position)
 
-	# S S S G G
-	# 0 1 2 3 4
-	# ghost lines - 1
-	# ghost indices [3, 4]
+	if not ghost:
+		var last_line = lines[-1]
+		if last_line.segment_indices.has(len(segments) - 1):
+			last_line.segment_indices.append(len(segments))
+			last_line.prev.append(segment.position)
+			last_line.new.append(segment.position)
+		else:
+			# Create a new line
+			var line = LINE_SCENE.instance()
+			line.default_color = Globals.COLOR_RGB[self.color]
+			line.set_indices([len(segments)])
+			line.prev.append(Grid.grid_to_world(before_last_tail_pos))
+			line.new.append(segment.position)
+			visuals.add_child(line)
+			lines.append(line)
+			
 
-	for ghost_line in ghost_lines:
-		ghost_line.queue_free()
-	ghost_lines.clear()
+	# # var dir = (segment.position - line.prev[len(line.prev) - 1]).normalized()
+	# if ghost:
+	# 	line.prev.append(Grid.grid_to_world(before_last_tail_pos))
+	# else:
+	# 	line.prev.append(segment.position)
+	# line.new.append(segment.position)
+	# # line.prev[len(line.prev) - 1] = segment.position
+	# # line.new[len(line.new) - 1] = segment.position
+	# segment_holder.add_child(segment)
 
-	setup_ghost_segments()
+	# # S S S G G
+	# # 0 1 2 3 4
+	# # ghost lines - 1
+	# # ghost indices [3, 4]
 
-	if len(ghost_lines) > 0:
-		z_index = 0
+	# for ghost_line in ghost_lines:
+	# 	ghost_line.queue_free()
+	# ghost_lines.clear()
+
+	# setup_ghost_segments()
+
+	# if len(ghost_lines) > 0:
+	# 	z_index = 0
 
 func remove_segment():
 	var segment = segments.pop_back()
-	if segment is SnakeGhostSegment and len(ghost_lines) > 0:
-		var last_line = ghost_lines[-1]
-		last_line.indices.pop_back()
-		last_line.prev.pop_back()
-		last_line.new.pop_back()
-		if len(last_line.indices) == 0:
+	base_line.segment_indices.pop_back()
+	base_line.prev.pop_back()
+	base_line.new.pop_back()
+	if not segment is SnakeGhostSegment:
+		var last_line = lines[-1]
+		# print('removing default line segment')
+		if len(last_line.segment_indices) > 1:
+			last_line.segment_indices.pop_back()
+			last_line.prev.pop_back()
+			last_line.new.pop_back()
+		else:
+			# print('removing full line')
 			last_line.queue_free()
-			ghost_lines.pop_back()
-	segment.queue_free()
-	line.prev.pop_back()
-	line.new.pop_back()
+			lines.pop_back()
+		
 
-	if len(ghost_lines) == 0:
-		z_index = 1
+	# if segment is SnakeGhostSegment and len(ghost_lines) > 0:
+	# 	var last_line = ghost_lines[-1]
+	# 	last_line.indices.pop_back()
+	# 	last_line.prev.pop_back()
+	# 	last_line.new.pop_back()
+	# 	if len(last_line.indices) == 0:
+	# 		last_line.queue_free()
+	# 		ghost_lines.pop_back()
+	segment.queue_free()
+	segment._exit_tree()
+	# line.prev.pop_back()
+	# line.new.pop_back()
+
+	# if len(ghost_lines) == 0:
+	# 	z_index = 1
 
 func align_visuals():
 	var previous_pos = position
@@ -163,9 +208,10 @@ func set_state(value):
 
 func set_color(value):
 	color = value
-	if not line:
+	if not base_line:
 		yield(self, "ready")
-	line.default_color = Globals.COLOR_RGB[self.color]
+	for line in lines:
+		line.default_color = Globals.COLOR_RGB[self.color]
 
 func get_tail_pos() -> Vector2:
 	return segments[len(segments) - 1].pos
@@ -226,8 +272,9 @@ func move(direction: Vector2):
 
 	save_new()
 
-	var dir = (line.prev[-1] - line.new[-1]).normalized()
-	ParticleManager.spawn(move_particle, line.prev[-1] - dir * 16, dir.angle())
+
+	var dir = (base_line.prev[-1] - base_line.new[-1]).normalized()
+	ParticleManager.spawn(move_particle, base_line.prev[-1] - dir * 16, dir.angle())
 	
 	if direction == Vector2.UP:
 		sfx_move.pitch_scale = 0.9
@@ -272,14 +319,16 @@ func setup_segments(segment_positions: Array, segment_ghosts: Array) -> Array:
 			continue
 		var segment_scene = GHOST_SEGMENT_SCENE if segment_ghosts[i] else SEGMENT_SCENE
 		var segment = segment_scene.instance()
-		# segment.set_segment_percent(count/segment_positions.size())
-		# var offset = Vector2(randi() % 3, randi() % 3)
-		# offset.x = clamp(offset.x, 0, Grid.size.x - 1)
-		# offset.y = clamp(offset.y, 0, Grid.size.y - 1)
 		segment.set_pos(segment_positions[i])
 		segment.set_snake(self)
 		segment.align()
 		segments.append(segment)
+
+
+				
+	# for ghost_line in ghost_lines:
+	# 	ghost_line.copy_prev(line.prev)
+	# 	ghost_line.save_new(segments)
 		
 	return segments
 

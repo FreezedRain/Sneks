@@ -15,7 +15,6 @@ func set_active(value):
         _on_mouse_exited()
     disabled = not active
     modulate = Color.white if active else disabled_color
-    
 
 func _on_mouse_exited():
     if disabled:
