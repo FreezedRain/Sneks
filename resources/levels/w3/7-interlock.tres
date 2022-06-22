@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/level_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "interlock"
+biome = 2
+level_string = "8,6
+aaaaaaa-
+-g----g-
+--aaaa--
+--Gg-R--
+-g-aa-g-
+-aaaaaa-"
+snakes_string = "r1/1-0/1
+g3/1-2/1"

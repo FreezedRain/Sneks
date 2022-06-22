@@ -1,0 +1,18 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/level_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "found family"
+biome = 2
+level_string = "7,6
+----#-y-
+----rry-
+----rYaa
+----rGaa
+aaa-rRg-
+aaa#--g-"
+snakes_string = "r1/0-0/0
+g3/0-2/0
+y1/1-0/1"
