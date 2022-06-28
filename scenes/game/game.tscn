@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=51 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/menu/undo_button.png" type="Texture" id=2]
@@ -45,6 +45,8 @@
 [ext_resource path="res://sprites/biome_icons/grassy_icon.png" type="Texture" id=43]
 [ext_resource path="res://sprites/biome_icons/rocky_icon.png" type="Texture" id=44]
 [ext_resource path="res://fonts/Multicolore.otf" type="DynamicFontData" id=45]
+[ext_resource path="res://resources/levels/w3/7-interlock.tres" type="Resource" id=46]
+[ext_resource path="res://resources/levels/w3/8-foundfamiliy.tres" type="Resource" id=47]
 
 [sub_resource type="DynamicFont" id=3]
 size = 32
@@ -120,7 +122,7 @@ color_top = Color( 0.278431, 0.364706, 0.258824, 1 )
 color_bottom = Color( 0.203922, 0.278431, 0.164706, 1 )
 icon = ExtResource( 43 )
 hub = ExtResource( 21 )
-levels = [ ExtResource( 19 ), ExtResource( 22 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 30 ) ]
+levels = [ ExtResource( 19 ), ExtResource( 22 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 47 ) ]
 
 [node name="Spooky" type="Node" parent="Biomes"]
 script = ExtResource( 11 )
