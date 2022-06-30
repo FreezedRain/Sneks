@@ -1,6 +1,8 @@
 ## Keep track of global events
 extends Node
 
+signal game_completed
+
 signal level_completed(level)
 
 signal level_transition(idx)
