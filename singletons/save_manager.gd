@@ -1,5 +1,7 @@
 extends Node
 
+var USE_SAVES = OS.has_feature("standalone")
+
 const SAVE_FOLDER : String = "user://"
 const SAVE_NAME : String = "save.tres"
 
@@ -10,6 +12,8 @@ func _ready():
 	load_game()
 
 func save_game():
+	if not USE_SAVES:
+		return
 	print('Saving game...')
 	if current_save == null:
 		current_save = GameSave.new()
@@ -21,6 +25,9 @@ func save_game():
 	print('Saved.')
 
 func load_game():
+	if not USE_SAVES:
+		current_save = GameSave.new()
+		return
 	print('Loading save file...')
 	var save_file_path : String = SAVE_FOLDER.plus_file(SAVE_NAME)
 	var file : File = File.new()
