@@ -10,7 +10,7 @@ const FINALE_SCENE = preload("res://scenes/extra/finale.tscn")
 
 var level_idx: int = 0
 var loading_level: bool = false
-var current_level: Level
+var current_level
 
 onready var overlay = $OverlayCanvas
 onready var undo_label = $UICanvas/Control/UndoButton/Label
@@ -79,10 +79,12 @@ func _on_game_completed():
 	play_transition_sfx()
 	yield(overlay.fade_out(0.5, 0.15), "completed")
 	current_level.queue_free()
-	var finale = FINALE_SCENE.instance()
-	add_child(finale)
+	current_level = FINALE_SCENE.instance()
+	add_child(current_level)
 	hub_button.set_active(true)
+	undo_button.hide()
 	yield(overlay.fade_in(0.5), "completed")
+	loading_level = false
 
 func _on_level_completed(level_id):
 	level_idx += 1
@@ -96,6 +98,7 @@ func _on_level_transition(level_id):
 	load_level(Globals.LEVELS[level_id])
 
 func _on_HubButton_pressed():
+	print('loaing')
 	load_level_idx(-1)
 
 func _on_UndoButton_pressed():
