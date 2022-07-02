@@ -74,10 +74,15 @@ func play_transition_sfx():
 	sfx_transition.play()
 
 func _on_game_completed():
+	loading_level = true
 	SaveManager.complete_level(Globals.BIOMES[biome_idx].hub.get_id())
 	play_transition_sfx()
 	yield(overlay.fade_out(0.5, 0.15), "completed")
-	get_tree().change_scene_to(FINALE_SCENE)
+	current_level.queue_free()
+	var finale = FINALE_SCENE.instance()
+	add_child(finale)
+	hub_button.set_active(true)
+	yield(overlay.fade_in(0.5), "completed")
 
 func _on_level_completed(level_id):
 	level_idx += 1
