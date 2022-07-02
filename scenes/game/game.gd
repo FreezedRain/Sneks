@@ -6,6 +6,7 @@ export (String) var override_level_id = ""
 export (LevelData.Biome) var biome_idx
 
 const LEVEL_SCENE = preload("res://scenes/level/level.tscn")
+const FINALE_SCENE = preload("res://scenes/extra/finale.tscn")
 
 var level_idx: int = 0
 var loading_level: bool = false
@@ -19,6 +20,7 @@ onready var sfx_transition = $SFXTransition
 
 func _ready():
 	Globals.load_biomes($Biomes)
+	Events.connect("game_completed", self, "_on_game_completed")
 	Events.connect("level_completed", self, "_on_level_completed")
 	Events.connect("undo_remaining", self, "_on_undo_remaining")
 	Events.connect("level_transition", self, "_on_level_transition")
@@ -51,8 +53,7 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 	if skip_fadeout:
 		yield(get_tree(), "idle_frame")
 	else:
-		sfx_transition.pitch_scale = rand_range(1.0, 1.15)
-		sfx_transition.play()
+		play_transition_sfx()
 		yield(overlay.fade_out(0.5, 0.15), "completed")
 	if current_level:
 		current_level.queue_free()
@@ -67,6 +68,16 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 	yield(overlay.fade_in(0.5), "completed")
 	current_level.start()
 	loading_level = false
+
+func play_transition_sfx():
+	sfx_transition.pitch_scale = rand_range(1.0, 1.15)
+	sfx_transition.play()
+
+func _on_game_completed():
+	SaveManager.complete_level(Globals.BIOMES[biome_idx].hub.get_id())
+	play_transition_sfx()
+	yield(overlay.fade_out(0.5, 0.15), "completed")
+	get_tree().change_scene_to(FINALE_SCENE)
 
 func _on_level_completed(level_id):
 	level_idx += 1
