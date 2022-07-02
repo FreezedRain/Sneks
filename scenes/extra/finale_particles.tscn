@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://sprites/utility/circle_32.png" type="Texture" id=1]
+[ext_resource path="res://scenes/extra/finale_particles.gd" type="Script" id=2]
+
+[sub_resource type="Curve" id=1]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.240566, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0 ), -4.13797, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=2]
+curve = SubResource( 1 )
+
+[sub_resource type="ParticlesMaterial" id=3]
+emission_shape = 2
+emission_box_extents = Vector3( 360, 360, 1 )
+flag_disable_z = true
+spread = 180.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 32.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 0.25
+scale_curve = SubResource( 2 )
+color = Color( 0.737255, 0.796078, 0.556863, 1 )
+hue_variation_random = 0.07
+
+[node name="FinaleParticles" type="Particles2D"]
+lifetime = 1.5
+explosiveness = 0.25
+process_material = SubResource( 3 )
+texture = ExtResource( 1 )
+script = ExtResource( 2 )

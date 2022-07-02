@@ -4,6 +4,7 @@ const ID_TEMPLATE = "%s_%s"
 
 const SNAKE_SCENE = preload("res://scenes/snake/snake.tscn")
 const SNAKE_GOAL_SCENE = preload("res://scenes/goals/snake_goal.tscn")
+const INVISIBLE_SCENE = preload("res://scenes/extra/invisible_block.tscn")
 const SEGMENT_GOAL_SCENE = preload("res://scenes/goals/segment_goal.tscn")
 const CLEAR_GOAL_SCENE = preload("res://scenes/goals/clear_goal.tscn")
 const TRANSITION_GOAL_SCENE = preload("res://scenes/goals/transition_goal.tscn")
@@ -43,8 +44,9 @@ func get_id() -> String:
 func load_objects() -> LevelObjects:
 	var goals = load_goals()
 	var snakes_and_segments = load_snakes()
+	var extra_objects = load_extra_objects()
 	
-	return LevelObjects.new(goals, snakes_and_segments[0], snakes_and_segments[1])
+	return LevelObjects.new(goals, snakes_and_segments[0], snakes_and_segments[1], extra_objects)
 	
 func load_tiles() -> Array:
 	var tiles = []
@@ -56,6 +58,20 @@ func load_tiles() -> Array:
 			col.append(tile)
 		tiles.append(col)
 	return tiles
+
+func load_extra_objects():
+	var objects = []
+	for x in range(size.x):
+		for y in range(size.y):
+			var raw_object = level[x][y]
+			var object = null
+			if raw_object == 'i':
+				object = INVISIBLE_SCENE.instance()
+			if object:
+				object.set_pos(Vector2(x, y))
+				object.align()
+				objects.append(object)
+	return objects
 
 func load_goals() -> Array:
 	var goals = []
@@ -156,8 +172,10 @@ class LevelObjects:
 	var goals: Array
 	var snakes: Array
 	var segments: Array
+	var extra: Array
 
-	func _init(goals: Array, snakes: Array, segments: Array):
+	func _init(goals: Array, snakes: Array, segments: Array, extra: Array):
 		self.goals = goals
 		self.snakes = snakes
 		self.segments = segments
+		self.extra = extra

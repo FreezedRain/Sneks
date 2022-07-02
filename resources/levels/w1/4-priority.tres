@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "priority"
-biome = 0
+biome = null
 level_string = "5,5
 ___#_
 _#___

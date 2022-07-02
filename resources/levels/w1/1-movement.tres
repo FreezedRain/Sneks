@@ -5,8 +5,8 @@
 
 [resource]
 script = ExtResource( 1 )
-name = ""
-biome = 0
+name = null
+biome = null
 level_string = "5,1
 ____G"
 snakes_string = "g1/0-0/0"

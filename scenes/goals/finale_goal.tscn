@@ -2,13 +2,15 @@
 
 [ext_resource path="res://scenes/goals/goal.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/goals/finale_goal.gd" type="Script" id=2]
-[ext_resource path="res://sprites/goals/apple.png" type="Texture" id=3]
+[ext_resource path="res://sprites/finale/finale_goal.png" type="Texture" id=3]
 [ext_resource path="res://sounds/pop.ogg" type="AudioStream" id=4]
 
 [node name="FinaleGoal" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
+position = Vector2( 0, 64 )
+z_index = -1
 texture = ExtResource( 3 )
 
 [node name="SFXPop" type="AudioStreamPlayer" parent="." index="2"]

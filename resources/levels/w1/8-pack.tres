@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "pack"
-biome = 0
+biome = null
 level_string = "9,4
 ----x---G
 ----x-G--

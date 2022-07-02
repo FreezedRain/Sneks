@@ -5,7 +5,7 @@
 [resource]
 script = ExtResource( 1 )
 name = "wiggle"
-biome = 0
+biome = null
 level_string = "6,5
 ##_G##
 G____G

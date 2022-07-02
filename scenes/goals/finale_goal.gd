@@ -9,4 +9,4 @@ func update_turn():
 			Events.emit_signal("game_completed")
 			ParticleManager.spawn('apple_particle', position)
 			sfx_pop.play()
-			hide()
+			# hide()

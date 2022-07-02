@@ -92,6 +92,7 @@ shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
+override_level_id = "4_hub"
 
 [node name="Biomes" type="Node" parent="."]
 
@@ -139,8 +140,8 @@ color_top = Color( 0.247059, 0.235294, 0.352941, 1 )
 color_bottom = Color( 0.415686, 0.447059, 0.466667, 1 )
 icon = ExtResource( 41 )
 hub = ExtResource( 34 )
-levels = [ ExtResource( 35 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 27 ), ExtResource( 49 ) ]
 next_levels_required = 2
+levels = [ ExtResource( 35 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 27 ), ExtResource( 49 ) ]
 
 [node name="Finale" type="Node" parent="Biomes"]
 script = ExtResource( 11 )

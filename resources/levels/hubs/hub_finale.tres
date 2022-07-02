@@ -1,19 +1,22 @@
-[gd_resource type="Resource" load_steps=2 format=2]
+[gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://resources/level_data_hub.gd" type="Script" id=1]
+[ext_resource path="res://scenes/extra/finale_particles.tscn" type="PackedScene" id=2]
 
 [resource]
 script = ExtResource( 1 )
 name = ""
 biome = 4
-level_string = "10,9
-# # # # # # # # # # #
-# # # _ _ _ _ _ _ #
-# # _ _ _ _ _ _ _ #
-# _ _ _ _ _ _ _ _ #
-b3 _ _ _ _ _ f _ _ #
-# _ _ _ _ _ _ _ _ #
-# # _ _ _ _ _ _ _ #
-# # # _ _ _ _ _ _ #
-# # # # # # # # # # #"
-snakes_string = "g3/4-2/4-1/4"
+level_string = "9,10
+# # # # # # # # # #
+# _ _ i i i _ _ #
+# _ _ i f i _ _ #
+# i i i _ i i i #
+# _ _ i _ i _ _ #
+# _ _ i _ i _ _ #
+# _ _ _ _ _ _ _ #
+# _ _ _ _ _ _ _ #
+# _ _ _ _ _ _ _ #
+# # # _ b3 _ # # # #"
+snakes_string = "g4/6-4/7-4/8"
+extra_scene = ExtResource( 2 )

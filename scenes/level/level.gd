@@ -9,6 +9,7 @@ onready var title = $CanvasLayer/Title
 onready var snake_holder = $Snakes
 onready var segment_holder = $Segments
 onready var goal_holder = $Goals
+onready var extra_holder = $Extra
 onready var particle_holder = $Particles
 onready var decorations = $Decorations
 
@@ -57,6 +58,9 @@ func load_level(data: LevelData):
 	
 	for goal in level_objects.goals:
 		goal_holder.add_child(goal)
+
+	for extra in level_objects.extra:
+		extra_holder.add_child(extra)
 	
 	decorations.setup()
 
