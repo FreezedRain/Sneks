@@ -60,7 +60,6 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 		current_level.queue_free()
 	SaveManager.set_last_level(level_data.get_id())
 	biome_idx = level_data.biome
-	print(biome_idx)
 	SaveManager.complete_level(Globals.BIOMES[biome_idx].hub.get_id())
 	level_idx = level_data.index
 	hub_button.set_active(level_idx != -1)
