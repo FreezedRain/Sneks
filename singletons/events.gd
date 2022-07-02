@@ -2,6 +2,7 @@
 extends Node
 
 signal game_completed
+signal return_to_game
 
 signal level_completed(level)
 

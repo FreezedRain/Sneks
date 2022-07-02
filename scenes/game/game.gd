@@ -21,6 +21,7 @@ onready var sfx_transition = $SFXTransition
 func _ready():
 	Globals.load_biomes($Biomes)
 	Events.connect("game_completed", self, "_on_game_completed")
+	Events.connect("return_to_game", self, "return_to_game")
 	Events.connect("level_completed", self, "_on_level_completed")
 	Events.connect("undo_remaining", self, "_on_undo_remaining")
 	Events.connect("level_transition", self, "_on_level_transition")
@@ -69,6 +70,15 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 	current_level.start()
 	loading_level = false
 
+func return_to_game():
+	loading_level = true
+	play_transition_sfx()
+	yield(overlay.fade_out(0.5, 0.15), "completed")
+	hub_button.show()
+	undo_button.show()
+	loading_level = false
+	load_level_idx(-1, true)
+
 func play_transition_sfx():
 	sfx_transition.pitch_scale = rand_range(1.0, 1.15)
 	sfx_transition.play()
@@ -81,10 +91,9 @@ func _on_game_completed():
 	current_level.queue_free()
 	current_level = FINALE_SCENE.instance()
 	add_child(current_level)
-	hub_button.set_active(true)
+	hub_button.hide()
 	undo_button.hide()
 	yield(overlay.fade_in(0.5), "completed")
-	loading_level = false
 
 func _on_level_completed(level_id):
 	level_idx += 1
@@ -98,7 +107,6 @@ func _on_level_transition(level_id):
 	load_level(Globals.LEVELS[level_id])
 
 func _on_HubButton_pressed():
-	print('loaing')
 	load_level_idx(-1)
 
 func _on_UndoButton_pressed():
