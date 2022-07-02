@@ -5,11 +5,19 @@ var biome_idx: int setget set_biome_idx
 
 func set_biome_idx(value: int):
 	biome_idx = value
-	set_active(SaveManager.is_level_complete(Globals.BIOMES[value].hub.get_id()))
+	var biome = Globals.BIOMES[value]
+	set_active(SaveManager.is_level_complete(biome.hub.get_id()))
 	if not sprite:
 		yield(self, "ready")
-	sprite.texture = Globals.BIOMES[value].icon
-	overlay.texture = Globals.BIOMES[value].icon
+	sprite.texture = biome.icon
+	overlay.texture = biome.icon
+
+func show_unlock_progress():
+	if biome_idx == 0:
+		return
+	var previous_biome = Globals.BIOMES[biome_idx - 1]
+	$Label.show()
+	$Label.text = "%d/%d" % [previous_biome.total_levels_complete(), previous_biome.next_levels_required]
 	# target_color = Globals.BIOME_RESOURCES[value].color_top
 	# $Label.text = str(value)
 

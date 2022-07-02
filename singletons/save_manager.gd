@@ -14,7 +14,6 @@ func _ready():
 func save_game():
 	if not USE_SAVES:
 		return
-	print('Saving game...')
 	if current_save == null:
 		current_save = GameSave.new()
 	var save_path = SAVE_FOLDER.plus_file(SAVE_NAME)
@@ -28,7 +27,6 @@ func load_game():
 	if not USE_SAVES:
 		current_save = GameSave.new()
 		return
-	print('Loading save file...')
 	var save_file_path : String = SAVE_FOLDER.plus_file(SAVE_NAME)
 	var file : File = File.new()
 	if not file.file_exists(save_file_path):
@@ -55,3 +53,6 @@ func set_last_level(level_id):
 
 func _on_level_completed(level_id):
 	complete_level(level_id)
+	var level_data = Globals.LEVELS[level_id]
+	if Globals.BIOMES[level_data.biome].can_unlock_next() and level_data.biome < len(Globals.BIOMES) - 1:
+		complete_level(Globals.BIOMES[level_data.biome + 1].hub.get_id())

@@ -92,7 +92,6 @@ shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
-override_level_id = "4_hub"
 
 [node name="Biomes" type="Node" parent="."]
 
@@ -104,6 +103,7 @@ color_top = Color( 0.345098, 0.270588, 0.215686, 1 )
 color_bottom = Color( 0.682353, 0.54902, 0.447059, 1 )
 icon = ExtResource( 42 )
 hub = ExtResource( 6 )
+next_levels_required = 5
 levels = [ ExtResource( 5 ), ExtResource( 8 ), ExtResource( 16 ), ExtResource( 15 ), ExtResource( 17 ), ExtResource( 7 ), ExtResource( 18 ), ExtResource( 13 ), ExtResource( 14 ) ]
 
 [node name="Rocky" type="Node" parent="Biomes"]
@@ -115,6 +115,7 @@ color_top = Color( 0.396078, 0.368627, 0.337255, 1 )
 color_bottom = Color( 0.576471, 0.576471, 0.576471, 1 )
 icon = ExtResource( 44 )
 hub = ExtResource( 24 )
+next_levels_required = 3
 levels = [ ExtResource( 25 ), ExtResource( 29 ), ExtResource( 26 ), ExtResource( 28 ), ExtResource( 20 ), ExtResource( 23 ) ]
 
 [node name="Grassy" type="Node" parent="Biomes"]
@@ -126,6 +127,7 @@ color_top = Color( 0.278431, 0.364706, 0.258824, 1 )
 color_bottom = Color( 0.203922, 0.278431, 0.164706, 1 )
 icon = ExtResource( 43 )
 hub = ExtResource( 21 )
+next_levels_required = 4
 levels = [ ExtResource( 19 ), ExtResource( 22 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 47 ) ]
 
 [node name="Spooky" type="Node" parent="Biomes"]
@@ -138,6 +140,7 @@ color_bottom = Color( 0.415686, 0.447059, 0.466667, 1 )
 icon = ExtResource( 41 )
 hub = ExtResource( 34 )
 levels = [ ExtResource( 35 ), ExtResource( 37 ), ExtResource( 36 ), ExtResource( 27 ), ExtResource( 49 ) ]
+next_levels_required = 2
 
 [node name="Finale" type="Node" parent="Biomes"]
 script = ExtResource( 11 )

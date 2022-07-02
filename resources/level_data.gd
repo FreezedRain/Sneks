@@ -88,6 +88,8 @@ func parse_goal(raw_object):
 		var biome_idx = int(raw_object.substr(1))
 		goal = BIOME_TRANSITION_GOAL_SCENE.instance()
 		goal.set_biome_idx(biome_idx)
+		if biome_idx - 1 == biome:
+			goal.show_unlock_progress()
 	elif Globals.COLOR_LETTERS.keys().has(raw_object):
 		var color = Globals.COLOR_LETTERS[raw_object]
 		if raw_object == raw_object.to_upper():
