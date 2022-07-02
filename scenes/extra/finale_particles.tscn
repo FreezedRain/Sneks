@@ -18,12 +18,13 @@ gravity = Vector3( 0, 0, 0 )
 initial_velocity = 32.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
-scale = 0.25
+scale = 0.35
 scale_curve = SubResource( 2 )
 color = Color( 0.737255, 0.796078, 0.556863, 1 )
 hue_variation_random = 0.07
 
 [node name="FinaleParticles" type="Particles2D"]
+amount = 5
 lifetime = 1.5
 explosiveness = 0.25
 process_material = SubResource( 3 )
