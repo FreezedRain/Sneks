@@ -2,6 +2,7 @@
 extends Node
 
 export (bool) var load_initial = true
+export (String) var override_level_id = ""
 export (LevelData.Biome) var biome_idx
 
 const LEVEL_SCENE = preload("res://scenes/level/level.tscn")
@@ -22,7 +23,10 @@ func _ready():
 	Events.connect("undo_remaining", self, "_on_undo_remaining")
 	Events.connect("level_transition", self, "_on_level_transition")
 	if load_initial:
-		load_level(Globals.LEVELS[SaveManager.get_last_level()])
+		if override_level_id != "":
+			load_level(Globals.LEVELS[override_level_id])
+		else:
+			load_level(Globals.LEVELS[SaveManager.get_last_level()])
 
 func _process(delta):
 	if Input.is_action_just_pressed("ui_right"):
