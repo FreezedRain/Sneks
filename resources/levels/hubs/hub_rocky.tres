@@ -14,5 +14,4 @@ b0 - - - - - - b2
 # - - # # - - #
 # - - e4 e5 - - #
 # # - - - - # #"
-snakes_string = "g4/3-3/3"
-extra_scene = null
+snakes_string = "g2/3-1/3"
