@@ -15,6 +15,7 @@ const GHOST_SEGMENT_SCENE = preload("res://scenes/snake/snake_ghost_segment.tscn
 const LINE_SCENE = preload("res://scenes/snake/snake_line.tscn")
 
 onready var visuals = $Visuals
+onready var line_visuals = $Visuals/Lines
 onready var sprite = $Visuals/Sprite
 onready var highlight = $Visuals/Sprite/Highlight
 onready var base_line = $Visuals/SnakeGhostLine
@@ -52,7 +53,7 @@ func setup_lines():
 				var line = LINE_SCENE.instance()
 				line.set_indices(segment_indices.duplicate())
 				segment_indices.clear()
-				visuals.add_child(line)
+				line_visuals.add_child(line)
 				lines.append(line)
 	segment_indices.clear()
 	for i in range(len(segments) + 1):
@@ -118,7 +119,7 @@ func add_segment(ghost=false):
 			line.set_indices([len(segments)])
 			line.prev.append(Grid.grid_to_world(before_last_tail_pos))
 			line.new.append(segment.position)
-			visuals.add_child(line)
+			line_visuals.add_child(line)
 			lines.append(line)
 
 func remove_segment():

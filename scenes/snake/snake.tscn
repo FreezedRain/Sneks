@@ -28,13 +28,15 @@ round_precision = 32
 antialiased = true
 script = ExtResource( 4 )
 
+[node name="Lines" type="Node2D" parent="Visuals"]
+
 [node name="Sprite" type="Sprite" parent="Visuals"]
-z_index = 1
 texture = ExtResource( 2 )
 
 [node name="Highlight" type="Sprite" parent="Visuals/Sprite"]
 visible = false
 modulate = Color( 1, 1, 1, 0.215686 )
+z_index = 1
 texture = ExtResource( 3 )
 
 [node name="HoverArea" type="Area2D" parent="."]
