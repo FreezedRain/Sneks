@@ -7,16 +7,15 @@
 script = ExtResource( 1 )
 name = ""
 biome = 4
-level_string = "9,10
-# # # # # # # # # #
-# _ _ i i i _ _ #
-# _ _ i f i _ _ #
-# i i i _ i i i #
+level_string = "9,9
+# # # # # # # # #
+# # # i i i # # #
+# # # i f i # # #
 # _ _ i _ i _ _ #
 # _ _ i _ i _ _ #
 # _ _ _ _ _ _ _ #
 # _ _ _ _ _ _ _ #
 # _ _ _ _ _ _ _ #
-# # # _ b3 _ # # # #"
+# # _ _ b3 _ _ # #"
 snakes_string = "g4/6-4/7-4/8"
 extra_scene = ExtResource( 2 )
