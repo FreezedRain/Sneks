@@ -98,7 +98,6 @@ func _on_game_completed():
 func _on_level_completed(level_id):
 	level_idx += 1
 	if level_idx > len(Globals.BIOMES[biome_idx].levels) - 1:
-		biome_idx = clamp(biome_idx + 1, 0, len(Globals.BIOMES) - 1)
 		level_idx = -1
 	load_level_idx(level_idx)
 
