@@ -3,6 +3,7 @@ extends Node
 
 signal game_completed
 signal return_to_game
+signal controls_changed(keyboard)
 
 signal level_completed(level)
 

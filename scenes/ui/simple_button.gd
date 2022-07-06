@@ -8,6 +8,10 @@ export (float) var duration = 0.1
 export (float) var target_scale = 1.1
 export (float) var target_rotation = 0
 onready var tween = $Tween
+onready var key_prompt = $KeyPrompt
+
+func _ready():
+	Events.connect("controls_changed", self, "_on_controls_changed")
 
 func set_active(value):
 	active = value
@@ -33,3 +37,7 @@ func _on_mouse_entered():
 	tween.interpolate_property(self, "rect_rotation", 0, target_rotation, duration, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	tween.interpolate_property(self, "rect_scale", Vector2.ONE, Vector2.ONE * target_scale, duration, Tween.TRANS_QUAD, Tween.EASE_IN_OUT)
 	tween.start()
+
+func _on_controls_changed(keyboard):
+	if key_prompt != null:
+		key_prompt.visible = keyboard

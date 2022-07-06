@@ -163,6 +163,13 @@ mouse_filter = 2
 disabled_color = Color( 0.588235, 0.588235, 0.588235, 1 )
 target_rotation = -10.0
 
+[node name="KeyPrompt" parent="UICanvas/Control/HubButton" index="1"]
+margin_left = 37.5
+margin_top = -10.5
+margin_right = 77.5
+margin_bottom = 13.5
+text = "h"
+
 [node name="UndoButton" parent="UICanvas/Control" instance=ExtResource( 10 )]
 anchor_left = 1.0
 anchor_right = 1.0
@@ -171,6 +178,13 @@ margin_right = 0.0
 texture_normal = ExtResource( 2 )
 disabled_color = Color( 0.588235, 0.588235, 0.588235, 1 )
 target_rotation = -10.0
+
+[node name="KeyPrompt" parent="UICanvas/Control/UndoButton" index="1"]
+margin_left = -74.5
+margin_top = -10.5
+margin_right = -34.5001
+margin_bottom = 13.5
+text = "z"
 
 [node name="Label" type="Label" parent="UICanvas/Control/UndoButton"]
 visible = false
@@ -211,3 +225,6 @@ bus = "SFX"
 
 [connection signal="pressed" from="UICanvas/Control/HubButton" to="." method="_on_HubButton_pressed"]
 [connection signal="pressed" from="UICanvas/Control/UndoButton" to="." method="_on_UndoButton_pressed"]
+
+[editable path="UICanvas/Control/HubButton"]
+[editable path="UICanvas/Control/UndoButton"]

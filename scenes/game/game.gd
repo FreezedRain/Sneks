@@ -11,6 +11,7 @@ const FINALE_SCENE = preload("res://scenes/extra/finale.tscn")
 var level_idx: int = 0
 var loading_level: bool = false
 var current_level
+var keyboard_controls: bool = false
 
 onready var overlay = $OverlayCanvas
 onready var undo_label = $UICanvas/Control/UndoButton/Label
@@ -31,9 +32,24 @@ func _ready():
 		else:
 			load_level(Globals.LEVELS[SaveManager.get_last_level()])
 
+func _input(event):
+	if event is InputEventKey and event.pressed:
+		if not keyboard_controls:
+			keyboard_controls = true
+			update_controls()
+	elif event is InputEventMouseButton and event.pressed:
+		if keyboard_controls:
+			keyboard_controls = false
+			update_controls()
+
 func _process(delta):
+	if loading_level:
+		return
 	if Input.is_action_just_pressed("restart"):
 		load_level_idx(level_idx)
+	elif Input.is_action_just_pressed("home"):
+		if hub_button.active:
+			_on_HubButton_pressed()
 	# if Input.is_action_just_pressed("ui_right"):
 	# 	load_level_idx(clamp(level_idx + 1, 0, len(Globals.BIOMES[biome_idx].levels)))
 	# elif Input.is_action_just_pressed("ui_left"):
@@ -68,6 +84,7 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 	current_level = LEVEL_SCENE.instance()
 	current_level.load_level(level_data)
 	add_child(current_level)
+	update_controls()
 	yield(overlay.fade_in(0.5), "completed")
 	current_level.start()
 	loading_level = false
@@ -80,6 +97,9 @@ func return_to_game():
 	undo_button.show()
 	loading_level = false
 	load_level_idx(-1, true)
+
+func update_controls():
+	Events.emit_signal("controls_changed", keyboard_controls)
 
 func play_transition_sfx():
 	sfx_transition.pitch_scale = rand_range(1.0, 1.15)
