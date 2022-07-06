@@ -32,10 +32,12 @@ func _ready():
 			load_level(Globals.LEVELS[SaveManager.get_last_level()])
 
 func _process(delta):
-	if Input.is_action_just_pressed("ui_right"):
-		load_level_idx(clamp(level_idx + 1, 0, len(Globals.BIOMES[biome_idx].levels)))
-	elif Input.is_action_just_pressed("ui_left"):
-		load_level_idx(clamp(level_idx - 1, 0, len(Globals.BIOMES[biome_idx].levels)))
+	if Input.is_action_just_pressed("restart"):
+		load_level_idx(level_idx)
+	# if Input.is_action_just_pressed("ui_right"):
+	# 	load_level_idx(clamp(level_idx + 1, 0, len(Globals.BIOMES[biome_idx].levels)))
+	# elif Input.is_action_just_pressed("ui_left"):
+	# 	load_level_idx(clamp(level_idx - 1, 0, len(Globals.BIOMES[biome_idx].levels)))
 
 func load_level_idx(idx: int, skip_fadeout=false):
 	if loading_level:
