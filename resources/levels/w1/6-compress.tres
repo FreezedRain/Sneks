@@ -1,0 +1,17 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/level_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "compress"
+biome = 0
+level_string = "5,6
+#G#G#
+#____
+#____
+#_###
+_____
+__#__"
+snakes_string = "g1/5-0/5-0/4
+g1/3-1/4-2/4-3/4-4/4-4/5-3/5"

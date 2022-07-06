@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/snake/snake.gd" type="Script" id=1]
 [ext_resource path="res://sprites/snake/eyes.png" type="Texture" id=2]
 [ext_resource path="res://sprites/snake/head.png" type="Texture" id=3]
 [ext_resource path="res://scenes/snake/snake_ghost_line.gd" type="Script" id=4]
 [ext_resource path="res://sounds/land.ogg" type="AudioStream" id=5]
+[ext_resource path="res://sprites/snake/highlight_brim.png" type="Texture" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 32 )
@@ -34,10 +35,13 @@ script = ExtResource( 4 )
 texture = ExtResource( 2 )
 
 [node name="Highlight" type="Sprite" parent="Visuals/Sprite"]
-visible = false
-modulate = Color( 1, 1, 1, 0.215686 )
-z_index = 1
+self_modulate = Color( 1, 1, 1, 0.215686 )
 texture = ExtResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Visuals/Sprite/Highlight"]
+self_modulate = Color( 1, 1, 1, 0.501961 )
+z_index = 4
+texture = ExtResource( 6 )
 
 [node name="HoverArea" type="Area2D" parent="."]
 monitorable = false

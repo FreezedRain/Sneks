@@ -1,0 +1,20 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://resources/level_data.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+name = "amogus"
+biome = 0
+level_string = "7,7
+_______
+_##_##_
+_#_G_#_
+_#G#G#_
+_#_G_#_
+_#_#_#_
+_______"
+snakes_string = "g1/0-0/0
+g5/0-6/0-6/1
+g0/4-0/5-0/6-1/6
+g6/3-6/4-6/5-6/6-5/6"
