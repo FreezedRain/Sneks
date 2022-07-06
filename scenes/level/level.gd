@@ -31,8 +31,10 @@ func _process(delta):
 	fsm.process(delta)
 
 func process_input():
-	mouse_pos = get_viewport().get_mouse_position()
+	mouse_pos = get_global_mouse_position()
 	mouse_grid_pos = Grid.world_to_grid(mouse_pos)
+	# $Sprite.position = Grid.grid_to_world(mouse_grid_pos)
+	# mouse_pos = get_viewport().get_mouse_position()
 
 func start():
 	fsm.next_state = fsm.states.turn

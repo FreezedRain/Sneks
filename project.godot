@@ -170,6 +170,7 @@ window/size/width=720
 window/size/height=720
 window/size/resizable=false
 window/dpi/allow_hidpi=true
+window/stretch/aspect="keep_height"
 
 [importer_defaults]
 

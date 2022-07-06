@@ -223,6 +223,10 @@ volume_db = -28.0
 pitch_scale = 1.05
 bus = "SFX"
 
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 360, 360 )
+current = true
+
 [connection signal="pressed" from="UICanvas/Control/HubButton" to="." method="_on_HubButton_pressed"]
 [connection signal="pressed" from="UICanvas/Control/UndoButton" to="." method="_on_UndoButton_pressed"]
 
