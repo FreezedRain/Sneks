@@ -168,9 +168,10 @@ SaveManager="*res://singletons/save_manager.gd"
 
 window/size/width=720
 window/size/height=720
-window/size/resizable=false
 window/dpi/allow_hidpi=true
-window/stretch/aspect="keep_height"
+window/handheld/orientation="sensor"
+window/stretch/mode="2d"
+window/stretch/aspect="expand"
 
 [importer_defaults]
 

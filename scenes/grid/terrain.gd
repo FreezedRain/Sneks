@@ -76,6 +76,7 @@ func update_tiles():
 	top.position = Grid.bounds.size * 0.5
 	top.scale = Vector2(20, 20);
 	top.modulate = Grid.biome.color_top
+	VisualServer.set_default_clear_color(Grid.biome.color_top)
 
 	checker.position = Grid.bounds.size * 0.5 + Vector2(0, 16)
 	checker.region_rect = Rect2(Vector2.ZERO, Vector2(Grid.size.x, Grid.size.y) * 64);			
