@@ -39,7 +39,7 @@ self_modulate = Color( 1, 1, 1, 0.215686 )
 texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Visuals/Sprite/Highlight"]
-self_modulate = Color( 1, 1, 1, 0.501961 )
+self_modulate = Color( 1, 1, 1, 0.313726 )
 z_index = 4
 texture = ExtResource( 6 )
 

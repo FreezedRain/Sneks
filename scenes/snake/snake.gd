@@ -42,6 +42,7 @@ func _ready():
 	save_prev()
 	save_new()
 	move_particle = Grid.biome.move_particle
+	set_highlight(false)
 
 func setup_lines():
 	var segment_indices = [0]
@@ -148,8 +149,10 @@ func align_visuals():
 
 func set_highlight(enabled: bool):
 	if enabled:
+		# set_state(State.TIRED)
 		highlight.show()
 	else:
+		# set_state(State.NORMAL)
 		highlight.hide()
 
 func set_state(value):
