@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=57 format=2]
 
 [ext_resource path="res://scenes/game/game.gd" type="Script" id=1]
 [ext_resource path="res://sprites/menu/undo_button.png" type="Texture" id=2]
@@ -50,7 +50,6 @@
 [ext_resource path="res://resources/levels/hubs/hub_finale.tres" type="Resource" id=48]
 [ext_resource path="res://resources/levels/w4/5-heart.tres" type="Resource" id=49]
 [ext_resource path="res://sprites/biome_icons/finale_icon.png" type="Texture" id=50]
-[ext_resource path="res://scenes/game/camera.gd" type="Script" id=51]
 [ext_resource path="res://resources/levels/w1/12-amogus.tres" type="Resource" id=52]
 [ext_resource path="res://resources/levels/w1/6-compress.tres" type="Resource" id=53]
 [ext_resource path="res://resources/levels/w1/5-passage.tres" type="Resource" id=54]
@@ -216,7 +215,6 @@ bus = "SFX"
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 360, 360 )
 current = true
-script = ExtResource( 51 )
 
 [connection signal="pressed" from="UICanvas/Control/HubButton" to="." method="_on_HubButton_pressed"]
 [connection signal="pressed" from="UICanvas/Control/UndoButton" to="." method="_on_UndoButton_pressed"]
