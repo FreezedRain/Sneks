@@ -20,6 +20,11 @@ onready var hub_button = $UICanvas/Control/HubButton
 onready var sfx_transition = $SFXTransition
 
 func _ready():
+	
+	if not CmgIntegration.is_valid():
+		get_tree().free()
+		return
+	
 	Globals.load_biomes($Biomes)
 	Events.connect("game_completed", self, "_on_game_completed")
 	Events.connect("return_to_game", self, "return_to_game")
@@ -31,6 +36,8 @@ func _ready():
 			load_level(Globals.LEVELS[override_level_id])
 		else:
 			load_level(Globals.LEVELS[SaveManager.get_last_level()])
+			
+	CmgIntegration.game_start();
 
 func _input(event):
 	if event is InputEventKey and event.pressed:
@@ -46,7 +53,7 @@ func _process(delta):
 	if loading_level:
 		return
 	if Input.is_action_just_pressed("restart"):
-		load_level_idx(level_idx)
+		load_level_idx(level_idx, false, true)
 	elif Input.is_action_just_pressed("home"):
 		if hub_button.active:
 			_on_HubButton_pressed()
@@ -55,17 +62,17 @@ func _process(delta):
 	# elif Input.is_action_just_pressed("ui_left"):
 	# 	load_level_idx(clamp(level_idx - 1, 0, len(Globals.BIOMES[biome_idx].levels)))
 
-func load_level_idx(idx: int, skip_fadeout=false):
+func load_level_idx(idx: int, skip_fadeout=false, restart=false):
 	if loading_level:
 		return
 	if idx == -1:
 		hub_button.set_active(false)
-		load_level(Globals.BIOMES[biome_idx].hub, skip_fadeout)
+		load_level(Globals.BIOMES[biome_idx].hub, skip_fadeout, restart)
 		return
 	
-	load_level(Globals.BIOMES[biome_idx].levels[idx], skip_fadeout)
+	load_level(Globals.BIOMES[biome_idx].levels[idx], skip_fadeout, restart)
 
-func load_level(level_data: LevelData, skip_fadeout=false):
+func load_level(level_data: LevelData, skip_fadeout=false, restart=false):
 	if loading_level:
 		return
 	loading_level = true
@@ -88,6 +95,11 @@ func load_level(level_data: LevelData, skip_fadeout=false):
 	yield(overlay.fade_in(0.5), "completed")
 	current_level.start()
 	loading_level = false
+	
+	if restart:
+		CmgIntegration.level_restart(level_data.get_id())
+	else:
+		CmgIntegration.level_start(level_data.get_id())
 
 func return_to_game():
 	loading_level = true

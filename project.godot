@@ -163,6 +163,7 @@ Globals="*res://singletons/globals.gd"
 Grid="*res://singletons/grid.gd"
 ParticleManager="*res://singletons/particle_manager.gd"
 SaveManager="*res://singletons/save_manager.gd"
+CmgIntegration="*res://scripts/coolmathgames/CMGIntegration.gd"
 
 [display]
 
