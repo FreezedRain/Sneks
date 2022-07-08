@@ -214,6 +214,7 @@ pitch_scale = 1.05
 bus = "SFX"
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 360, 360 )
 current = true
 script = ExtResource( 51 )
 
