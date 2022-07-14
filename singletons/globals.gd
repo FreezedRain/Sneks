@@ -18,11 +18,16 @@ func load_biomes(holder: Node):
 	load_levels()
 
 func load_levels():
+	var level_count = 1
 	for biome_id in BIOMES:
 		var biome = BIOMES[biome_id]
 		for level_idx in range(len(biome.levels)):
 			var level = biome.levels[level_idx]
 			level.index = level_idx
+			level.numeric_id = level_count
 			LEVELS[level.get_id()] = level
+			level_count += 1
 		biome.hub.index = -1
+		# biome.hub.numeric_id = level_count
+		# level_count += 1
 		LEVELS[biome.hub.get_id()] = biome.hub

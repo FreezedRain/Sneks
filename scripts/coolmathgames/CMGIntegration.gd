@@ -63,13 +63,13 @@ func level_start(level_num):
 	if !IS_CMG_BUILD:
 		return
 	if IS_DEBUG:
-		print("LEVEL START: " + level_num)
+		print("LEVEL START: %s" % level_num)
 	JavaScript.eval('parent.cmgGameEvent("start","' + str(level_num) + '");', true)
 
 func level_restart(level_num):
 	if !IS_CMG_BUILD:
 		return
 	if IS_DEBUG:
-		print("LEVEL RESTART: " + level_num)
+		print("LEVEL RESTART: %s" % level_num)
 	JavaScript.eval('parent.cmgGameEvent("replay","' + str(level_num) + '");', true)
 

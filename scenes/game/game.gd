@@ -103,10 +103,11 @@ func load_level(level_data: LevelData, skip_fadeout=false, restart=false):
 	current_level.start()
 	loading_level = false
 	
-	if restart:
-		CmgIntegration.level_restart(level_data.get_id())
-	else:
-		CmgIntegration.level_start(level_data.get_id())
+	if level_idx != -1:
+		if restart:
+			CmgIntegration.level_restart(level_data.numeric_id)
+		else:
+			CmgIntegration.level_start(level_data.numeric_id)
 
 func return_to_game():
 	loading_level = true

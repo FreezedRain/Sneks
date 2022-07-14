@@ -25,6 +25,7 @@ var size: Vector2
 var level: Array
 var snakes: Array
 var index: int
+var numeric_id: int
 
 func _init(name = "test", biome = Biome.DUSTY, level_string = "", snakes_string = "", extra_scene = null):
 	self.name = name
