@@ -20,9 +20,8 @@ onready var hub_button = $UICanvas/Control/HubButton
 onready var sfx_transition = $SFXTransition
 
 func _ready():
-	
 	if not CmgIntegration.is_valid():
-		get_tree().free()
+		get_tree().quit()
 		return
 	
 	Globals.load_biomes($Biomes)

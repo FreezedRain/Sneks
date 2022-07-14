@@ -47,6 +47,15 @@ func complete_level(level_id):
 		current_save.completed_levels.append(level_id)
 		save_game()
 
+func complete_all_levels():
+	for biome_id in Globals.BIOMES:
+		var biome = Globals.BIOMES[biome_id]
+		for level in biome.levels:
+			var level_id = level.get_id()
+			if not current_save.completed_levels.has(level_id):
+				current_save.completed_levels.append(level_id)
+	save_game()
+
 func set_last_level(level_id):
 	current_save.last_level_id = level_id
 	save_game()
