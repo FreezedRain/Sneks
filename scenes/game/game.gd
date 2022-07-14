@@ -40,7 +40,7 @@ func _ready():
 	CmgIntegration.game_start();
 
 func _input(event):
-	if event is InputEventKey and event.pressed:
+	if (event is InputEventKey or event is InputEventJoypadButton) and event.pressed:
 		if not keyboard_controls:
 			keyboard_controls = true
 			update_controls()
