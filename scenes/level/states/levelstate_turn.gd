@@ -55,9 +55,9 @@ func process_mouse(delta):
 			if drags[len(drags) - 1] - len(actions) == 0:
 				drags.pop_back()
 			update_undo()
-	else:
-		if Input.is_action_just_pressed("undo"):
-			undo()
+	# else:
+	# 	if Input.is_action_just_pressed("undo"):
+	# 		undo()
 
 func process_keyboard(delta):
 	if not making_turn and Input.is_action_just_pressed("switch"):
@@ -90,9 +90,9 @@ func process_keyboard(delta):
 			drags.pop_back()
 		update_undo()
 	
-	if not making_turn:
-		if Input.is_action_just_pressed("undo"):
-			undo()
+	# if not making_turn:
+	# 	if Input.is_action_just_pressed("undo"):
+	# 		undo()
 
 func process(delta):
 	if keyboard_controls:

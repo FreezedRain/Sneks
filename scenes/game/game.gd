@@ -36,7 +36,7 @@ func _ready():
 			load_level(Globals.LEVELS[override_level_id])
 		else:
 			load_level(Globals.LEVELS[SaveManager.get_last_level()])
-			
+
 	CmgIntegration.game_start();
 
 func _input(event):
@@ -57,6 +57,14 @@ func _process(delta):
 	elif Input.is_action_just_pressed("home"):
 		if hub_button.active:
 			_on_HubButton_pressed()
+	if keyboard_controls:
+		if Input.is_action_just_pressed("undo"):
+			if not undo_button.disabled:
+				undo_button._on_button_down()
+	if Input.is_action_just_released("undo"):
+		if not undo_button.disabled:
+			undo_button._on_button_up()
+
 	# if Input.is_action_just_pressed("ui_right"):
 	# 	load_level_idx(clamp(level_idx + 1, 0, len(Globals.BIOMES[biome_idx].levels)))
 	# elif Input.is_action_just_pressed("ui_left"):
@@ -142,12 +150,12 @@ func _on_level_transition(level_id):
 func _on_HubButton_pressed():
 	load_level_idx(-1)
 
-func _on_UndoButton_pressed():
-	Events.emit_signal("undo_pressed")
-
 func _on_undo_remaining(remaining):
 	undo_button.set_active(remaining > 0)
 	undo_label.text = str(remaining)
-	# if remaining > 0:
-	# 	undo_label.show()
-		
+
+func _on_UndoButton_short_pressed():
+	Events.emit_signal("undo_pressed")
+
+func _on_UndoButton_long_pressed():
+	load_level_idx(level_idx, false, true)

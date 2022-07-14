@@ -1,4 +1,4 @@
-extends TextureButton
+class_name SimpleButton extends TextureButton
 
 var active setget set_active
 var hovered = false
