@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+#TODO Make splash the default scene
+
 onready var cmg_splash = $Control/CoolmathSplash
 onready var icedrop_splash = $Control/IcedropSplash
 

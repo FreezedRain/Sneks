@@ -190,7 +190,7 @@ disabled_color = Color( 0.588235, 0.588235, 0.588235, 1 )
 target_rotation = -10.0
 
 [node name="KeyPrompt" parent="UICanvas/Control/HubButton" index="1"]
-text = "H"
+text = "G"
 
 [node name="UndoButton" parent="UICanvas/Control" instance=ExtResource( 10 )]
 material = SubResource( 5 )
