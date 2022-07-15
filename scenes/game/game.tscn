@@ -118,6 +118,7 @@ shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
+override_level_id = "2_2"
 
 [node name="Biomes" type="Node" parent="."]
 

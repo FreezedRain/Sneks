@@ -28,7 +28,11 @@ valign = 1
 
 [node name="Sprite" parent="." index="1"]
 position = Vector2( 0, 16 )
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 3 )
+
+[node name="SpriteOverlay" parent="." index="2"]
+scale = Vector2( 0.5, 0.5 )
 
 [node name="CompletionSprite" type="Sprite" parent="." index="3"]
 visible = false

@@ -10,7 +10,6 @@ var fade_in = 0
 func _ready():
 	Globals.INITIAL_RESOLUTION = get_viewport().size
 	
-	
 func _process(delta):
 	t += delta
 	

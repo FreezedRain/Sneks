@@ -32,6 +32,7 @@ script = ExtResource( 4 )
 [node name="Lines" type="Node2D" parent="Visuals"]
 
 [node name="Sprite" type="Sprite" parent="Visuals"]
+scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="Highlight" type="Sprite" parent="Visuals/Sprite"]
@@ -40,6 +41,7 @@ texture = ExtResource( 3 )
 
 [node name="Sprite" type="Sprite" parent="Visuals/Sprite/Highlight"]
 self_modulate = Color( 1, 1, 1, 0.313726 )
+scale = Vector2( 2, 2 )
 z_index = 4
 texture = ExtResource( 6 )
 

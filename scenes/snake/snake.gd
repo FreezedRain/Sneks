@@ -64,7 +64,7 @@ func setup_lines():
 func _process(delta):
 	lerp_value = lerp(lerp_value, 1, delta * 16)
 	visuals.position = lerp(visuals.position, Vector2.ZERO, delta * 16)
-	sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 16)
+	sprite.rotation = lerp_angle(sprite.rotation, (position - segments[0].position).angle() - PI * 0.5, delta * 20)
 	base_line.compute_segments(-position - visuals.position, lerp_value)
 	for line in lines:
 		line.compute_segments(-position - visuals.position, lerp_value)
