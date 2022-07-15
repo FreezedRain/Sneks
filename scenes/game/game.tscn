@@ -21,7 +21,7 @@
 [ext_resource path="res://resources/levels/w3/1-diet.tres" type="Resource" id=19]
 [ext_resource path="res://resources/levels/w2/5-packingveggies.tres" type="Resource" id=20]
 [ext_resource path="res://resources/levels/hubs/hub_grassy.tres" type="Resource" id=21]
-[ext_resource path="res://resources/levels/w3/2-requiredshape.tres" type="Resource" id=22]
+[ext_resource path="res://resources/levels/w3/3-requiredshape.tres" type="Resource" id=22]
 [ext_resource path="res://resources/levels/w2/7-bolivia.tres" type="Resource" id=23]
 [ext_resource path="res://resources/levels/hubs/hub_rocky.tres" type="Resource" id=24]
 [ext_resource path="res://resources/levels/w2/1-pigment.tres" type="Resource" id=25]
@@ -30,9 +30,9 @@
 [ext_resource path="res://resources/levels/w2/4-makeway.tres" type="Resource" id=28]
 [ext_resource path="res://resources/levels/w2/2-coil.tres" type="Resource" id=29]
 [ext_resource path="res://resources/levels/w3/6-lockpick.tres" type="Resource" id=30]
-[ext_resource path="res://resources/levels/w3/3-snack.tres" type="Resource" id=31]
-[ext_resource path="res://resources/levels/w3/4-grow.tres" type="Resource" id=32]
-[ext_resource path="res://resources/levels/w3/5-key.tres" type="Resource" id=33]
+[ext_resource path="res://resources/levels/w3/2-snack.tres" type="Resource" id=31]
+[ext_resource path="res://resources/levels/w3/4-key.tres" type="Resource" id=32]
+[ext_resource path="res://resources/levels/w3/5-grow.tres" type="Resource" id=33]
 [ext_resource path="res://resources/levels/hubs/hub_graveyard.tres" type="Resource" id=34]
 [ext_resource path="res://resources/levels/w4/1-ghost.tres" type="Resource" id=35]
 [ext_resource path="res://resources/levels/w4/3-effigy.tres" type="Resource" id=36]
@@ -118,7 +118,6 @@ shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
-override_level_id = "2_2"
 
 [node name="Biomes" type="Node" parent="."]
 
@@ -155,7 +154,7 @@ color_bottom = Color( 0.203922, 0.278431, 0.164706, 1 )
 icon = ExtResource( 43 )
 hub = ExtResource( 21 )
 next_levels_required = 4
-levels = [ ExtResource( 19 ), ExtResource( 22 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 47 ) ]
+levels = [ ExtResource( 19 ), ExtResource( 31 ), ExtResource( 22 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 30 ), ExtResource( 46 ), ExtResource( 47 ) ]
 
 [node name="Spooky" type="Node" parent="Biomes"]
 script = ExtResource( 11 )

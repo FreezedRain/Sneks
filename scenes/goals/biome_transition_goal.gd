@@ -1,5 +1,7 @@
 class_name BiomeTransitionGoal extends Goal
 
+export (Color) var complete_text_color = Color.white
+
 var biome_idx: int setget set_biome_idx
 # onready var sprite_overlay = $SpriteOverlay
 
@@ -16,8 +18,11 @@ func show_unlock_progress():
 	if biome_idx == 0:
 		return
 	var previous_biome = Globals.BIOMES[biome_idx - 1]
-	$Label.show()
-	$Label.text = "%d/%d" % [previous_biome.total_levels_complete(), previous_biome.next_levels_required]
+	var total_levels_complete = previous_biome.total_levels_complete()
+	var label = $Label
+	label.show()
+	label.text = "%d/%d" % [total_levels_complete, previous_biome.next_levels_required]
+	# total_levels_complete == len(previous_biome.levels):
 	# target_color = Globals.BIOME_RESOURCES[value].color_top
 	# $Label.text = str(value)
 

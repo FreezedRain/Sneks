@@ -1,6 +1,6 @@
 extends Node
 
-const IS_CMG_BUILD = true
+const IS_CMG_BUILD = false
 var IS_DEBUG = OS.is_debug_build()
 var completed_all: bool = false
 

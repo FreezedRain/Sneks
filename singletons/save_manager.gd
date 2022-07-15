@@ -1,6 +1,6 @@
 extends Node
 
-var USE_SAVES = OS.has_feature("standalone")
+var USE_SAVES = OS.has_feature("standalone") or true
 
 const SAVE_FOLDER : String = "user://"
 const SAVE_NAME : String = "save.tres"

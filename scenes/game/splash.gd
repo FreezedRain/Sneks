@@ -9,6 +9,9 @@ var fade_in = 0
 
 func _ready():
 	Globals.INITIAL_RESOLUTION = get_viewport().size
+	if not CmgIntegration.IS_CMG_BUILD:
+		cmg_splash.visible = false
+		t = 1.5
 	
 func _process(delta):
 	t += delta

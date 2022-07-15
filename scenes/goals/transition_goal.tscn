@@ -37,5 +37,5 @@ scale = Vector2( 0.5, 0.5 )
 [node name="CompletionSprite" type="Sprite" parent="." index="3"]
 visible = false
 position = Vector2( 12, 2 )
-scale = Vector2( 0.55, 0.55 )
+scale = Vector2( 0.275, 0.275 )
 texture = ExtResource( 5 )
