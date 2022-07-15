@@ -11,6 +11,7 @@ const COLOR_LETTERS = {
 
 var BIOMES: Dictionary
 var LEVELS: Dictionary
+var INITIAL_RESOLUTION: Vector2
 
 func load_biomes(holder: Node):
 	for biome in holder.get_children():

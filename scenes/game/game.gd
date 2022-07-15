@@ -36,6 +36,9 @@ func _ready():
 		else:
 			load_level(Globals.LEVELS[SaveManager.get_last_level()])
 
+	for particle in ParticleManager.particles:
+		ParticleManager.spawn(particle, Vector2.ONE * 5000, 0, self)
+
 	CmgIntegration.game_start();
 	
 	hub_button.hide()

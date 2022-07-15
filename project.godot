@@ -165,7 +165,7 @@ _global_script_class_icons={
 [application]
 
 config/name="SNEKS"
-run/main_scene="res://scenes/game/game.tscn"
+run/main_scene="res://scenes/game/splash.tscn"
 config/icon="res://sprites/icon_sneks.png"
 
 [autoload]

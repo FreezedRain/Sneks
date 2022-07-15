@@ -1,7 +1,5 @@
 extends CanvasLayer
 
-#TODO Make splash the default scene
-
 onready var cmg_splash = $Control/CoolmathSplash
 onready var icedrop_splash = $Control/IcedropSplash
 
@@ -10,7 +8,7 @@ var fade = 1
 var fade_in = 0
 
 func _ready():
-	pass
+	Globals.INITIAL_RESOLUTION = get_viewport().size
 	
 	
 func _process(delta):
