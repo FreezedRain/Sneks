@@ -37,6 +37,9 @@ func _ready():
 			load_level(Globals.LEVELS[SaveManager.get_last_level()])
 
 	CmgIntegration.game_start();
+	
+	hub_button.hide()
+	undo_button.hide()
 
 func _input(event):
 	if (event is InputEventKey or event is InputEventJoypadButton) and event.pressed:
@@ -88,6 +91,8 @@ func load_level(level_data: LevelData, skip_fadeout=false, restart=false):
 	else:
 		play_transition_sfx()
 		yield(overlay.fade_out(0.5, 0.15), "completed")
+		hub_button.show()
+		undo_button.show()
 	if current_level:
 		current_level.queue_free()
 	SaveManager.set_last_level(level_data.get_id())
