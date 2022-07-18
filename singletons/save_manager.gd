@@ -1,6 +1,6 @@
 extends Node
 
-var USE_SAVES = OS.has_feature("standalone") or true
+var USE_SAVES = OS.has_feature("standalone")
 
 const SAVE_FOLDER : String = "user://"
 const SAVE_NAME : String = "save.tres"
@@ -54,7 +54,10 @@ func complete_all_levels():
 			var level_id = level.get_id()
 			if not current_save.completed_levels.has(level_id):
 				current_save.completed_levels.append(level_id)
+		if not current_save.completed_levels.has(biome.hub.get_id()):
+				current_save.completed_levels.append(biome.hub.get_id())
 	save_game()
+	Globals.game.restart_level()
 
 func set_last_level(level_id):
 	current_save.last_level_id = level_id

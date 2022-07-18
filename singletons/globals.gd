@@ -12,6 +12,7 @@ const COLOR_LETTERS = {
 var BIOMES: Dictionary
 var LEVELS: Dictionary
 var INITIAL_RESOLUTION: Vector2
+var game
 
 func load_biomes(holder: Node):
 	for biome in holder.get_children():
@@ -32,3 +33,4 @@ func load_levels():
 		# biome.hub.numeric_id = level_count
 		# level_count += 1
 		LEVELS[biome.hub.get_id()] = biome.hub
+

@@ -20,6 +20,7 @@ onready var hub_button = $UICanvas/Control/HubButton
 onready var sfx_transition = $SFXTransition
 
 func _ready():
+	Globals.game = self
 	if not CmgIntegration.is_valid():
 		get_tree().quit()
 		return
@@ -39,7 +40,7 @@ func _ready():
 	for particle in ParticleManager.particles:
 		ParticleManager.spawn(particle, Vector2.ONE * 5000, 0, self)
 
-	CmgIntegration.game_start();
+	CmgIntegration.game_start()
 	
 	hub_button.hide()
 	undo_button.hide()
@@ -129,6 +130,9 @@ func return_to_game():
 func update_controls():
 	Events.emit_signal("controls_changed", keyboard_controls)
 
+func restart_level():
+	load_level_idx(level_idx, false, true)
+
 func play_transition_sfx():
 	sfx_transition.pitch_scale = rand_range(1.0, 1.15)
 	sfx_transition.play()
@@ -166,4 +170,4 @@ func _on_UndoButton_short_pressed():
 	Events.emit_signal("undo_pressed")
 
 func _on_UndoButton_long_pressed():
-	load_level_idx(level_idx, false, true)
+	restart_level()

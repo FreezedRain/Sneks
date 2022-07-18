@@ -6,9 +6,11 @@ var finished: bool = false
 func _ready():
 	VisualServer.set_default_clear_color(Color.black)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	if Input.is_action_just_pressed("click") and finished:
+func _input(event):
+	if not finished:
+		return
+	if (event is InputEventKey or event is InputEventJoypadButton or event is InputEventMouseButton) and event.pressed:
+		finished = false
 		Events.emit_signal("return_to_game")
 
 func _on_AnimationPlayer_animation_finished(anim_name:String):

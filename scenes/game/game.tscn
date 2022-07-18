@@ -186,6 +186,8 @@ anchor_bottom = 1.0
 mouse_filter = 2
 
 [node name="HubButton" parent="UICanvas/Control" instance=ExtResource( 10 )]
+focus_mode = 0
+enabled_focus_mode = 0
 disabled_color = Color( 0.588235, 0.588235, 0.588235, 1 )
 target_rotation = -10.0
 
@@ -198,6 +200,8 @@ anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -117.0
 margin_right = 0.0
+focus_mode = 0
+enabled_focus_mode = 0
 texture_normal = ExtResource( 2 )
 script = ExtResource( 55 )
 disabled_color = Color( 0.588235, 0.588235, 0.588235, 1 )

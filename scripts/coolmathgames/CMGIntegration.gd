@@ -1,6 +1,6 @@
 extends Node
 
-const IS_CMG_BUILD = false
+const IS_CMG_BUILD = true
 var IS_DEBUG = OS.is_debug_build()
 var completed_all: bool = false
 
@@ -18,8 +18,12 @@ var valid_domains = [
 	"m.coolmath-games.com"
 ]
 
-# func _ready():
+func _ready():
+	setup_level_unlock()
 # 	JavaScript.eval("$(window).bind(\n'touchmove',\nfunction(e) {\ne.preventDefault();\n}\n);")
+
+func _process(delta):
+	process_level_unlock()
 
 func setup_level_unlock():
 	if !IS_CMG_BUILD:
@@ -36,6 +40,7 @@ func process_level_unlock():
 	if !IS_CMG_BUILD or completed_all:
 		return
 	if JavaScript.eval("unlocked"):
+		completed_all = true
 		SaveManager.complete_all_levels()
 
 func is_valid():
