@@ -4,7 +4,6 @@ var prev: Array
 var new: Array
 var segment_indices: Array setget set_indices
 
-
 func set_indices(value):
 	segment_indices = value
 

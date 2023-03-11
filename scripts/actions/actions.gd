@@ -64,7 +64,6 @@ class AppleEatAction extends Action:
 	func execute():
 		apple.set_active(true)
 		snake.add_segment(ghost)
-		# segment_holder.add_child(snake.add_segment())
 
 	func undo():
 		apple.set_active(false)

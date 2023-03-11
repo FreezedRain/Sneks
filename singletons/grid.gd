@@ -38,7 +38,6 @@ func is_free(pos: Vector2) -> bool:
 		return false
 	var tile = get_tile(pos)
 	for obj in tile.objects:
-		# print('[%s] is solid: [%s]' % [obj.name, obj.solid])
 		if obj.solid:
 			return false
 	return true

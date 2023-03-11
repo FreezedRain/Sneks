@@ -149,10 +149,8 @@ func align_visuals():
 
 func set_highlight(enabled: bool):
 	if enabled:
-		# set_state(State.TIRED)
 		highlight.show()
 	else:
-		# set_state(State.NORMAL)
 		highlight.hide()
 
 func set_state(value):

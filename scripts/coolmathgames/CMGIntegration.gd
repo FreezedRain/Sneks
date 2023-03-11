@@ -20,7 +20,6 @@ var valid_domains = [
 
 func _ready():
 	setup_level_unlock()
-# 	JavaScript.eval("$(window).bind(\n'touchmove',\nfunction(e) {\ne.preventDefault();\n}\n);")
 
 func _process(delta):
 	process_level_unlock()
