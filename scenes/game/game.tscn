@@ -56,7 +56,7 @@
 [ext_resource path="res://resources/levels/w1/5-passage.tres" type="Resource" id=54]
 [ext_resource path="res://scenes/ui/hold_button.gd" type="Script" id=55]
 
-[sub_resource type="Shader" id=4]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform float fill : hint_range(0, 1);
@@ -72,18 +72,18 @@ void fragment()
 	COLOR = col;
 }"
 
-[sub_resource type="ShaderMaterial" id=5]
-shader = SubResource( 4 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/fill = 0.0
 shader_param/fill_color = Color( 0.588235, 0.588235, 0.588235, 1 )
 
-[sub_resource type="DynamicFont" id=1]
+[sub_resource type="DynamicFont" id=3]
 size = 32
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 45 )
 
-[sub_resource type="Shader" id=2]
+[sub_resource type="Shader" id=4]
 code = "shader_type canvas_item;
 
 const float PI = 3.1415926538;
@@ -111,13 +111,14 @@ void fragment(){
 //	COLOR.a = 1.0 - smoothstep(progress, progress + 0.01, dist);
 }"
 
-[sub_resource type="ShaderMaterial" id=3]
-shader = SubResource( 2 )
+[sub_resource type="ShaderMaterial" id=5]
+shader = SubResource( 4 )
 shader_param/progress = 0.0
 shader_param/transition_texture = ExtResource( 4 )
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
+override_level_id = "3_1"
 
 [node name="Biomes" type="Node" parent="."]
 
@@ -195,7 +196,7 @@ target_rotation = -10.0
 text = "G"
 
 [node name="UndoButton" parent="UICanvas/Control" instance=ExtResource( 10 )]
-material = SubResource( 5 )
+material = SubResource( 2 )
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -117.0
@@ -205,6 +206,7 @@ enabled_focus_mode = 0
 texture_normal = ExtResource( 2 )
 script = ExtResource( 55 )
 disabled_color = Color( 0.588235, 0.588235, 0.588235, 1 )
+hold_time = 0.5
 
 [node name="KeyPrompt" parent="UICanvas/Control/UndoButton" index="1"]
 text = "Z"
@@ -217,7 +219,7 @@ margin_left = -20.0
 margin_top = -16.5
 margin_right = 25.0
 margin_bottom = 28.5
-custom_fonts/font = SubResource( 1 )
+custom_fonts/font = SubResource( 3 )
 text = "2"
 align = 1
 valign = 1
@@ -233,7 +235,7 @@ anchor_bottom = 1.0
 color = Color( 0, 0, 0, 0 )
 
 [node name="OverlayShader" type="ColorRect" parent="OverlayCanvas"]
-material = SubResource( 3 )
+material = SubResource( 5 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color( 0.803922, 0.298039, 0.298039, 0 )

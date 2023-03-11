@@ -49,6 +49,7 @@ script = ExtResource( 6 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = 0
+visible = false
 
 [node name="Title" type="Label" parent="CanvasLayer"]
 anchor_left = 0.5

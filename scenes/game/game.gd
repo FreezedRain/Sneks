@@ -45,6 +45,9 @@ func _ready():
 	hub_button.hide()
 	undo_button.hide()
 
+	yield(get_tree(), "idle_frame")
+	OS.set_window_size(Vector2(640, 640))
+
 func _input(event):
 	if (event is InputEventKey or event is InputEventJoypadButton) and event.pressed:
 		if not keyboard_controls:

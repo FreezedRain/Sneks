@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/sneksend2.png-e8b5aeb6b674b6b527de31f79bc4ceca.s3tc.stex"
 path.etc2="res://.import/sneksend2.png-e8b5aeb6b674b6b527de31f79bc4ceca.etc2.stex"
+path.etc="res://.import/sneksend2.png-e8b5aeb6b674b6b527de31f79bc4ceca.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://sprites/finale/sneksend2.png"
-dest_files=[ "res://.import/sneksend2.png-e8b5aeb6b674b6b527de31f79bc4ceca.s3tc.stex", "res://.import/sneksend2.png-e8b5aeb6b674b6b527de31f79bc4ceca.etc2.stex" ]
+dest_files=[ "res://.import/sneksend2.png-e8b5aeb6b674b6b527de31f79bc4ceca.s3tc.stex", "res://.import/sneksend2.png-e8b5aeb6b674b6b527de31f79bc4ceca.etc2.stex", "res://.import/sneksend2.png-e8b5aeb6b674b6b527de31f79bc4ceca.etc.stex" ]
 
 [params]
 

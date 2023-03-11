@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/grassy_icon.png-1ac86fffb0f92d27f3799643966a219f.s3tc.stex"
 path.etc2="res://.import/grassy_icon.png-1ac86fffb0f92d27f3799643966a219f.etc2.stex"
+path.etc="res://.import/grassy_icon.png-1ac86fffb0f92d27f3799643966a219f.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://sprites/biome_icons/grassy_icon.png"
-dest_files=[ "res://.import/grassy_icon.png-1ac86fffb0f92d27f3799643966a219f.s3tc.stex", "res://.import/grassy_icon.png-1ac86fffb0f92d27f3799643966a219f.etc2.stex" ]
+dest_files=[ "res://.import/grassy_icon.png-1ac86fffb0f92d27f3799643966a219f.s3tc.stex", "res://.import/grassy_icon.png-1ac86fffb0f92d27f3799643966a219f.etc2.stex", "res://.import/grassy_icon.png-1ac86fffb0f92d27f3799643966a219f.etc.stex" ]
 
 [params]
 

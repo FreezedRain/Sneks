@@ -4,15 +4,16 @@ importer="texture"
 type="StreamTexture"
 path.s3tc="res://.import/goalapplepng.png-4837a0e652576ec088e729b85f82d288.s3tc.stex"
 path.etc2="res://.import/goalapplepng.png-4837a0e652576ec088e729b85f82d288.etc2.stex"
+path.etc="res://.import/goalapplepng.png-4837a0e652576ec088e729b85f82d288.etc.stex"
 metadata={
-"imported_formats": [ "s3tc", "etc2" ],
+"imported_formats": [ "s3tc", "etc2", "etc" ],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://sprites/finale/goalapplepng.png"
-dest_files=[ "res://.import/goalapplepng.png-4837a0e652576ec088e729b85f82d288.s3tc.stex", "res://.import/goalapplepng.png-4837a0e652576ec088e729b85f82d288.etc2.stex" ]
+dest_files=[ "res://.import/goalapplepng.png-4837a0e652576ec088e729b85f82d288.s3tc.stex", "res://.import/goalapplepng.png-4837a0e652576ec088e729b85f82d288.etc2.stex", "res://.import/goalapplepng.png-4837a0e652576ec088e729b85f82d288.etc.stex" ]
 
 [params]
 
